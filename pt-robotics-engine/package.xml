@@ -1,0 +1,18 @@
+<package>
+    <name>pt-robotics-engine</name>
+    <version>0.0.1</version>
+    <description>
+        The pt-robotics-engine meta package provides all the functionality for pi-top Robots
+    </description>
+    <author>pi-top</author>
+    <maintainer email="ryan@pi-top.com">pi-top</maintainer>
+    <license>GPL 3.0</license>
+    <url>https://github.com/pi-top/pi-top-robotics-engine</url>
+
+    <buildtool_depend>catkin</buildtool_depend>
+   <!-- <run_depend>package</run_depend> -->
+
+    <export>
+        <metapackage/>
+    </export>
+</package>
