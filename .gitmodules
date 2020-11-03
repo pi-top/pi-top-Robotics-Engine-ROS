@@ -1,0 +1,6 @@
+[submodule "robotics_base/hardware_interface/pitop.pma"]
+	path = robotics_base/hardware_interface/pitop.pma
+	url = https://github.com/pi-top/pitop.pma
+[submodule "robotics_base/hardware_interface/pi-top-Python-Common-Library"]
+	path = robotics_base/hardware_interface/pi-top-Python-Common-Library
+	url = https://github.com/pi-top/pi-top-Python-Common-Library
