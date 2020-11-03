@@ -124,7 +124,7 @@ window.onload = function () {
     // get handle for video placeholder
     video = document.getElementById('video');
     // Populate video source 
-    // video.src = "http://" + robot_IP + ":8080/stream?topic=/usb_cam/image_transport&type=ros_compressed";
+    video.src = "http://" + robot_IP + ":8080/stream?topic=/usb_cam/image_transport&type=ros_compressed";
     video.onload = function () {
         // joystick and keyboard controls will be available only when video is correctly loaded
         createJoystick();
