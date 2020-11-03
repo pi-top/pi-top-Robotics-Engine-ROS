@@ -1,0 +1,20 @@
+<launch>
+    <param name="right_motor_port" value="M1" type="str"/>
+    <param name="right_motor_forward_direction" value="counter-clockwise" type="str"/>
+    <param name="left_motor_port" value="M4" type="str"/>
+    <param name="left_motor_forward_direction" value="clockwise" type="str"/>
+
+    <param name="pan_servo_port" value="S1" type="str"/>
+    <param name="tilt_servo_port" value="S4" type="str"/>
+
+    <include file="$(find pan_tilt_move)/launch/cmd_vel_sub.launch" />
+    <include file="$(find robot_move)/launch/cmd_vel_sub.launch" />
+    <!--<include file="$(find web_video_server)/launch/web_video_server.launch" />
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />-->
+    <include file="$(find robot_odom)/launch/odom_publisher.launch" />
+    <include file="$(find robot_imu)/launch/imu_publisher.launch" />
+    <include file="$(find ros-rover)/launch/usb_cam-pi-top.launch" />
+  <!--<include file="$(find robot_localization)/launch/ros-rover_localization.launch" />-->
+
+</launch>
+
