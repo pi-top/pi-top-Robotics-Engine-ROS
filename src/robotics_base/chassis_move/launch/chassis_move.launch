@@ -1,14 +1,4 @@
 <launch>
-    <node pkg='chassis_move'
-          type='chassis_move.py'
-          name='Chassis_Move_Subscriber_Node'
-          output='screen'>
+    <node pkg='chassis_move' type='chassis_move.py' name='Chassis_Move_Subscriber_Node' output='screen'>
     </node>
-<!--    <node pkg='robot_move'
-          type='robot_motor_handler.py'
-          name='Robot_Motor_Handler_Node'
-          output='screen'>
-    </node>
--->
-
 </launch>

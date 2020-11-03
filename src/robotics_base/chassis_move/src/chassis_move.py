@@ -13,7 +13,8 @@ class ChassisMoveController:
         global right_motor
         self._left_motor = left_motor
         self._right_motor = right_motor
-        self._max_speed = min(self._left_motor.max_speed, self._right_motor.max_speed)
+        self._max_rpm = min(self._left_motor.max_rpm, self._right_motor.max_rpm)
+        self._max_speed = self._max_rpm / 60.0 * wheel_circumference
 
     def robot_move(self, linear_speed, angular_speed):
         v_r = (linear_speed + wheel_base * angular_speed) / 2
@@ -75,6 +76,7 @@ if __name__ == "__main__":
     # get chassis parameters
     wheel_diameter = rospy.get_param('wheel_diameter')
     wheel_base = rospy.get_param('wheel_base')
+    wheel_circumference = wheel_diameter * pi
 
     if right_motor_forward_direction == "CCW":
         right_motor = PMAEncoderMotor(port_name=right_motor_port, forward_direction=ForwardDirection.COUNTER_CLOCKWISE)
