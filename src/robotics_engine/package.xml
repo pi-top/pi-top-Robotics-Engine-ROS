@@ -7,7 +7,7 @@
     <author>pi-top</author>
     <maintainer email="ryan@pi-top.com">pi-top</maintainer>
     <license>GPL 3.0</license>
-    <url>https://github.com/pi-top/pi-top-robotics-engine</url>
+    <url>https://github.com/pi-top/pi-top-Robotics-Engine</url>
 
     <buildtool_depend>catkin</buildtool_depend>
    <!-- <run_depend>package</run_depend> -->

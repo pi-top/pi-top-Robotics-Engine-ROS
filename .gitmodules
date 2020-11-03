@@ -1,0 +1,6 @@
+[submodule "build/build-from-noetic/libs/pitop.pma"]
+	path = build/build-from-noetic/libs/pitop.pma
+	url = https://github.com/pi-top/pitop.pma
+[submodule "build/build-from-noetic/libs/pi-top-Python-Common-Library"]
+	path = build/build-from-noetic/libs/pi-top-Python-Common-Library
+	url = https://github.com/pi-top/pi-top-Python-Common-Library

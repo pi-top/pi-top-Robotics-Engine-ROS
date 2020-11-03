@@ -34,6 +34,7 @@ apt-get install -y ros-noetic-image-view
 apt-get install -y ros-noetic-image-transport
 apt-get install -y ros-noetic-compressed-image-transport
 apt-get install -y ros-noetic-cv-bridge # this is a biggy
+apt-get install -y ros-noetic-cv-camera
 apt-get install -y ros-noetic-opencv-apps  # face tracking, people tracking and more
 apt-get install -y python3-rosdep
 
@@ -43,7 +44,7 @@ apt-get install -y avahi-daemon
 # install tools for server
 apt-get install -y python3-tornado ros-noetic-rosbridge-suite nginx
 # Configure nginx server root to ros-web-ui directory
-sed -i 's/root \/var\/www\/html/root \/home\/ros-web-ui/' /etc/nginx/sites-enabled/default
+sed -i 's/root \/var\/www\/html/root \/home\/catkin_ws\/src\/robotics-web-controller/' /etc/nginx/sites-enabled/default
 service nginx restart
 
 # install python packages
@@ -57,8 +58,8 @@ source /ros_entrypoint.sh
 cd /home/catkin_ws/src || exit
 catkin_init_workspace
 # chmod python files so they can execute
-chmod +x /home/catkin_ws/src/ros-rover/chmod_python_files.sh
-bash /home/catkin_ws/src/ros-rover/chmod_python_files.sh
+#chmod +x /home/catkin_ws/src/ros-rover/chmod_python_files.sh
+#bash /home/catkin_ws/src/ros-rover/chmod_python_files.sh
 
 # need ros-noetic-web-video-server  and async_web_server_cpp but cant find it on noetic
 # could put this in its own directory or into main ROS directory in future
