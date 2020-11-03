@@ -44,7 +44,7 @@ apt-get install -y avahi-daemon
 # install tools for server
 apt-get install -y python3-tornado ros-noetic-rosbridge-suite nginx
 # Configure nginx server root to ros-web-ui directory
-sed -i 's/root \/var\/www\/html/root \/home\/catkin_ws\/src\/robotics-web-controller/' /etc/nginx/sites-enabled/default
+sed -i 's/root \/var\/www\/html/root \/home\/catkin_ws\/src\/robotics_web_controller/' /etc/nginx/sites-enabled/default
 service nginx restart
 
 # install python packages
