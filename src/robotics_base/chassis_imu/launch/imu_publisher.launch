@@ -1,0 +1,11 @@
+<launch>
+    <node pkg='chassis_imu' type='imu_publisher.py' name='Robot_Imu_Publisher_Node' output='screen'>
+        <param name="imu_raw_topic" value="imu/data_raw" type="str"/>
+        <param name="imu_topic" value="imu/data" type="str"/>
+        <param name="imu_mag_topic" value="imu/mag" type="str"/>
+        <param name="frame_id" value='imu_link' type="str"/>
+    </node>
+
+    <node pkg="tf" type="static_transform_publisher" name="imu_transform_broadcaster" args="-0.085 0 0.05 0 0 0 1 base_link imu_link 100" />
+
+</launch>
