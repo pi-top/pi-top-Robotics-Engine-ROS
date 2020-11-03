@@ -47,10 +47,6 @@ class OdomPublisher:
 
         rospy.on_shutdown(self.shutdown_hook)
 
-        self._wheel_radius = wheel_diameter / 2   # assume both are same
-        self._wheel_circumference = wheel_diameter * pi
-        self._vehicle_wheel_base = wheel_base
-
     def shutdown_hook(self):
         self._ctrl_c = True
 
@@ -80,17 +76,13 @@ class OdomPublisher:
                 float64[36] covariance - TODO
         """
         prev_time = 0
-        # prev_right_wheel_distance = self._right_motor.distance_counter
-        # prev_left_wheel_distance = self._left_motor.distance_counter
-        # theta = 0
-        # x_i = 0
-        # y_i = 0
         while not self._ctrl_c:
             right_wheel_rpm = self._right_motor.current_rpm
-            right_wheel_speed = (right_wheel_rpm / 60.0) * self._wheel_circumference
+            right_wheel_speed = (right_wheel_rpm / 60.0) * wheel_circumference
 
+            left_wheel_rpm = self._left_motor.current_rpm
+            left_wheel_speed = (left_wheel_rpm / 60.0) * wheel_circumference
 
-            left_wheel_speed = self._left_motor.current_rpm  # convert to m/s
             # left_wheel_speed = 0  # convert to m/s
             rospy.loginfo('RIGHT WHEEL SPEED: {}'.format(right_wheel_speed))
             rospy.loginfo('LEFT WHEEL SPEED: {}'.format(left_wheel_speed))
@@ -152,7 +144,7 @@ class OdomPublisher:
         # subscript r represents robot frame
         self._v_rx = (right_wheel_speed + left_wheel_speed) / 2
         # v_ry = 0  # cannot move in y
-        self._omega_r = (right_wheel_speed - left_wheel_speed) / self._vehicle_wheel_base  # in rad/s
+        self._omega_r = (right_wheel_speed - left_wheel_speed) / wheel_base  # in rad/s
         self._theta_r += self._omega_r * dt
 
     def update_world_frame_params(self):
@@ -164,7 +156,7 @@ class OdomPublisher:
     def update_pose(self, dt):
         self._x_k += self._v_wx * dt
         self._y_k += self._v_wy * dt
-        self._z_k = self._wheel_radius
+        self._z_k = wheel_radius
         self._theta_k += self._theta_dot_w * dt
 
     def get_pose_covariance(self):
@@ -213,8 +205,11 @@ if __name__ == "__main__":
     left_motor_port = rospy.get_param('left_motor_port')
     left_motor_forward_direction = rospy.get_param('left_motor_forward_direction')
 
+    # get chassis parameters
     wheel_diameter = rospy.get_param('wheel_diameter')
+    wheel_radius = wheel_diameter / 2  # assume both are same
     wheel_base = rospy.get_param('wheel_base')
+    wheel_circumference = wheel_diameter * pi
 
     topic_param = rospy.get_param('~topic')
     frame_id_param = rospy.get_param('~frame_id')

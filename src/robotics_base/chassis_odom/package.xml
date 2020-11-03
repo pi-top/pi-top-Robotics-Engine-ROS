@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>robot_odom</name>
+  <name>chassis_odom</name>
   <version>0.0.0</version>
-  <description>The robot_odom package contains nodes to control DC motors on robot</description>
+  <description>The chassis_odom package published odometry data from the motors</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
