@@ -1,0 +1,9 @@
+<launch>
+    <node pkg='chassis_odom' type='odom_publisher.py' name='Chassis_Odom_Publisher_Node' output='screen'>
+        <param name="topic" value="odom" type="str"/>
+        <param name="frame_id" value="odom" type="str"/>
+        <param name="child_frame" value='base_link' type="str"/>
+    </node>
+
+    <node pkg="tf" type="static_transform_publisher" name="map_transform_broadcaster" args="0 0 0 0 0 0 1 map odom 100" />
+</launch>
