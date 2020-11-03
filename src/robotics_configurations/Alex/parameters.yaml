@@ -1,0 +1,8 @@
+wheel_base: 0.1725
+wheel_diameter: 0.074
+right_motor_port: "M1"
+right_motor_forward_direction: "CCW"
+left_motor_port: "M4"
+left_motor_forward_direction: "CW"
+pan_servo_port: "S1"
+tilt_servo_port: "S4"

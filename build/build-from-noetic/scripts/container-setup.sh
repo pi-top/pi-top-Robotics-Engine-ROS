@@ -4,7 +4,7 @@
 set -e
 set -o xtrace
 
-#chown -R root /tmp
+chown -R root /tmp
 # fix GPG key issue with ROS Noetic
 apt-key del 421C365BD9FF1F717815A3895523BAEEB01FA116
 apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' \

@@ -25,5 +25,5 @@ sudo docker build -t $IMAGE_NAME .
 sudo docker run --privileged \
       -p 8022:22 -p 80:80 -p 8080:8080 -p 9090:9090 \
       $IMAGE_NAME \
-      bash /home/container-setup.sh
+      bash /home/container-build-from-noetic-setup.sh
 
