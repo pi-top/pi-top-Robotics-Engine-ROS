@@ -4,7 +4,9 @@ right_motor_port: "M1"
 right_motor_forward_direction: "CCW"
 left_motor_port: "M4"
 left_motor_forward_direction: "CW"
-servo_port_1: "S1"
-servo_port_1_define: "pan"
-tilt_servo_port: "S4"
-servo_port_2_define: "tilt"
+servo_config: {
+  n: 2,
+  list:
+    [{name: "pan_servo", port: "S1", function: "pan", direction: 1, max_speed: 30, topic: "pan_servo/cmd_vel"},
+    {name: "tilt_servo", port: "S4", function: "tilt", direction: 1, max_speed: 30, topic: "tilt_servo/cmd_vel"}]
+}

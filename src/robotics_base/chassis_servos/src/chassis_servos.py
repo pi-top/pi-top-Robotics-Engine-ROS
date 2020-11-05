@@ -54,7 +54,7 @@ class CmdVelSubPanTilt:
 
 
 if __name__ == "__main__":
-    rospy.init_node('pan tilt subscriber node', log_level=rospy.ERROR)
+    rospy.init_node('Servo subscriber node', log_level=rospy.ERROR)
     # setup servo motor
     pan_servo_port = rospy.get_param('pan_servo_port')
     tilt_servo_port = rospy.get_param('tilt_servo_port')
