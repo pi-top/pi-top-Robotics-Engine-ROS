@@ -11,9 +11,9 @@ int main()
 	if (!capture.isOpened())
 		return -1;
 	Mat edges;
-	int xx = capture.set(cv::CAP_PROP_AUTO_EXPOSURE, 0);
-	int yy = capture.set(cv::CAP_PROP_EXPOSURE, 1.0);
-	printf("Seting function return value: auto exposure:%d, exposure %d. \n",xx,yy);
+	int ret1 = capture.set(cv::CAP_PROP_AUTO_EXPOSURE, 0);
+	int ret2 = capture.set(cv::CAP_PROP_EXPOSURE, 1.0);
+	printf("Setting function return value: auto exposure:%d, exposure %d. \n",ret1,ret2);
 	
 	int num=0;
 	struct   timeval   start,stop,diff;
