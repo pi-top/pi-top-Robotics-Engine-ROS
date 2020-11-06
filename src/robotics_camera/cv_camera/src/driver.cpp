@@ -2,10 +2,12 @@
 
 #include "cv_camera/driver.h"
 #include <string>
+#include <stdio.h>
+#include <iostream>
 
 namespace
 {
-const double DEFAULT_RATE = 30.0;
+const double DEFAULT_RATE = 40.0;
 const int32_t PUBLISHER_BUFFER_SIZE = 1;
 }
 
@@ -22,6 +24,8 @@ void Driver::setup()
 {
   double hz(DEFAULT_RATE);
   int32_t device_id(0);
+  double autoexposure = 0.25;
+  double exposure = 1.0;
   std::string device_path("");
   std::string frame_id("camera");
   std::string file_path("");
@@ -70,9 +74,19 @@ void Driver::setup()
       ROS_WARN("fail to set image_height");
     }
   }
-  if (!camera_->setExposure())
+  if (private_node_.getParam("cv_cap_prop_auto_exposure", autoexposure))
   {
-    ROS_WARN("fail to set exposure");
+    if (!camera_->setAutoExposure(autoexposure))
+    {
+      ROS_WARN("fail to set autoexposure");
+    }
+  }
+  if (private_node_.getParam("cv_cap_prop_exposure", exposure))
+  {
+    if (!camera_->setExposure(exposure))
+    {
+      ROS_WARN("fail to set exposure");
+    }
   }
 
   camera_->setPropertyFromParam(cv::CAP_PROP_POS_MSEC, "cv_cap_prop_pos_msec");
