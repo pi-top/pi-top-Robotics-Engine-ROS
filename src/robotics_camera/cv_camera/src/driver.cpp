@@ -4,11 +4,44 @@
 #include <string>
 #include <stdio.h>
 #include <iostream>
+#include <sys/time.h>
+#include <asm/types.h>
+#include <linux/videodev2.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
 
 namespace
 {
 const double DEFAULT_RATE = 40.0;
 const int32_t PUBLISHER_BUFFER_SIZE = 1;
+}
+
+#define MAX_DEVICE_DRIVER_NAME 80
+
+int setExposureForDevice(const char * path)
+{
+    int deviceHandle;
+    deviceHandle = open("/dev/video0", O_RDWR);
+    int ret=0;
+
+    v4l2_control control = {V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL};
+    // The driver may clamp the value or return ERANGE
+    if (-1 == ioctl(deviceHandle, VIDIOC_S_CTRL, &control) && errno != ERANGE) {
+        perror ("VIDIOC_S_CTRL");
+        ret = -1
+    }
+    control = {V4L2_CID_EXPOSURE_ABSOLUTE, 1};
+    //The driver may clamp the value or return ERANGE
+    if (-1 == ioctl(deviceHandle, VIDIOC_S_CTRL, &control) && errno != ERANGE) {
+        perror ("VIDIOC_S_CTRL");
+        ret = -1
+    }
+
+    close(deviceHandle);
+    return ret;
 }
 
 namespace cv_camera
@@ -39,6 +72,10 @@ void Driver::setup()
     camera_name = frame_id;
   }
 
+  char deviceName[MAX_DEVICE_DRIVER_NAME];
+  sprintf(deviceName, "/dev/video%1d", device_id);
+  setExposureForDevice(deviceName);
+
   int32_t image_width(640);
   int32_t image_height(480);
 
@@ -60,6 +97,7 @@ void Driver::setup()
   {
     camera_->open(device_id);
   }
+
   if (private_node_.getParam("image_width", image_width))
   {
     if (!camera_->setWidth(image_width))
