@@ -37,6 +37,7 @@ apt-get install -y ros-noetic-cv-bridge # this is a biggy
 apt-get install -y ros-noetic-cv-camera
 apt-get install -y ros-noetic-opencv-apps  # face tracking, people tracking and more
 apt-get install -y python3-rosdep
+apt-get install -y ros-noetic-pid
 
 # install hostname resolver (this doesn't work to fix for now but might with some config)
 apt-get install -y avahi-daemon
