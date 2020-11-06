@@ -5,20 +5,17 @@
 #include <stdio.h>
 using namespace cv;
 
-
 int main()
 {
 	VideoCapture capture(0);
 	if (!capture.isOpened())
 		return -1;
 	Mat edges;
-        int xx = capture.set(cv::CAP_PROP_AUTO_EXPOSURE, 0);
-    	int yy = capture.set(cv::CAP_PROP_EXPOSURE, 1.0);
+    int xx = capture.set(cv::CAP_PROP_AUTO_EXPOSURE, 0);
+    int yy = capture.set(cv::CAP_PROP_EXPOSURE, 1.0);
+    printf("Seting function return value: auto exposure:%d, exposure %d. \n",xx,yy);
 
-
-        printf("Seting function return value: auto exposure:%d, exposure %d. \n",xx,yy);
-        int num=0;
-
+    int num=0;
 	struct   timeval   start,stop,diff;
   	gettimeofday(&start,0);
 	while (num < 300)
