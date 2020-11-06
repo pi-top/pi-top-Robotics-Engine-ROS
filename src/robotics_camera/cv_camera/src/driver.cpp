@@ -24,7 +24,7 @@ const int32_t PUBLISHER_BUFFER_SIZE = 1;
 int setExposureForDevice(const char * path)
 {
     int deviceHandle;
-    deviceHandle = open("/dev/video0", O_RDWR);
+    deviceHandle = open(path, O_RDWR);
     int ret=0;
 
     v4l2_control control = {V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL};
