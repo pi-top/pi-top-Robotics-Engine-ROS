@@ -11,17 +11,17 @@ int main()
 	if (!capture.isOpened())
 		return -1;
 	Mat edges;
-    int xx = capture.set(cv::CAP_PROP_AUTO_EXPOSURE, 0);
-    int yy = capture.set(cv::CAP_PROP_EXPOSURE, 1.0);
-    printf("Seting function return value: auto exposure:%d, exposure %d. \n",xx,yy);
-
-    int num=0;
+	int xx = capture.set(cv::CAP_PROP_AUTO_EXPOSURE, 0);
+	int yy = capture.set(cv::CAP_PROP_EXPOSURE, 1.0);
+	printf("Seting function return value: auto exposure:%d, exposure %d. \n",xx,yy);
+	
+	int num=0;
 	struct   timeval   start,stop,diff;
-  	gettimeofday(&start,0);
+	gettimeofday(&start,0);
 	while (num < 300)
 	{
 		num++;
-                Mat frame;
+		Mat frame;
 		capture >> frame;
 		if (frame.empty())
 		{
@@ -37,10 +37,9 @@ int main()
 		waitKey(3);
 	}
 
-
 	gettimeofday(&stop,0);
 	printf("Total time:%d seconds\n",stop.tv_sec - start.tv_sec);
-
+	
 	capture.release();
 	destroyAllWindows();
 	return 0;
