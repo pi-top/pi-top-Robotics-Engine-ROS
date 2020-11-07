@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
 import rospy
-from geometry_msgs.msg import Vector3
-from sensor_msgs.msg  import Image
+from std_msgs.msg import Int16MultiArray
+from sensor_msgs.msg import Image
 import cv2
 import numpy as np
+from cv_bridge import CvBridge, CvBridgeError
+
 
 # subscribe to image_raw
 # mask out parts of image we don't care about (a viewport)
@@ -20,53 +22,119 @@ import numpy as np
 class PathFinder:
 
     def __init__(self):
-        self._image_subscriber = rospy.Subscriber('/usb_cam/image_raw', Image, callback=self.find_path, queue_size=1)
+        self._image_subscriber = rospy.Subscriber('/cv_camera/image_raw', Image, callback=self.image_callback,
+                                                  queue_size=1)
         self._robot_view_publisher = rospy.Publisher('/line_follower/robot_view', Image, queue_size=1)
-        self._centroid_publisher = rospy.Publisher('/line_follower/centroid_point', Vector3, queue_size=1)
-        self._centroid_point = Vector3
+        self._centroid_publisher = rospy.Publisher('/line_follower/centroid_point', Int16MultiArray, queue_size=10)
+        self._centroid_point = Int16MultiArray()
+        self.bridge = CvBridge()
+        self._ctrl_c = False
+        self._image_width = None
+        self._image_height = None
 
-    def find_path(self, frame):
-        processed_frame = self.process_frame(frame)
-        self._centroid_point = self.find_centroid(processed_frame)
+    def shutdown_hook(self):
+        self._ctrl_c = True
 
+    def image_callback(self, frame):
+        # convert ROS Image to CV image
+        cv_image = self.ros_to_cv_image(frame)
 
-        robot_view = self.create_robot_view(processed_frame)
+        # update image width and height in case they have changed
+        self._image_width = cv_image.shape[1]
+        self._image_height = cv_image.shape[0]
 
+        # mask out everything except blue parts of image
+        blue_masked_frame = self.colour_mask(cv_image)
 
-    def process_frame(self, frame):
+        # find contour of the line
+        line_contour = self.find_contours(blue_masked_frame)
+
+        # find centroid points of that contour
+        centroid_x, centroid_y = self.find_centroid(line_contour)
+
+        # publish centroid point as a ROS message
+        self._centroid_point.data = [centroid_x, centroid_y]
+        self._centroid_publisher.publish(self._centroid_point)
+
+        # create and publish robot view
+        cv2.drawContours(cv_image, [line_contour], 0, (100, 60, 240), 3)
+        cv2.drawMarker(cv_image, (centroid_x, centroid_y), (100, 60, 240), markerType=cv2.MARKER_CROSS, markerSize=20, thickness=2, line_type=cv2.FILLED)
+        self.publish_robot_view(cv_image)
+
+    def colour_mask(self, frame):
+        # apply gaussian blur to smooth out the frame
+        blur = cv2.blur(frame, (9, 9))
 
         # Convert BGR to HSV
-        hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        hsv_frame = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
 
-        # define range of blue color in HSV
-        lower_blue = np.array([110, 50, 50])
-        upper_blue = np.array([130, 255, 255])
+        # define range of blue color in HSV-> H: 0-179, S: 0-255, V: 0-255
+        lower_blue = np.array([80, 75, 100])
+        upper_blue = np.array([140, 255, 255])
 
         # Threshold the HSV image to get only blue colors
-        masked_frame = cv2.inRange(hsv_frame, lower_blue, upper_blue)
+        mask = cv2.inRange(hsv_frame, lower_blue, upper_blue)
 
-        res = cv2.bitwise_and(masked_frame, masked_frame, mask=)
+        result = cv2.bitwise_and(frame, frame, mask=mask)
 
-        return masked_frame
+        return result
 
+    def find_contours(self, frame):
+        # convert to greyscale
+        grey_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    def find_centroid(self, frame):
-        centroid_point = Vector3
-        moments = cv2.moments(frame)
-        centroid_x = int(moments["m10"] / moments["m00"])
-        centroid_y = int(moments["m01"] / moments["m00"])
+        # convert the grayscale image to binary image
+        ret, thresh = cv2.threshold(grey_image, 127, 255, 0)
 
-        centroid_point.
+        # Find the contours of the frame. RETR_EXTERNAL: retrieves only the extreme outer contours
+        contours, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    def publish_centroid(self, message):
-        masked_image =
+        # Find the biggest contour (if detected)
+        if len(contours) > 0:
+            largest_contour = max(contours, key=cv2.contourArea)
+        else:
+            # no contours found, set to None
+            largest_contour = None
 
+        return largest_contour
 
+    def find_centroid(self, contour):
 
+        if contour is not None:
+            moments = cv2.moments(contour)
+            centroid_x = int(moments['m10'] / moments['m00'])
+            centroid_y = int(moments['m01'] / moments['m00'])
+        else:
+            # no centroid found, set to middle of frame
+            centroid_x = int(self._image_width / 2)
+            centroid_y = int(self._image_height / 2)
 
+        return centroid_x, centroid_y
 
+    def publish_robot_view(self, frame):
+        ros_image = self.cv_to_ros_image(frame)
+        self._robot_view_publisher.publish(ros_image)
+
+    def cv_to_ros_image(self, cv_image):
+        ros_image = None
+        try:
+            ros_image = self.bridge.cv2_to_imgmsg(cv_image, "bgr8")
+        except CvBridgeError as e:
+            print(e)
+
+        return ros_image
+
+    def ros_to_cv_image(self, ros_image):
+        cv_image = None
+        try:
+            cv_image = self.bridge.imgmsg_to_cv2(ros_image, "bgr8")
+        except CvBridgeError as e:
+            print(e)
+
+        return cv_image
 
 
 if __name__ == "__main__":
     rospy.init_node('image listener', anonymous=True, log_level=rospy.DEBUG)
-
+    path_finder = PathFinder()
+    rospy.spin()
