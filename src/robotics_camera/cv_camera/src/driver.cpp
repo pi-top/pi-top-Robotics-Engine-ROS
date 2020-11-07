@@ -33,7 +33,7 @@ int setExposureForDevice(const char * path)
         perror ("VIDIOC_S_CTRL");
         ret = -1;
     }
-    control = {V4L2_CID_EXPOSURE_ABSOLUTE, 1};
+    control = {V4L2_CID_EXPOSURE_ABSOLUTE, 900};
     //The driver may clamp the value or return ERANGE
     if (-1 == ioctl(deviceHandle, VIDIOC_S_CTRL, &control) && errno != ERANGE) {
         perror ("VIDIOC_S_CTRL");
