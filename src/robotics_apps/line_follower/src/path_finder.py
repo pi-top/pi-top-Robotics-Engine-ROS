@@ -21,9 +21,8 @@ from cv_bridge import CvBridge, CvBridgeError
 class PathFinder:
 
     def __init__(self):
-        self._image_subscriber = rospy.Subscriber('/cv_camera/image_raw', Image, callback=self.image_callback,
-                                                  queue_size=1)
-        self._robot_view_publisher = rospy.Publisher('/line_follower/robot_view', Image, queue_size=1)
+        self._image_subscriber = rospy.Subscriber('/cv_camera/image_raw', Image, callback=self.image_callback, queue_size=1)
+        self._robot_view_publisher = rospy.Publisher('/line_follower/robot_view', Image, queue_size=10)
         self._centroid_publisher = rospy.Publisher('/line_follower/centroid_point', Int16MultiArray, queue_size=10)
         self._centroid_point = Int16MultiArray()
         self.bridge = CvBridge()
@@ -47,19 +46,23 @@ class PathFinder:
 
         # find contour of the line
         line_contour = self.find_contours(blue_masked_frame)
-
-        # find centroid points of that contour
+        #
+        # # find centroid points of that contour
         centroid_x, centroid_y = self.find_centroid(line_contour)
-
-        # publish centroid point as a ROS message
+        #
+        # print(centroid_x, centroid_y)
+        #
+        # # Create ROS message for centroid point
         self._centroid_point.data = [centroid_x, centroid_y, self._image_width, self._image_height]
-        self._centroid_publisher.publish(self._centroid_point)
 
-        # create and publish robot view
-        if line_contour is not None:
-            cv2.drawContours(cv_image, [line_contour], 0, (100, 60, 240), 3)
-        cv2.drawMarker(cv_image, (centroid_x, centroid_y), (100, 60, 240),
-                       markerType=cv2.MARKER_CROSS, markerSize=20, thickness=2, line_type=cv2.FILLED)
+        # create robot view
+        # if line_contour is not None:
+        #     cv2.drawContours(cv_image, [line_contour], 0, (100, 60, 240), 3)
+        # cv2.drawMarker(cv_image, (centroid_x, centroid_y), (100, 60, 240),
+        #                markerType=cv2.MARKER_CROSS, markerSize=20, thickness=2, line_type=cv2.FILLED)
+
+        # THIS ONE IS BAD
+        self._centroid_publisher.publish(self._centroid_point)
         self.publish_robot_view(cv_image)
 
     def colour_mask(self, frame):

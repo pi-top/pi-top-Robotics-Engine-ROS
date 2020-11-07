@@ -6,7 +6,7 @@ import numpy as np
 
 class PIDFeeder:
     _setpoint = Float64()
-    _setpoint = 0
+    _setpoint.data = 0
 
     def __init__(self):
         self._centroid_subscriber = rospy.Subscriber('/line_follower/centroid_point', Int16MultiArray, callback=self.callback, queue_size=1)
@@ -14,7 +14,7 @@ class PIDFeeder:
         self._state_publisher = rospy.Publisher('/line_follower/state', Float64, queue_size=1)
         self._image_width = 0
         self._image_height = 0
-        self._state = Float64
+        self._state = Float64()
 
     def callback(self, centroid_point):
         centroid_x, centroid_y, image_width, image_height = centroid_point.data
@@ -22,16 +22,16 @@ class PIDFeeder:
         self._image_height = image_height
 
         # get angle to feed to PID controller
-        angle_state = self.calculate_body_vector(centroid_x, centroid_y)
+        control_angle = self.get_control_angle(centroid_x, centroid_y)
 
-        print("Chassis vector angle: {}".format(angle_state))
+        # print("Chassis vector angle: {}".format(control_angle))
 
         self._setpoint_publisher.publish(self._setpoint)
 
-        self._state.data = angle_state
+        self._state.data = control_angle
         self._state_publisher.publish(self._state)
 
-    def calculate_body_vector(self, centroid_x, centroid_y):
+    def get_control_angle(self, centroid_x, centroid_y):
         chassis_center_x = int(self._image_width / 2)
         chassis_center_y = int(self._image_height * 1.5)
 

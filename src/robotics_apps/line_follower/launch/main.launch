@@ -1,0 +1,6 @@
+<launch>
+    <include file="$(find line_follower)/launch/path_finder.launch" />
+    <include file="$(find line_follower)/launch/pid.launch" />
+    <include file="$(find line_follower)/launch/pid_feeder.launch" />
+    <include file="$(find line_follower)/launch/chassis_commander.launch" />
+</launch>
