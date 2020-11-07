@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find line_follower)/launch/pid.launch" />
+    <node pkg='line_follower' type='pid_feeder.py' name='pid_feeder' output='screen'></node>
+</launch>

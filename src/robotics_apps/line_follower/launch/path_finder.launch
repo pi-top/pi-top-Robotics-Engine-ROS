@@ -1,0 +1,3 @@
+<launch>
+    <node pkg='line_follower' type='path_finder.py' name='path_finder' output='screen'></node>
+</launch>

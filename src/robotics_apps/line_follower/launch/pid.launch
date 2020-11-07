@@ -1,0 +1,16 @@
+<launch>
+    <node name="line_follower_pid" pkg="pid" type="controller" >
+      <param name="Kp" value="0.5" />
+      <param name="Ki" value="0.04" />
+      <param name="Kd" value="0.16" />
+      <param name="upper_limit" value="0.5" />
+      <param name="lower_limit" value="-0.5" />
+      <param name="windup_limit" value="0.5" />
+      <param name="max_loop_frequency" value="31" />
+      <param name="min_loop_frequency" value="1" />
+      <param name="setpoint_topic" value="/line_follower/setpoint" />
+      <param name="topic_from_plant" value="/line_follower/state" />
+      <param name="topic_from_controller" value="/line_follower/control_effort" />
+      <param name="pid_enable_topic" value="/line_follower/pid_enable" />
+    </node>
+</launch>

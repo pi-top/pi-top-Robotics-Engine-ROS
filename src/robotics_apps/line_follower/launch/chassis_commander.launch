@@ -1,0 +1,4 @@
+<launch>
+    <node pkg='line_follower' type='chassis_commander.py' name='chassis_commander' output='screen'></node>
+    <param name="line_follower_speed" value="0.2" type="double"/>
+</launch>

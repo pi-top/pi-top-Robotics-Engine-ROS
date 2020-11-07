@@ -18,7 +18,6 @@ from cv_bridge import CvBridge, CvBridgeError
 # PID controller will output motor differential speed
 # node receives this differential and converts to /cmd_vel publisher
 
-
 class PathFinder:
 
     def __init__(self):
@@ -53,12 +52,14 @@ class PathFinder:
         centroid_x, centroid_y = self.find_centroid(line_contour)
 
         # publish centroid point as a ROS message
-        self._centroid_point.data = [centroid_x, centroid_y]
+        self._centroid_point.data = [centroid_x, centroid_y, self._image_width, self._image_height]
         self._centroid_publisher.publish(self._centroid_point)
 
         # create and publish robot view
-        cv2.drawContours(cv_image, [line_contour], 0, (100, 60, 240), 3)
-        cv2.drawMarker(cv_image, (centroid_x, centroid_y), (100, 60, 240), markerType=cv2.MARKER_CROSS, markerSize=20, thickness=2, line_type=cv2.FILLED)
+        if line_contour is not None:
+            cv2.drawContours(cv_image, [line_contour], 0, (100, 60, 240), 3)
+        cv2.drawMarker(cv_image, (centroid_x, centroid_y), (100, 60, 240),
+                       markerType=cv2.MARKER_CROSS, markerSize=20, thickness=2, line_type=cv2.FILLED)
         self.publish_robot_view(cv_image)
 
     def colour_mask(self, frame):
@@ -67,10 +68,6 @@ class PathFinder:
 
         # Convert BGR to HSV
         hsv_frame = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
-
-        # define range of blue color in HSV-> H: 0-179, S: 0-255, V: 0-255
-        lower_blue = np.array([80, 75, 100])
-        upper_blue = np.array([140, 255, 255])
 
         # Threshold the HSV image to get only blue colors
         mask = cv2.inRange(hsv_frame, lower_blue, upper_blue)
@@ -102,8 +99,9 @@ class PathFinder:
 
         if contour is not None:
             moments = cv2.moments(contour)
-            centroid_x = int(moments['m10'] / moments['m00'])
-            centroid_y = int(moments['m01'] / moments['m00'])
+            # add 1e-5 to avoid division by zero (standard docs.opencv.org practice apparently)
+            centroid_x = int(moments['m10'] / (moments['m00'] + 1e-5))
+            centroid_y = int(moments['m01'] / (moments['m00'] + 1e-5))
         else:
             # no centroid found, set to middle of frame
             centroid_x = int(self._image_width / 2)
@@ -135,6 +133,24 @@ class PathFinder:
 
 
 if __name__ == "__main__":
-    rospy.init_node('image listener', anonymous=True, log_level=rospy.DEBUG)
+    rospy.init_node('path_finder', anonymous=True, log_level=rospy.DEBUG)
+
+    # TODO: put these in ROS params
+    # define range of blue color in HSV-> H: 0-179, S: 0-255, V: 0-255
+    hue_lower = 160
+    hue_upper = 280
+    sat_lower = 0.3
+    sat_upper = 1.0
+    val_lower = 0.5
+    val_upper = 1.0
+    cv_hue_lower = int(hue_lower / 2)
+    cv_hue_upper = int(hue_upper / 2)
+    cv_sat_lower = int(sat_lower * 255)
+    cv_sat_upper = int(sat_upper * 255)
+    cv_val_lower = int(val_lower * 255)
+    cv_val_upper = int(val_upper * 255)
+    lower_blue = np.array([cv_hue_lower, cv_sat_lower, cv_val_lower])
+    upper_blue = np.array([cv_hue_upper, cv_sat_upper, cv_val_upper])
+
     path_finder = PathFinder()
     rospy.spin()
