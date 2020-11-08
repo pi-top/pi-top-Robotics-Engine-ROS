@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
 import rospy
-from std_msgs.msg import Int16MultiArray
+# from std_msgs.msg import Int16MultiArray
+from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Image
 import cv2
 import numpy as np
 from cv_bridge import CvBridge, CvBridgeError
+from simple_pid import PID
 
 
 # subscribe to image_raw
@@ -18,51 +20,99 @@ from cv_bridge import CvBridge, CvBridgeError
 # PID controller will output motor differential speed
 # node receives this differential and converts to /cmd_vel publisher
 
+class Controller:
+    def __init__(self):
+        self._pid = PID(Kp=0.2, Ki=0.01, Kd=0.01, setpoint=0)
+        self._pid.output_limits = (-0.5, 0.5)
+        self._cmd_vel_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
+        self._twist_data = Twist()
+        self._twist_data.linear.x = chassis_speed_x
+
+    def stop_chassis(self):
+        self._twist_data.linear.x = 0
+        self._twist_data.angular.z = 0
+        self._cmd_vel_publisher.publish(self._twist_data)
+
+    def chassis_move(self, centroid_x, centroid_y, image_width, image_height):
+        control_angle = self.get_control_angle(centroid_x, centroid_y, image_width, image_height)
+        control_effort = self._pid(control_angle)
+        self.chassis_command(control_effort)
+
+    def get_control_angle(self, centroid_x, centroid_y, image_width, image_height):
+        chassis_center_x = int(image_width / 2)
+        chassis_center_y = int(image_height * 1.5)
+
+        delta_x = chassis_center_x - centroid_x
+        delta_y = centroid_y - chassis_center_y
+
+        chassis_vector_angle = np.arctan(delta_x / delta_y) * 180 / np.pi
+
+        return chassis_vector_angle
+
+    def chassis_command(self, control_effort):
+        self._twist_data.angular.z = control_effort
+        self._cmd_vel_publisher.publish(self._twist_data)
+
+
 class PathFinder:
 
     def __init__(self):
         self._image_subscriber = rospy.Subscriber('/cv_camera/image_raw', Image, callback=self.image_callback, queue_size=1)
         self._robot_view_publisher = rospy.Publisher('/line_follower/robot_view', Image, queue_size=5)
-        self._centroid_publisher = rospy.Publisher('/line_follower/centroid_point', Int16MultiArray, queue_size=5)
-        self._centroid_point = Int16MultiArray()
+        # self._centroid_publisher = rospy.Publisher('/line_follower/centroid_point', Point32, queue_size=5)
+        # self._image_resolution_publisher = rospy.Publisher('/line_follower/image_resolution', Point32, queue_size=5)
+        # self._centroid_point = Point32()
+        # self._image_resolution = Point32()
+        self._controller = Controller()
         self.bridge = CvBridge()
-        self._ctrl_c = False
         self._image_width = None
         self._image_height = None
 
+        self._ctrl_c = False
+        rospy.on_shutdown(self.shutdown_hook)
+
     def shutdown_hook(self):
         self._ctrl_c = True
+        self._controller.stop_chassis()
 
     def image_callback(self, frame):
-        # convert ROS Image to CV image
-        cv_image = self.ros_to_cv_image(frame)
 
-        # update image width and height in case they have changed
-        self._image_width = cv_image.shape[1]
-        self._image_height = cv_image.shape[0]
+        if not self._ctrl_c:
+            # convert ROS Image to CV image
+            cv_image = self.ros_to_cv_image(frame)
 
-        # mask out everything except blue parts of image
-        blue_masked_frame = self.colour_mask(cv_image)
+            # update image width and height in case they have changed
+            raw_image_width = cv_image.shape[1]
+            raw_image_height = cv_image.shape[0]
 
-        # find contour of the line
-        line_contour = self.find_contours(blue_masked_frame)
-        # #
-        # # # find centroid points of that contour
-        centroid_x, centroid_y = self.find_centroid(line_contour)
-        # #
-        # print(centroid_x, centroid_y)
-        #
-        # # Create ROS message for centroid point
-        self._centroid_point.data = [centroid_x, centroid_y, self._image_width, self._image_height]
+            self._image_width = int(raw_image_width * 50 / 100)
+            self._image_height = int(raw_image_height * 50 / 100)
+            dim = (self._image_width, self._image_height)
 
-        # create robot view
-        if line_contour is not None:
-            cv2.drawContours(blue_masked_frame, [line_contour], 0, (100, 60, 240), 3)
-        cv2.drawMarker(blue_masked_frame, (centroid_x, centroid_y), (100, 60, 240),
-                       markerType=cv2.MARKER_CROSS, markerSize=20, thickness=2, line_type=cv2.FILLED)
+            cv_image_scale_down = cv2.resize(cv_image, dim, interpolation=cv2.INTER_AREA)
 
-        self._centroid_publisher.publish(self._centroid_point)
-        self.publish_robot_view(blue_masked_frame)
+            # mask out everything except blue parts of image
+            blue_masked_frame = self.colour_mask(cv_image_scale_down)
+
+            # find contour of the line
+            line_contour = self.find_contours(blue_masked_frame)
+            # #
+            # # # find centroid points of that contour
+            centroid_x, centroid_y = self.find_centroid(line_contour)
+
+            self._controller.chassis_move(centroid_x, centroid_y, self._image_width, self._image_height)
+
+            # print(centroid_x, centroid_y)
+
+            # create robot view
+            if line_contour is not None:
+                cv2.drawContours(blue_masked_frame, [line_contour], 0, (100, 60, 240), 2)
+            cv2.drawMarker(blue_masked_frame, (centroid_x, centroid_y), (100, 60, 240),
+                           markerType=cv2.MARKER_CROSS, markerSize=20, thickness=2, line_type=cv2.FILLED)
+
+            blue_masked_frame_scale_up = cv2.resize(blue_masked_frame, (raw_image_width, raw_image_height), interpolation=cv2.INTER_AREA)
+
+            self.publish_robot_view(blue_masked_frame_scale_up)
 
     def colour_mask(self, frame):
         # apply gaussian blur to smooth out the frame
@@ -145,6 +195,8 @@ class PathFinder:
 
 if __name__ == "__main__":
     rospy.init_node('path_finder', anonymous=True, log_level=rospy.DEBUG)
+
+    chassis_speed_x = rospy.get_param('line_follower_speed')
 
     # TODO: put these in ROS params
     # define range of blue color in HSV-> H: 0-179, S: 0-255, V: 0-255
