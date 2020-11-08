@@ -10,8 +10,9 @@ class PIDFeeder:
 
     def __init__(self):
         self._centroid_subscriber = rospy.Subscriber('/line_follower/centroid_point', Int16MultiArray, callback=self.callback, queue_size=1)
-        self._setpoint_publisher = rospy.Publisher('/line_follower/setpoint', Float64, queue_size=1)
-        self._state_publisher = rospy.Publisher('/line_follower/state', Float64, queue_size=1)
+        self._setpoint_publisher = rospy.Publisher('/line_follower/setpoint', Float64, queue_size=5, latch=True)
+        self._setpoint_publisher.publish(self._setpoint)
+        self._state_publisher = rospy.Publisher('/line_follower/state', Float64, queue_size=5)
         self._image_width = 0
         self._image_height = 0
         self._state = Float64()
@@ -25,8 +26,6 @@ class PIDFeeder:
         control_angle = self.get_control_angle(centroid_x, centroid_y)
 
         # print("Chassis vector angle: {}".format(control_angle))
-
-        self._setpoint_publisher.publish(self._setpoint)
 
         self._state.data = control_angle
         self._state_publisher.publish(self._state)

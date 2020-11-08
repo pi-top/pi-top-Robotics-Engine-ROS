@@ -22,8 +22,8 @@ class PathFinder:
 
     def __init__(self):
         self._image_subscriber = rospy.Subscriber('/cv_camera/image_raw', Image, callback=self.image_callback, queue_size=1)
-        self._robot_view_publisher = rospy.Publisher('/line_follower/robot_view', Image, queue_size=10)
-        self._centroid_publisher = rospy.Publisher('/line_follower/centroid_point', Int16MultiArray, queue_size=10)
+        self._robot_view_publisher = rospy.Publisher('/line_follower/robot_view', Image, queue_size=5)
+        self._centroid_publisher = rospy.Publisher('/line_follower/centroid_point', Int16MultiArray, queue_size=5)
         self._centroid_point = Int16MultiArray()
         self.bridge = CvBridge()
         self._ctrl_c = False
@@ -46,24 +46,23 @@ class PathFinder:
 
         # find contour of the line
         line_contour = self.find_contours(blue_masked_frame)
-        #
-        # # find centroid points of that contour
+        # #
+        # # # find centroid points of that contour
         centroid_x, centroid_y = self.find_centroid(line_contour)
-        #
+        # #
         # print(centroid_x, centroid_y)
         #
         # # Create ROS message for centroid point
         self._centroid_point.data = [centroid_x, centroid_y, self._image_width, self._image_height]
 
         # create robot view
-        # if line_contour is not None:
-        #     cv2.drawContours(cv_image, [line_contour], 0, (100, 60, 240), 3)
-        # cv2.drawMarker(cv_image, (centroid_x, centroid_y), (100, 60, 240),
-        #                markerType=cv2.MARKER_CROSS, markerSize=20, thickness=2, line_type=cv2.FILLED)
+        if line_contour is not None:
+            cv2.drawContours(blue_masked_frame, [line_contour], 0, (100, 60, 240), 3)
+        cv2.drawMarker(blue_masked_frame, (centroid_x, centroid_y), (100, 60, 240),
+                       markerType=cv2.MARKER_CROSS, markerSize=20, thickness=2, line_type=cv2.FILLED)
 
-        # THIS ONE IS BAD
         self._centroid_publisher.publish(self._centroid_point)
-        self.publish_robot_view(cv_image)
+        self.publish_robot_view(blue_masked_frame)
 
     def colour_mask(self, frame):
         # apply gaussian blur to smooth out the frame
@@ -84,17 +83,26 @@ class PathFinder:
         grey_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         # convert the grayscale image to binary image
-        ret, thresh = cv2.threshold(grey_image, 127, 255, 0)
+        ret, thresh = cv2.threshold(grey_image, 100, 255, 0)
+        # thresh = cv2.adaptiveThreshold(grey_image, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 11, 2)
 
         # Find the contours of the frame. RETR_EXTERNAL: retrieves only the extreme outer contours
-        contours, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
+        # print("Contours found: {}".format(len(contours)))
         # Find the biggest contour (if detected)
         if len(contours) > 0:
             largest_contour = max(contours, key=cv2.contourArea)
+            # print("largest contour: {}".format(largest_contour))
+            x, y, w, h = cv2.boundingRect(largest_contour)
         else:
             # no contours found, set to None
             largest_contour = None
+
+        cv2.drawContours(frame, contours, -1, 255, 3)
+        # draw the biggest contour (c) in green
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        # self.publish_robot_view(frame, encoding="bgr8")
 
         return largest_contour
 
@@ -112,23 +120,23 @@ class PathFinder:
 
         return centroid_x, centroid_y
 
-    def publish_robot_view(self, frame):
-        ros_image = self.cv_to_ros_image(frame)
+    def publish_robot_view(self, frame, encoding="bgr8"):
+        ros_image = self.cv_to_ros_image(frame, encoding)
         self._robot_view_publisher.publish(ros_image)
 
-    def cv_to_ros_image(self, cv_image):
+    def cv_to_ros_image(self, cv_image, encoding="bgr8"):
         ros_image = None
         try:
-            ros_image = self.bridge.cv2_to_imgmsg(cv_image, "bgr8")
+            ros_image = self.bridge.cv2_to_imgmsg(cv_image, encoding)
         except CvBridgeError as e:
             print(e)
 
         return ros_image
 
-    def ros_to_cv_image(self, ros_image):
+    def ros_to_cv_image(self, ros_image, encoding="bgr8"):
         cv_image = None
         try:
-            cv_image = self.bridge.imgmsg_to_cv2(ros_image, "bgr8")
+            cv_image = self.bridge.imgmsg_to_cv2(ros_image, encoding)
         except CvBridgeError as e:
             print(e)
 

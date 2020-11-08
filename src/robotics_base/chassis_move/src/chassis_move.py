@@ -44,7 +44,7 @@ class ChassisMoveController:
 class CmdVelSub:
 
     def __init__(self):
-        self._cmd_vel_subscriber = rospy.Subscriber('/cmd_vel', Twist, callback=self.callback)
+        self._cmd_vel_subscriber = rospy.Subscriber('/cmd_vel', Twist, callback=self.callback, queue_size=1)
         self._twist_data = Twist()
         self._chassis_mover = ChassisMoveController()
 
