@@ -10,23 +10,39 @@ from cv_bridge import CvBridge, CvBridgeError
 from simple_pid import PID
 
 
-# subscribe to image_raw
-# mask out parts of image we don't care about (a viewport)
-# mask blue parts of image and deleted the rest
-# convert to binary image (black and white) cv2.threshold
-# find centroid using cv2.moments and find coordinates
-# Find angle of chassis vector
-# publish angle to PID controller
-# PID controller will output motor differential speed
-# node receives this differential and converts to /cmd_vel publisher
+# parameters to tune:
+# - servo angle
+# - image scale for cv operations
+# - linear speed
+# - angle mean filter
+# - kp, ki and kd
+# - whether to do camera calibration or not
+
+# problems
+# - currently have no way to measure lag on angle calculation, lag reduces phase margin on loopPID stability
+# - cv_camera using 25-30% of CPU, should reduce resolution when line_follower is engaged
+# - chassis_move uses 10-15% when receiving commands
+#       - could check how recently a command was received and ignore if too soon (queue_size=1 so maybe this is ok)
+
+def running_mean(old_array, new_value):
+
+    def calculate_mean(x, N):
+        cum_sum = np.cumsum(np.insert(x, 0, 0))
+        return (cum_sum[N:] - cum_sum[:-N]) / float(N)
+
+    new_array = np.append(np.delete(old_array, 0), new_value)
+    new_mean = calculate_mean(new_array, np.shape(new_array)[0])[0]
+    return new_array, new_mean
+
 
 class Controller:
     def __init__(self):
-        self._pid = PID(Kp=0.2, Ki=0.01, Kd=0.01, setpoint=0)
-        self._pid.output_limits = (-0.5, 0.5)
+        self._pid = PID(Kp=0.02, Ki=0.001, Kd=0.001, setpoint=0)
+        self._pid.output_limits = (-4.0, 4.0)
         self._cmd_vel_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
         self._twist_data = Twist()
         self._twist_data.linear.x = chassis_speed_x
+        self._angle_filter_window = np.zeros(3)
 
     def stop_chassis(self):
         self._twist_data.linear.x = 0
@@ -47,6 +63,8 @@ class Controller:
 
         chassis_vector_angle = np.arctan(delta_x / delta_y) * 180 / np.pi
 
+        # self._angle_filter_window, new_angle = average_array_increment(self._angle_filter_window, chassis_vector_angle)
+
         return chassis_vector_angle
 
     def chassis_command(self, control_effort):
@@ -57,17 +75,13 @@ class Controller:
 class PathFinder:
 
     def __init__(self):
-        self._image_subscriber = rospy.Subscriber('/cv_camera/image_raw', Image, callback=self.image_callback, queue_size=1)
+        self._image_subscriber = rospy.Subscriber('/cv_camera/image_raw', Image, callback=self.image_callback,
+                                                  queue_size=1)
         self._robot_view_publisher = rospy.Publisher('/line_follower/robot_view', Image, queue_size=5)
-        # self._centroid_publisher = rospy.Publisher('/line_follower/centroid_point', Point32, queue_size=5)
-        # self._image_resolution_publisher = rospy.Publisher('/line_follower/image_resolution', Point32, queue_size=5)
-        # self._centroid_point = Point32()
-        # self._image_resolution = Point32()
         self._controller = Controller()
         self.bridge = CvBridge()
-        self._image_width = None
-        self._image_height = None
-
+        self._image_width = 0
+        self._image_height = 0
         self._ctrl_c = False
         rospy.on_shutdown(self.shutdown_hook)
 
@@ -85,8 +99,8 @@ class PathFinder:
             raw_image_width = cv_image.shape[1]
             raw_image_height = cv_image.shape[0]
 
-            self._image_width = int(raw_image_width * 50 / 100)
-            self._image_height = int(raw_image_height * 50 / 100)
+            self._image_width = int(raw_image_width * cv_image_scale)
+            self._image_height = int(raw_image_height * cv_image_scale)
             dim = (self._image_width, self._image_height)
 
             cv_image_scale_down = cv2.resize(cv_image, dim, interpolation=cv2.INTER_AREA)
@@ -96,8 +110,8 @@ class PathFinder:
 
             # find contour of the line
             line_contour = self.find_contours(blue_masked_frame)
-            # #
-            # # # find centroid points of that contour
+
+            # find centroid points of that contour
             centroid_x, centroid_y = self.find_centroid(line_contour)
 
             self._controller.chassis_move(centroid_x, centroid_y, self._image_width, self._image_height)
@@ -110,7 +124,8 @@ class PathFinder:
             cv2.drawMarker(blue_masked_frame, (centroid_x, centroid_y), (100, 60, 240),
                            markerType=cv2.MARKER_CROSS, markerSize=20, thickness=2, line_type=cv2.FILLED)
 
-            blue_masked_frame_scale_up = cv2.resize(blue_masked_frame, (raw_image_width, raw_image_height), interpolation=cv2.INTER_AREA)
+            blue_masked_frame_scale_up = cv2.resize(blue_masked_frame, (raw_image_width, raw_image_height),
+                                                    interpolation=cv2.INTER_AREA)
 
             self.publish_robot_view(blue_masked_frame_scale_up)
 
@@ -145,13 +160,14 @@ class PathFinder:
             largest_contour = max(contours, key=cv2.contourArea)
             # print("largest contour: {}".format(largest_contour))
             x, y, w, h = cv2.boundingRect(largest_contour)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
         else:
             # no contours found, set to None
             largest_contour = None
 
         cv2.drawContours(frame, contours, -1, 255, 3)
         # draw the biggest contour (c) in green
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
         # self.publish_robot_view(frame, encoding="bgr8")
 
         return largest_contour
@@ -197,6 +213,7 @@ if __name__ == "__main__":
     rospy.init_node('path_finder', anonymous=True, log_level=rospy.DEBUG)
 
     chassis_speed_x = rospy.get_param('line_follower_speed')
+    cv_image_scale = rospy.get_param('cv_image_scale')
 
     # TODO: put these in ROS params
     # define range of blue color in HSV-> H: 0-179, S: 0-255, V: 0-255

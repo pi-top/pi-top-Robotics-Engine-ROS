@@ -37,13 +37,13 @@ class ChassisMoveController:
         self._left_motor.set_target_rpm(target_rpm=rpm_left)
         self._right_motor.set_target_rpm(target_rpm=rpm_right)
 
-        rospy.logdebug('Left motor RPM: {}\nRight motor RPM: {}\n'.format(rpm_left, rpm_right))
+        # rospy.logdebug('Left motor RPM: {}\nRight motor RPM: {}\n'.format(rpm_left, rpm_right))
 
 
 class CmdVelSub:
 
     def __init__(self):
-        self._cmd_vel_subscriber = rospy.Subscriber('/cmd_vel', Twist, callback=self.callback, queue_size=5)
+        self._cmd_vel_subscriber = rospy.Subscriber('/cmd_vel', Twist, callback=self.callback, queue_size=1)
         self._twist_data = Twist()
         self._chassis_mover = ChassisMoveController()
 
@@ -58,7 +58,7 @@ class CmdVelSub:
             float64 y (rad/s)
             float64 z (rad/s)
         """
-        rospy.loginfo('/cmd_vel callback triggered with message: {}'.format(message))
+        # rospy.loginfo('/cmd_vel callback triggered with message: {}'.format(message))
 
         x_speed = message.linear.x
         angular_z = message.angular.z
@@ -67,7 +67,7 @@ class CmdVelSub:
 
 
 if __name__ == "__main__":
-    rospy.init_node('chassis_move node', log_level=rospy.DEBUG)
+    rospy.init_node('chassis_move node', log_level=rospy.ERROR)
 
     # get global params for motor setup
     right_motor_port = rospy.get_param('right_motor_port')
