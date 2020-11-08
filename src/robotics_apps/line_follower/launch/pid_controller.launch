@@ -1,5 +1,0 @@
-<launch>
-    <node pkg='line_follower' type='pid_controller.py' name='pid_controller' output='screen'></node>
-    <param name="line_follower_speed" value="0.2" type="double"/>
-</launch>
-
