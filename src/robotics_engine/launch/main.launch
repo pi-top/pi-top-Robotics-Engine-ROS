@@ -1,8 +1,10 @@
 <launch>
+    <rosparam command="load" file="$(find robotics_configurations)/Alex/parameters.yaml" />
     <!--<include file="$(find pan_tilt_move)/launch/cmd_vel_sub.launch" />-->
     <include file="$(find chassis_move)/launch/chassis_move.launch" />
-    <!--<include file="$(find web_video_server)/launch/web_video_server.launch" />
+    <!--<include file="$(find web_video_server)/launch/web_video_server.launch"
     <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />-->
     <include file="$(find chassis_odom)/launch/odom_publisher.launch" />
+    <include file="$(find cv_camera)/launch/pi-top-camera.launch" />
     <!--<include file="$(find chassis_imu)/launch/imu_publisher.launch" /> NO IMU SDK AVAILABLE YET-->
 </launch>

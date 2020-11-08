@@ -3,7 +3,7 @@
 import rospy
 from geometry_msgs.msg import Twist, Vector3
 from ptpma import PMAEncoderMotor, ForwardDirection, BrakingType
-from math import pi
+from math import pi, floor
 
 
 class ChassisMoveController:
@@ -13,35 +13,37 @@ class ChassisMoveController:
         global right_motor
         self._left_motor = left_motor
         self._right_motor = right_motor
-        self._max_rpm = min(self._left_motor.max_rpm, self._right_motor.max_rpm)
-        self._max_speed = self._max_rpm / 60.0 * wheel_circumference
+        self._max_rpm = floor(min(self._left_motor.max_rpm, self._right_motor.max_rpm))
 
     def robot_move(self, linear_speed, angular_speed):
-        v_r = (linear_speed + wheel_base * angular_speed) / 2
-        v_l = (linear_speed - wheel_base * angular_speed) / 2
-        v_diff = v_r - v_l
+        speed_right = (linear_speed + wheel_base * angular_speed) / 2
+        speed_left = (linear_speed - wheel_base * angular_speed) / 2
+        rpm_right = round(60 * speed_right / wheel_circumference, 1)
+        rpm_left = round(60 * speed_left / wheel_circumference, 1)
+        rpm_diff = rpm_right - rpm_left
 
-        if v_r > self._max_speed:
-            v_r = self._max_speed
-            v_l = self._max_speed - v_diff
-        elif v_r < -self._max_speed:
-            v_r = -self._max_speed
-            v_l = -self._max_speed - v_diff
+        if rpm_right > self._max_rpm:
+            rpm_right = self._max_rpm
+            rpm_left = self._max_rpm - rpm_diff
+        elif rpm_right < -self._max_rpm:
+            rpm_right = -self._max_rpm
+            rpm_left = -self._max_rpm - rpm_diff
 
-        if v_l > self._max_speed:
-            v_l = self._max_speed
-        elif v_l < -self._max_speed:
-            v_l = -self._max_speed
+        if rpm_left > self._max_rpm:
+            rpm_left = self._max_rpm
+        elif rpm_left < -self._max_rpm:
+            rpm_left = -self._max_rpm
 
-        self._left_motor.set_target_speed(target_speed=v_l)
-        self._right_motor.set_target_speed(target_speed=v_r)
-        rospy.logdebug('Left motor speed: {}\nRight motor speed: {}\n'.format(v_l, v_r))
+        self._left_motor.set_target_rpm(target_rpm=rpm_left)
+        self._right_motor.set_target_rpm(target_rpm=rpm_right)
+
+        # rospy.logdebug('Left motor RPM: {}\nRight motor RPM: {}\n'.format(rpm_left, rpm_right))
 
 
 class CmdVelSub:
 
     def __init__(self):
-        self._cmd_vel_subscriber = rospy.Subscriber('/cmd_vel', Twist, callback=self.callback)
+        self._cmd_vel_subscriber = rospy.Subscriber('/cmd_vel', Twist, callback=self.callback, queue_size=2)
         self._twist_data = Twist()
         self._chassis_mover = ChassisMoveController()
 
@@ -56,7 +58,7 @@ class CmdVelSub:
             float64 y (rad/s)
             float64 z (rad/s)
         """
-        rospy.loginfo('/cmd_vel callback triggered with message: {}'.format(message))
+        # rospy.loginfo('/cmd_vel callback triggered with message: {}'.format(message))
 
         x_speed = message.linear.x
         angular_z = message.angular.z
@@ -65,7 +67,7 @@ class CmdVelSub:
 
 
 if __name__ == "__main__":
-    rospy.init_node('chassis_move node', log_level=rospy.DEBUG)
+    rospy.init_node('chassis_move node', log_level=rospy.ERROR)
 
     # get global params for motor setup
     right_motor_port = rospy.get_param('right_motor_port')

@@ -34,7 +34,7 @@ apt-get install -y ros-noetic-image-view
 apt-get install -y ros-noetic-image-transport
 apt-get install -y ros-noetic-compressed-image-transport
 apt-get install -y ros-noetic-cv-bridge # this is a biggy
-apt-get install -y ros-noetic-cv-camera
+#apt-get install -y ros-noetic-cv-camera  # build this one from our own source
 apt-get install -y ros-noetic-opencv-apps  # face tracking, people tracking and more
 apt-get install -y python3-rosdep
 
@@ -52,6 +52,7 @@ pip3 install cython
 pip3 install gpiozero smbus2 numpy
 pip3 install imageio
 pip3 install PyV4L2Camera
+pip3 install simple_pid
 
 #initialise catkin workspace
 source /ros_entrypoint.sh

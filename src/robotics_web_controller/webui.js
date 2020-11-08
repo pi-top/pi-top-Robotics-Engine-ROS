@@ -65,7 +65,7 @@ function createJoystick() {
     // Check if joystick was aready created
     if (manager == null) {
         joystickContainer = document.getElementById('joystick');
-        // joystck configuration, if you want to adjust joystick, refer to:
+        // joystick configuration, if you want to adjust joystick, refer to:
         // https://yoannmoinet.github.io/nipplejs/
         var options = {
             zone: joystickContainer,
@@ -78,18 +78,18 @@ function createJoystick() {
         manager = nipplejs.create(options);
         // event listener for joystick move
         manager.on('move', function (evt, nipple) {
-            // nipplejs returns direction is screen coordiantes
+            // nipplejs returns direction is screen coordinates
             // we need to rotate it, that dragging towards screen top will move robot forward
             var direction = nipple.angle.degree - 90;
             if (direction > 180) {
                 direction = -(450 - nipple.angle.degree);
             }
             // convert angles to radians and scale linear and angular speed
-            // adjust if youwant robot to drvie faster or slower
-            var lin = Math.cos(direction / 57.29) * nipple.distance * 0.005;
-            var ang = Math.sin(direction / 57.29) * nipple.distance * 0.05;
-            // nipplejs is triggering events when joystic moves each pixel
-            // we need delay between consecutive messege publications to 
+            // adjust if you want robot to drive faster or slower
+            var lin = Math.cos(direction / 57.29) * nipple.distance * 0.008;
+            var ang = Math.sin(direction / 57.29) * nipple.distance * 0.03;
+            // nipplejs is triggering events when joystick moves each pixel
+            // we need delay between consecutive message publications to
             // prevent system from being flooded by messages
             // events triggered earlier than 50ms after last publication will be dropped 
             if (publishImmidiately) {
@@ -124,7 +124,7 @@ window.onload = function () {
     // get handle for video placeholder
     video = document.getElementById('video');
     // Populate video source 
-    video.src = "http://" + robot_IP + ":8080/stream?topic=/usb_cam/image_transport&type=ros_compressed";
+    video.src = "http://" + robot_IP + ":8080/stream?topic=/cv_camera/image_raw&type=ros_compressed"; //&quality=20
     video.onload = function () {
         // joystick and keyboard controls will be available only when video is correctly loaded
         createJoystick();
