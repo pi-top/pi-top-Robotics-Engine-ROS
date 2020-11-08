@@ -2,7 +2,6 @@
 
 import rospy
 from geometry_msgs.msg import Twist
-import numpy as np
 from simple_pid import PID
 
 
@@ -13,7 +12,6 @@ class Controller:
         self._cmd_vel_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
         self._twist_data = Twist()
         self._twist_data.linear.x = chassis_speed_x
-        self._angle_filter_window = np.zeros(3)
 
     def stop_chassis(self):
         self._twist_data.linear.x = 0
@@ -22,9 +20,8 @@ class Controller:
 
     def control_chassis(self, state):
         control_effort = self._pid(state)
-        self.chassis_command(control_effort)
+        self.send_command(control_effort)
 
-
-    def chassis_command(self, control_effort):
+    def send_command(self, control_effort):
         self._twist_data.angular.z = control_effort
         self._cmd_vel_publisher.publish(self._twist_data)

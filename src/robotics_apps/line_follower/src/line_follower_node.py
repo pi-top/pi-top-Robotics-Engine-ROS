@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
 
 import rospy
-# from std_msgs.msg import Int16MultiArray
-from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Image
 import cv2
 import numpy as np
 from cv_bridge import CvBridge, CvBridgeError
 from controller import Controller
 from vision_functions import colour_mask, find_centroid, find_contours
-
 
 # parameters to tune:
 # - servo angle
@@ -41,6 +38,7 @@ class PathFinder:
         self._line_follower_image_height = 0
         self._hsv_lower = lower_blue
         self._hsv_upper = upper_blue
+        self._angle_filter_window = np.zeros(3)
         self._ctrl_c = False
         rospy.on_shutdown(self.shutdown_hook)
 
@@ -71,6 +69,7 @@ class PathFinder:
             self.publish_robot_view(robot_view)
 
     def convert_frame(self, frame):
+        # convert ROS image to one opencv can understand
         cv_image = self.ros_to_cv_image(frame)
 
         # update image width and height in case they have changed
@@ -88,6 +87,7 @@ class PathFinder:
     def image_processing(self, image):
         # mask out everything except blue parts of image
         blue_masked_frame = colour_mask(image, self._hsv_lower, self._hsv_upper)
+
         # find contour of the line
         line_contour = find_contours(blue_masked_frame)
 
@@ -100,12 +100,13 @@ class PathFinder:
 
         centroid_coordinate = (centroid_x, centroid_y)
 
-        # create robot view
+        # draw contour lines on robot view
         if line_contour is not None:
             cv2.drawContours(blue_masked_frame, [line_contour], 0, (100, 60, 240), 2)
 
+        # draw centroid on robot view
         cv2.drawMarker(blue_masked_frame, (centroid_x, centroid_y), (100, 60, 240),
-                       markerType=cv2.MARKER_CROSS, markerSize=20, thickness=2, line_type=cv2.FILLED)
+                       markerType=cv2.MARKER_CROSS, markerSize=10, thickness=2, line_type=cv2.FILLED)
 
         # scale image back up for viewing
         blue_masked_frame_scale_up = cv2.resize(blue_masked_frame, (self._cam_image_width, self._cam_image_height),
