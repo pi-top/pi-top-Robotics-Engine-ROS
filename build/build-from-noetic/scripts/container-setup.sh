@@ -53,6 +53,7 @@ pip3 install cython
 pip3 install gpiozero smbus2 numpy
 pip3 install imageio
 pip3 install PyV4L2Camera
+pip3 install simple_pid
 
 #initialise catkin workspace
 source /ros_entrypoint.sh
