@@ -22,8 +22,10 @@ from vision_functions import colour_mask, find_centroid, find_contours
 # - chassis_move uses 10-15% when receiving commands
 #       - could check how recently a command was received and ignore if too soon (queue_size=1 so maybe this is ok)
 
+# TODO: control linear speed based on the width of the contour found, larger width means there is a corner
+# TODO: add dynamic reconfigure compatibility so parameters can be tuned on the fly
 
-class PathFinder:
+class LineFollower:
 
     def __init__(self):
         self._image_subscriber = rospy.Subscriber('/cv_camera/image_raw', Image,
@@ -38,7 +40,7 @@ class PathFinder:
         self._line_follower_image_height = 0
         self._hsv_lower = lower_blue
         self._hsv_upper = upper_blue
-        self._angle_filter_window = np.zeros(3)
+        # self._angle_filter_window = np.zeros(3)
         self._ctrl_c = False
         rospy.on_shutdown(self.shutdown_hook)
 
@@ -171,5 +173,5 @@ if __name__ == "__main__":
     lower_blue = np.array([cv_hue_lower, cv_sat_lower, cv_val_lower])
     upper_blue = np.array([cv_hue_upper, cv_sat_upper, cv_val_upper])
 
-    path_finder = PathFinder()
+    line_follower = LineFollower()
     rospy.spin()

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import cv2
 
 
@@ -27,7 +28,6 @@ def find_contours(frame):
     # Find the contours of the frame. RETR_EXTERNAL: retrieves only the extreme outer contours
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    # print("Contours found: {}".format(len(contours)))
     # Find the biggest contour (if detected)
     if len(contours) > 0:
         largest_contour = max(contours, key=cv2.contourArea)

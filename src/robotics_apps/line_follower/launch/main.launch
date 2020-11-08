@@ -1,5 +1,5 @@
 <launch>
     <node pkg='line_follower' type='line_follower_node.py' name='line_follower_node' output='screen'></node>
-    <param name="line_follower_speed" value="0.4" type="double"/>
+    <param name="line_follower_speed" value="0.8" type="double"/>
     <param name="cv_image_scale" value="0.5" type="double"/>
 </launch>

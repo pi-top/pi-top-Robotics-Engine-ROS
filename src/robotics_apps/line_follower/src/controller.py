@@ -7,7 +7,7 @@ from simple_pid import PID
 
 class Controller:
     def __init__(self, chassis_speed_x):
-        self._pid = PID(Kp=0.02, Ki=0.001, Kd=0.001, setpoint=0)
+        self._pid = PID(Kp=0.04, Ki=0.002, Kd=0.002, setpoint=0)
         self._pid.output_limits = (-4.0, 4.0)
         self._cmd_vel_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
         self._twist_data = Twist()
