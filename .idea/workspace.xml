@@ -1,4 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c80d19a2-f8b1-43b5-b382-900a8de37252" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/examples/pmaencodermotor_rover.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/examples/pmaencodermotor_rover.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/ptpma/encoder_motor.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/ptpma/encoder_motor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/ptpma/servo_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/ptpma/servo_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/ptpma/servo_motor.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/ptpma/servo_motor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/line_follower_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/line_follower_node.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/math_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/math_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/vision_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/vision_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_move/src/chassis_move.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_move/src/chassis_move.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_engine/launch/main.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_engine/launch/main.launch" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1jXgjeclY70cnG6ljjXf2EpN0V8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c80d19a2-f8b1-43b5-b382-900a8de37252" name="Default Changelist" comment="" />
+      <created>1604926579077</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604926579077</updated>
+      <workItem from="1604926580158" duration="286000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
 </project>

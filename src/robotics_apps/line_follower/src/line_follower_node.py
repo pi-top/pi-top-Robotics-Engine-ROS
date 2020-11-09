@@ -60,6 +60,8 @@ class LineFollower:
             # get control angle
             control_angle = self.get_control_angle(centroid_coordinate[0], centroid_coordinate[1])
 
+            print(control_angle)
+
             # optionally filter the angle with moving average
             # self._angle_filter_window, new_angle = average_array_increment(self._angle_filter_window,
             # chassis_vector_angle)
