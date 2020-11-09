@@ -4,5 +4,6 @@
     <param name="image_width" type="int" value="640" />
     <param name="image_height " type="int" value="480" />
     <param name="device_id" type="int" value="0" />
+    <param name="cv_cap_prop_exposure" type="double" value="700" />
   </node>
 </launch>
