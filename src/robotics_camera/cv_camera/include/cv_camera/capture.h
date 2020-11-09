@@ -12,6 +12,7 @@
 #include <sensor_msgs/CameraInfo.h>
 #include <sensor_msgs/image_encodings.h>
 #include <opencv2/highgui/highgui.hpp>
+#include <opencv2/opencv.hpp>
 #include <camera_info_manager/camera_info_manager.h>
 
 /**
@@ -147,11 +148,21 @@ public:
   {
     return cap_.set(cv::CAP_PROP_FRAME_HEIGHT, height);
   }
-
-  inline bool setExposure(int ex = 2.0)
+ /**
+   * @brief try capture image auto exposure
+   * @return true if success
+   */
+  inline bool setAutoExposure(double ex)
   {
-    cap_.set(cv::CAP_PROP_AUTO_EXPOSURE, 0.25);
-    return  cap_.set(cv::CAP_PROP_EXPOSURE, 2.0);
+    return cap_.set(cv::CAP_PROP_AUTO_EXPOSURE, ex);
+  }
+ /**
+   * @brief try capture image exposure value
+   * @return true if success
+   */
+  inline bool setExposure(double ex)
+  {
+    return cap_.set(cv::CAP_PROP_EXPOSURE, ex);
   }
 
   /**

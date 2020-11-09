@@ -2,11 +2,46 @@
 
 #include "cv_camera/driver.h"
 #include <string>
+#include <stdio.h>
+#include <iostream>
+#include <sys/time.h>
+#include <asm/types.h>
+#include <linux/videodev2.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
 
 namespace
 {
-const double DEFAULT_RATE = 30.0;
+const double DEFAULT_RATE = 40.0;
 const int32_t PUBLISHER_BUFFER_SIZE = 1;
+}
+
+#define MAX_DEVICE_DRIVER_NAME 80
+
+int setExposureForDevice(const char * path)
+{
+    int deviceHandle;
+    deviceHandle = open(path, O_RDWR);
+    int ret=0;
+
+    v4l2_control control = {V4L2_CID_EXPOSURE_AUTO, V4L2_EXPOSURE_MANUAL};
+    // The driver may clamp the value or return ERANGE
+    if (-1 == ioctl(deviceHandle, VIDIOC_S_CTRL, &control) && errno != ERANGE) {
+        perror ("VIDIOC_S_CTRL");
+        ret = -1;
+    }
+    control = {V4L2_CID_EXPOSURE_ABSOLUTE, 900};
+    //The driver may clamp the value or return ERANGE
+    if (-1 == ioctl(deviceHandle, VIDIOC_S_CTRL, &control) && errno != ERANGE) {
+        perror ("VIDIOC_S_CTRL");
+        ret = -1;
+    }
+
+    close(deviceHandle);
+    return ret;
 }
 
 namespace cv_camera
@@ -22,6 +57,8 @@ void Driver::setup()
 {
   double hz(DEFAULT_RATE);
   int32_t device_id(0);
+  double autoexposure = 0.25;
+  double exposure = 1.0;
   std::string device_path("");
   std::string frame_id("camera");
   std::string file_path("");
@@ -34,6 +71,10 @@ void Driver::setup()
   {
     camera_name = frame_id;
   }
+
+  char deviceName[MAX_DEVICE_DRIVER_NAME];
+  sprintf(deviceName, "/dev/video%1d", device_id);
+  setExposureForDevice(deviceName);
 
   int32_t image_width(640);
   int32_t image_height(480);
@@ -56,6 +97,7 @@ void Driver::setup()
   {
     camera_->open(device_id);
   }
+
   if (private_node_.getParam("image_width", image_width))
   {
     if (!camera_->setWidth(image_width))
@@ -70,9 +112,19 @@ void Driver::setup()
       ROS_WARN("fail to set image_height");
     }
   }
-  if (!camera_->setExposure())
+  if (private_node_.getParam("cv_cap_prop_auto_exposure", autoexposure))
   {
-    ROS_WARN("fail to set exposure");
+    if (!camera_->setAutoExposure(autoexposure))
+    {
+      ROS_WARN("fail to set autoexposure");
+    }
+  }
+  if (private_node_.getParam("cv_cap_prop_exposure", exposure))
+  {
+    if (!camera_->setExposure(exposure))
+    {
+      ROS_WARN("fail to set exposure");
+    }
   }
 
   camera_->setPropertyFromParam(cv::CAP_PROP_POS_MSEC, "cv_cap_prop_pos_msec");
