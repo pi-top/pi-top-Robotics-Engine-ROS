@@ -30,6 +30,7 @@ add_library(cv_camera_nodelet src/cv_camera_nodelet.cpp)
 
 ## Declare a cpp executable
 add_executable(cv_camera_node src/cv_camera_node.cpp)
+add_executable(opencvTest src/opencvTest.cpp)
 add_dependencies(cv_camera_node cv_camera)
 add_dependencies(cv_camera_nodelet cv_camera)
 
@@ -49,6 +50,9 @@ target_link_libraries(cv_camera_node
   cv_camera
   )
 
+target_link_libraries(opencvTest
+  ${OpenCV_LIBS}
+  )
 #############
 ## Install ##
 #############
