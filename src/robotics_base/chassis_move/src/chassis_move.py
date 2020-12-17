@@ -22,28 +22,31 @@ class ChassisMoveController:
         rpm_left = self._speed_to_rpm(speed_left)
         rpm_diff = abs(rpm_right - rpm_left)
 
+        rpm_left, rpm_right = self._rpm_clamp_check(rpm_left, rpm_right, rpm_diff)
+
+        self._left_motor.set_target_rpm(target_rpm=rpm_left)
+        self._right_motor.set_target_rpm(target_rpm=rpm_right)
+
+    def _rpm_clamp_check(self, rpm_left, rpm_right, rpm_diff):
         if rpm_right > self._max_rpm:
             rpm_right = self._max_rpm
             rpm_left = self._max_rpm - rpm_diff
         elif rpm_right < -self._max_rpm:
             rpm_right = -self._max_rpm
-            rpm_left = -self._max_rpm - rpm_diff
+            rpm_left = -self._max_rpm + rpm_diff
 
-        if rpm_left > self._max_rpm:
-            rpm_left = self._max_rpm
-        elif rpm_left < -self._max_rpm:
-            rpm_left = -self._max_rpm
+        rpm_left = self._max_rpm if rpm_left > self._max_rpm else rpm_left
+        rpm_left = -self._max_rpm if rpm_left < -self._max_rpm else rpm_left
 
-        self._left_motor.set_target_rpm(target_rpm=rpm_left)
-        self._right_motor.set_target_rpm(target_rpm=rpm_right)
+        return rpm_left, rpm_right
 
-        # rospy.logdebug('Left motor RPM: {}\nRight motor RPM: {}\n'.format(rpm_left, rpm_right))
-
-    def _speed_to_rpm(self, speed):
+    @staticmethod
+    def _speed_to_rpm(speed):
         rpm = round(60.0 * speed / wheel_circumference, 1)
         return rpm
 
-    def _rpm_to_speed(self, rpm):
+    @staticmethod
+    def _rpm_to_speed(rpm):
         speed = round(rpm * wheel_circumference / 60.0, 3)
         return speed
 
