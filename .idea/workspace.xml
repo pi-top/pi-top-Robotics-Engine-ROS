@@ -1,4 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/examples/pmaencodermotor_rover.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/examples/pmaencodermotor_rover.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/ptpma/encoder_motor.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/ptpma/encoder_motor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/ptpma/servo_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/ptpma/servo_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/ptpma/servo_motor.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma/ptpma/servo_motor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_move/src/chassis_move.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_move/src/chassis_move.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1jXgjeclY70cnG6ljjXf2EpN0V8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="" />
+      <created>1607482126872</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607482126872</updated>
+      <workItem from="1607482128220" duration="5040000" />
+      <workItem from="1607573457612" duration="1198000" />
+      <workItem from="1608204158151" duration="348000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
 </project>

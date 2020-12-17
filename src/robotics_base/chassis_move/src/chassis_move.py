@@ -16,11 +16,11 @@ class ChassisMoveController:
         self._max_rpm = floor(min(self._left_motor.max_rpm, self._right_motor.max_rpm))
 
     def robot_move(self, linear_speed, angular_speed):
-        speed_right = (linear_speed + wheel_base * angular_speed) / 2
-        speed_left = (linear_speed - wheel_base * angular_speed) / 2
-        rpm_right = round(60 * speed_right / wheel_circumference, 1)
-        rpm_left = round(60 * speed_left / wheel_circumference, 1)
-        rpm_diff = rpm_right - rpm_left
+        speed_right = linear_speed + (wheel_base * angular_speed) / 2
+        speed_left = linear_speed - (wheel_base * angular_speed) / 2
+        rpm_right = self._speed_to_rpm(speed_right)
+        rpm_left = self._speed_to_rpm(speed_left)
+        rpm_diff = abs(rpm_right - rpm_left)
 
         if rpm_right > self._max_rpm:
             rpm_right = self._max_rpm
@@ -38,6 +38,14 @@ class ChassisMoveController:
         self._right_motor.set_target_rpm(target_rpm=rpm_right)
 
         # rospy.logdebug('Left motor RPM: {}\nRight motor RPM: {}\n'.format(rpm_left, rpm_right))
+
+    def _speed_to_rpm(self, speed):
+        rpm = round(60.0 * speed / wheel_circumference, 1)
+        return rpm
+
+    def _rpm_to_speed(self, rpm):
+        speed = round(rpm * wheel_circumference / 60.0, 3)
+        return speed
 
 
 class CmdVelSub:
