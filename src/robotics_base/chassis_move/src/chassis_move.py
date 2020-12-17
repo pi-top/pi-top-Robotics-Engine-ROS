@@ -20,14 +20,14 @@ class ChassisMoveController:
         speed_left = linear_speed - (wheel_base * angular_speed) / 2
         rpm_right = self._speed_to_rpm(speed_right)
         rpm_left = self._speed_to_rpm(speed_left)
-        rpm_diff = abs(rpm_right - rpm_left)
 
-        rpm_left, rpm_right = self._rpm_clamp_check(rpm_left, rpm_right, rpm_diff)
+        rpm_left, rpm_right = self._rpm_clamp_check(rpm_left, rpm_right)
 
         self._left_motor.set_target_rpm(target_rpm=rpm_left)
         self._right_motor.set_target_rpm(target_rpm=rpm_right)
 
-    def _rpm_clamp_check(self, rpm_left, rpm_right, rpm_diff):
+    def _rpm_clamp_check(self, rpm_left, rpm_right):
+        rpm_diff = abs(rpm_right - rpm_left)
         if rpm_right > self._max_rpm:
             rpm_right = self._max_rpm
             rpm_left = self._max_rpm - rpm_diff
