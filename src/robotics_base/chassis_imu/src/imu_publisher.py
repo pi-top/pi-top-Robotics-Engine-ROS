@@ -5,10 +5,11 @@ from sensor_msgs.msg import Imu, MagneticField
 from geometry_msgs.msg import Vector3, Quaternion
 # Because of transformations
 from tf.transformations import quaternion_from_euler
-import tf
+# import tf
 import numpy as np
+from dataclasses import fields
 
-from ptpma import PMAInertialMeasurementUnit
+from pitop.pma import Imu as RobotImu
 
 # import time
 # import math
@@ -16,8 +17,10 @@ from ptpma import PMAInertialMeasurementUnit
 # import numpy as np
 from math import pi
 
-class ImuPublisher:
+g = 9.80665
 
+
+class ImuPublisher:
     # variance calculations
     # assume that the sensor data is normally distributed
     # 99.7% of the data are within 3 standard deviations (sigma) of the mean
@@ -41,14 +44,14 @@ class ImuPublisher:
     # this is an accumulation of the errors in our other IMU terms since ultimately it is calculated from them
     # guestimate for now and say is has a variance of 20degrees
 
-    _angular_velocity_covariance = np.mat(np.diag([(pi/18)**2] * 3))
+    # TODO: these need changing, especially orientation covariance
+    _angular_velocity_covariance = np.mat(np.diag([(pi / 18) ** 2] * 3))
     _linear_acceleration_covariance = np.mat(np.diag([9.0e-4] * 3))
     _mag_covariance = np.mat(np.diag([(1.0e-4 / 9) ** 2] * 3))
     _orientation_covariance = np.mat(np.diag([20] * 3))
 
-
     def __init__(self, imu_raw_topic, imu_topic, imu_mag_topic, frame_id):
-        self._imu = PMAInertialMeasurementUnit()
+        self._imu = RobotImu()
 
         self._imu_raw_publisher = rospy.Publisher(imu_raw_topic, Imu, queue_size=1)
         self._imu_raw_data = Imu()
@@ -108,27 +111,30 @@ class ImuPublisher:
             # rospy.loginfo("y_acc: {}".format(y_acc))
             # rospy.loginfo("z_acc: {}".format(z_acc))
             # x_acc, y_acc, z_acc = tuple(9.80665 * x for x in (x_acc, y_acc, z_acc))  # convert to m/2^2
-            x_acc, y_acc, z_acc = tuple(9.80665 * x for x in self._imu.acceleration)  # convert to m/2^2
+            acc = self._imu.accelerometer * g  # convert to m/2^2
+            x_acc, y_acc, z_acc = list(getattr(acc, field.name) for field in fields(acc))
 
             # x_gyro, y_gyro, z_gyro = self._imu.gyro
             # rospy.loginfo("x_gyro: {}".format(x_gyro))
             # rospy.loginfo("y_gyro: {}".format(y_gyro))
             # rospy.loginfo("z_gyro: {}".format(z_gyro))
             # x_gyro, y_gyro, z_gyro = tuple(pi/180 * x for x in (x_gyro, y_gyro, z_gyro))  # convert to rad/s
-            x_gyro, y_gyro, z_gyro = tuple(pi/180 * x for x in self._imu.gyro)  # convert to rad/s
+            gyro = self._imu.gyroscope * pi / 180.0  # convert to rad/s
+            x_gyro, y_gyro, z_gyro = list(getattr(gyro, field.name) for field in fields(gyro))
 
             # x_mag, y_mag, z_mag = self._imu.magnetic
             # rospy.loginfo("x_mag: {}".format(x_mag))
             # rospy.loginfo("y_mag: {}".format(y_mag))
             # rospy.loginfo("z_mag: {}".format(z_mag))
             # x_mag, y_mag, z_mag = tuple(0.0001 * x for x in (x_mag, y_mag, z_mag))  # convert to Tesla
-            x_mag, y_mag, z_mag = tuple(0.0001 * x for x in self._imu.magnetic)  # convert to Tesla
+            mag = self._imu.magnetometer * 10e-6  # convert to Tesla
+            x_mag, y_mag, z_mag = list(getattr(mag, field.name) for field in fields(mag))
 
             roll, pitch, yaw = self._imu.orientation
             # rospy.loginfo("roll: {}".format(roll))
             # rospy.loginfo("pitch: {}".format(pitch))
             # rospy.loginfo("yaw: {}".format(yaw))
-            q_msg = get_quaternion_msg(roll, pitch, yaw)
+            q_msg = self.get_quaternion_msg(roll, pitch, yaw)
 
             now = rospy.Time.now()
 
@@ -178,15 +184,16 @@ class ImuPublisher:
             # sleep for update time
             self._rate.sleep()
 
+    @staticmethod
+    def get_quaternion_msg(roll, pitch, yaw):
+        q = quaternion_from_euler(roll, pitch, yaw)  # roll and pitch both zero
+        quaternion_msg = Quaternion()
+        quaternion_msg.x = q[0]
+        quaternion_msg.y = q[1]
+        quaternion_msg.z = q[2]
+        quaternion_msg.w = q[3]
+        return quaternion_msg
 
-def get_quaternion_msg(roll, pitch, yaw):
-    q = quaternion_from_euler(roll, pitch, yaw)  # roll and pitch both zero
-    quaternion_msg = Quaternion()
-    quaternion_msg.x = q[0]
-    quaternion_msg.y = q[1]
-    quaternion_msg.z = q[2]
-    quaternion_msg.w = q[3]
-    return quaternion_msg
 
 if __name__ == "__main__":
     rospy.init_node('Imu_Publisher_Node', log_level=rospy.INFO, anonymous=True)

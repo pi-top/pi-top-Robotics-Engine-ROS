@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../pi-top-Python-SDK/.idea/pi-top-Python-SDK.iml" filepath="$PROJECT_DIR$/../pi-top-Python-SDK/.idea/pi-top-Python-SDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/pi-top-robotics-engine.iml" filepath="$PROJECT_DIR$/.idea/pi-top-robotics-engine.iml" />
     </modules>
   </component>
