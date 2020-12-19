@@ -1,8 +1,11 @@
 var twist;
+var twist2;
 var cmdVel;
+var cmdVel2;
 var publishImmidiately = true;
 var robot_IP;
 var manager;
+var managerPanTi;  //for pan and tilt
 var teleop;
 var ros;
 
@@ -16,6 +19,18 @@ function moveAction(linear, angular) {
     }
     // console.log(linear)
     cmdVel.publish(twist);
+}
+
+function moveAction_PanTi(angular, angular2) {
+    if (angular !== undefined && angular2 !== undefined) {
+        twist2.angular.x = angular;
+        twist2.angular.z = angular2;
+    } else {
+        twist2.angular.x = 0;
+        twist2.angular.z = 0;
+    }
+    // console.log(linear)
+    cmdVel2.publish(twist2);
 }
 
 function initVelocityPublisher() {
@@ -40,6 +55,30 @@ function initVelocityPublisher() {
     });
     // Register publisher within ROS system
     cmdVel.advertise();
+}
+
+function initVelocityPublisher_PanTi() {
+    // Init message with zero values.
+    twist2 = new ROSLIB.Message({
+        linear: {
+            x: 0,
+            y: 0,
+            z: 0
+        },
+        angular: {
+            x: 0,
+            y: 0,
+            z: 0
+        }
+    });
+    // Init topic object
+    cmdVel2 = new ROSLIB.Topic({
+        ros: ros,
+        name: '/pan_tilt/cmd_vel',
+        messageType: 'geometry_msgs/Twist'
+    });
+    // Register publisher within ROS system
+    cmdVel2.advertise();
 }
 
 function initTeleopKeyboard() {
@@ -69,7 +108,7 @@ function createJoystick() {
         // https://yoannmoinet.github.io/nipplejs/
         var options = {
             zone: joystickContainer,
-            position: { left: 50 + '%', top: 105 + 'px' },
+            position: { left: 30 + '%', top: 105 + 'px' },
             mode: 'static',
             size: 200,
             color: '#0066ff',
@@ -109,6 +148,56 @@ function createJoystick() {
     }
 }
 
+function createJoystick_PanTi() {
+    // Check if joystick was aready created
+    if (managerPanTi == null) {
+        joystickContainer = document.getElementById('joystick1');
+        // joystick configuration, if you want to adjust joystick, refer to:
+        // https://yoannmoinet.github.io/nipplejs/
+        var options = {
+            zone: joystickContainer,
+            position: { left: 70 + '%', top: 105 + 'px' },
+            mode: 'static',
+            size: 200,
+            color: '#0066ff',
+            restJoystick: true
+        };
+        managerPanTi = nipplejs.create(options);
+        // event listener for joystick move
+        managerPanTi.on('move', function (evt, nipple) {
+            // nipplejs returns direction is screen coordinates
+            // we need to rotate it, that dragging towards screen top will move robot forward
+            var direction = nipple.angle.degree - 90;
+            if (direction > 180) {
+                direction = -(450 - nipple.angle.degree);
+            }
+            // convert angles to radians and scale linear and angular speed
+            // adjust if you want robot to drive faster or slower
+            var ang = Math.cos(direction / 57.29) * nipple.distance * 0.03;
+            var ang2 = Math.sin(direction / 57.29) * nipple.distance * 0.03;
+            // nipplejs is triggering events when joystick moves each pixel
+            // we need delay between consecutive message publications to
+            // prevent system from being flooded by messages
+            // events triggered earlier than 50ms after last publication will be dropped 
+            if (publishImmidiately) {
+                publishImmidiately = false;
+                moveAction_PanTi(ang, ang2);
+                setTimeout(function () {
+                    publishImmidiately = true;
+                }, 50);
+            }
+        });
+        // event litener for joystick release, always send stop message
+        managerPanTi.on('end', function () {
+            // send twice to make sure it gets through
+            moveAction_PanTi(0, 0);
+            moveAction_PanTi(0, 0);
+
+        });
+    }
+}
+
+
 window.onload = function () {
     // determine robot address automatically
     robot_IP = location.hostname;
@@ -121,6 +210,8 @@ window.onload = function () {
     });
 
     initVelocityPublisher();
+
+	initVelocityPublisher_PanTi();
     // get handle for video placeholder
     video = document.getElementById('video');
     // Populate video source 
@@ -128,6 +219,7 @@ window.onload = function () {
     video.onload = function () {
         // joystick and keyboard controls will be available only when video is correctly loaded
         createJoystick();
+        createJoystick_PanTi();
         initTeleopKeyboard();
     };
 }
