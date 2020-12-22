@@ -48,6 +48,10 @@
     <xacro:macro name="right_wheel_joint_origin">
         <origin xyz="0 -0.0805 0" rpy="${-pi/2} 0 0"/>
     </xacro:macro>
+
+    <xacro:macro name="left_wheel_joint_origin">
+        <origin xyz="0 0.0805 0" rpy="${pi/2} 0 0"/>
+    </xacro:macro>
     <!-- * * * * * * * * * -->
 
     <!-- Macros -->
@@ -68,6 +72,7 @@
     <!-- Model Definitions -->
 
     <link name="base_link">
+        <pose>0 0 ${wheel_radius} 0 0 0</pose>
         <visual>
             <origin rpy="0.0 0 0" xyz="0 0 0"/>
             <geometry>
@@ -130,6 +135,35 @@
     	<parent link="base_link"/>
     	<child link="right_wheel"/>
     	<xacro:right_wheel_joint_origin/>
+        <limit effort="1.0" velocity="0.45"/>
+        <xacro:z_axis/>
+	</joint>
+
+    <link name="left_wheel">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="${wheel_mass}"/>
+            <inertia ixx="${wheel_ixx}" ixy="0.0" ixz="0.0" iyy="${wheel_iyy}" iyz="0.0" izz="${wheel_izz}"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="baselink_left_wheel_joint" type="continuous">
+    	<parent link="base_link"/>
+    	<child link="left_wheel"/>
+    	<xacro:left_wheel_joint_origin/>
         <limit effort="1.0" velocity="0.45"/>
         <xacro:z_axis/>
 	</joint>

@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/config/alex.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/control_alex.launch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/start_alex.launch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/urdf_visualize.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/urdf_visualize.launch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/start_alex.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/rviz.launch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +62,7 @@
       <workItem from="1607573457612" duration="1198000" />
       <workItem from="1608204158151" duration="3110000" />
       <workItem from="1608610159288" duration="6563000" />
-      <workItem from="1608621594208" duration="9076000" />
+      <workItem from="1608621594208" duration="10238000" />
     </task>
     <task id="LOCAL-00001" summary="Working rviz spawn">
       <created>1608623171166</created>
@@ -88,7 +85,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608628341556</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add joint controller GUI and fix missing TF transform for wheel">
+      <created>1608632225693</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1608632225693</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,6 +115,7 @@
     <MESSAGE value="Working rviz spawn" />
     <MESSAGE value="Chassis joint coordinates correct" />
     <MESSAGE value="Add wheel cylinder link/joint and fix chassis origin" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add wheel cylinder link/joint and fix chassis origin" />
+    <MESSAGE value="Add joint controller GUI and fix missing TF transform for wheel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add joint controller GUI and fix missing TF transform for wheel" />
   </component>
 </project>
