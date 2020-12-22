@@ -17,15 +17,7 @@
         <color rgba="0 0.7 0.64 1"/>
     </material>
 
-    <link name="base_link">
-        <visual>
-            <origin rpy="0.0 0 0" xyz="0 0 0"/>
-            <geometry>
-                <box size="0.01 0.01 0.01"/>
-            </geometry>
-            <material name="red"/>
-        </visual>
-    </link>
+
 
     <!-- Chassis Properties -->
     <xacro:property name="chassis_mass" value="0.1"/>
@@ -35,6 +27,10 @@
     <xacro:property name="chassis_ixx" value="${(chassis_mass / 12.0) * (chassis_depth_y**2 + chassis_height_z**2)}"/>
     <xacro:property name="chassis_iyy" value="${(chassis_mass / 12.0) * (chassis_width_x**2 + chassis_height_z**2)}"/>
     <xacro:property name="chassis_izz" value="${(chassis_mass / 12.0) * (chassis_width_x**2 + chassis_depth_y**2)}"/>
+
+    <xacro:macro name="chassis_origin">
+        <origin xyz="0 ${-chassis_depth_y/2} 0" rpy="0 0 0"/>
+    </xacro:macro>
 
     <xacro:macro name="chassis_joint_origin">
         <origin xyz="-0.068 0 0.056475" rpy="${pi/2} 0 ${-pi/2}"/>
@@ -48,34 +44,94 @@
     <xacro:property name="wheel_ixx" value="${(wheel_mass / 12.0) * (3 * wheel_radius**2 + wheel_width**2)}"/>
     <xacro:property name="wheel_iyy" value="${wheel_ixx}"/>
     <xacro:property name="wheel_izz" value="${(chassis_mass * wheel_radius**2) / 2}"/>
+
+    <xacro:macro name="right_wheel_joint_origin">
+        <origin xyz="0 -0.0805 0" rpy="${-pi/2} 0 0"/>
+    </xacro:macro>
     <!-- * * * * * * * * * -->
+
+    <!-- Macros -->
+    <xacro:macro name="x_axis">
+        <axis xyz="1 0 0"/>
+    </xacro:macro>
+
+    <xacro:macro name="y_axis">
+        <axis xyz="0 1 0"/>
+    </xacro:macro>
+
+    <xacro:macro name="z_axis">
+        <axis xyz="0 0 1"/>
+    </xacro:macro>
+
+    <!-- * * * * * * * * * -->
+
+    <!-- Model Definitions -->
+
+    <link name="base_link">
+        <visual>
+            <origin rpy="0.0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.01 0.01 0.01"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+    </link>
 
 
     <link name="chassis">
         <inertial>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <xacro:chassis_origin/>
             <mass value="${chassis_mass}"/>
             <inertia ixx="${chassis_ixx}" ixy="0.0" ixz="0.0" iyy="${chassis_iyy}" iyz="0.0" izz="${chassis_izz}"/>
         </inertial>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <xacro:chassis_origin/>
             <geometry>
                 <box size="${chassis_width_x} ${chassis_depth_y} ${chassis_height_z}"/>
             </geometry>
             <material name="grey"/>
         </visual>
         <collision>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <xacro:chassis_origin/>
             <geometry>
                 <box size="${chassis_width_x} ${chassis_depth_y} ${chassis_height_z}"/>
             </geometry>
         </collision>
     </link>
 
-    <joint name="fixed" type="fixed">
+    <joint name="baselink_chassis_joint" type="fixed">
     	<parent link="base_link"/>
     	<child link="chassis"/>
     	<xacro:chassis_joint_origin/>
+	</joint>
+
+    <link name="right_wheel">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="${wheel_mass}"/>
+            <inertia ixx="${wheel_ixx}" ixy="0.0" ixz="0.0" iyy="${wheel_iyy}" iyz="0.0" izz="${wheel_izz}"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="baselink_right_wheel_joint" type="continuous">
+    	<parent link="base_link"/>
+    	<child link="right_wheel"/>
+    	<xacro:right_wheel_joint_origin/>
+        <limit effort="1.0" velocity="0.005"/>
+        <xacro:z_axis/>
 	</joint>
 
     <!--<link name="castor_swivel">
