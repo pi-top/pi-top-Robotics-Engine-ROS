@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-<!--    <include file="$(find robotics_configurations)/alex_description/launch/urdf_visualize.launch"/>-->
-<!--    <include file="$(find robotics_configurations)/alex_description/launch/control_alex.launch"/>-->
     <param name="robot_description"
            command="$(find xacro)/xacro '$(find robotics_configurations)/alex_description/robots/alex.urdf.xacro'" />
 
@@ -11,17 +9,9 @@
     <!-- start joint GUI -->
     <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/>
 
-<!--    <rosparam file="$(find robotics_configurations)/alex_description/config/alex.yaml" command="load"/>-->
-    <!-- load the controllers -->
-<!--    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/" -->
-<!--          args="baselink_right_wheel_joint_controller joint_state_controller"/>-->
-
     <!-- convert joint states to TF transforms for rviz, etc -->
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
           respawn="false" output="screen"/>
-<!--        <remap from="/joint_states" to="/alex/joint_states" />-->
-<!--    </node>-->
-
 
     <!-- Show in Rviz   -->
     <node name="rviz" pkg="rviz" type="rviz"

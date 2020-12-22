@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="alex">
 
     <material name="grey">
-        <color rgba="0.75 0.75 0.75 0.5"/>
+        <color rgba="0.75 0.75 0.75 1.0"/>
     </material>
 
     <material name="red">
@@ -10,7 +10,7 @@
     </material>
 
     <material name="black">
-        <color rgba="0.8 0.8 0.8 1"/>
+        <color rgba="1.0 1.0 1.0 1"/>
     </material>
 
     <material name="pi-top_green">
@@ -35,19 +35,19 @@
         </plugin>
     </gazebo>
 
-    <xacro:macro name="gazebo_params" params="link_ref">
+    <xacro:macro name="gazebo_wheel_params" params="link_ref">
         <gazebo reference="${link_ref}">
             <kp>100.0</kp>
             <kd>100.0</kd>
             <mu1>10.0</mu1>
             <mu2>10.0</mu2>
-            <!--<xacro:insert_block name="material" />-->
-<!--            <material>Gazebo/${material}</material>-->
+            <material>Gazebo/Black</material>
         </gazebo>
     </xacro:macro>
 
 
     <!-- Chassis Properties -->
+    <xacro:property name="chassis_mesh_path" value="package://robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0001.stl"/>
     <xacro:property name="chassis_mass" value="0.1"/>
     <xacro:property name="chassis_width_x" value="0.192"/>
     <xacro:property name="chassis_depth_y" value="0.059"/>
@@ -56,13 +56,26 @@
     <xacro:property name="chassis_iyy" value="${(chassis_mass / 12.0) * (chassis_width_x**2 + chassis_height_z**2)}"/>
     <xacro:property name="chassis_izz" value="${(chassis_mass / 12.0) * (chassis_width_x**2 + chassis_depth_y**2)}"/>
 
+    <xacro:property name="chassis_origin_z_offset" value="0.017475"/>
+
     <xacro:macro name="chassis_origin">
-        <origin xyz="0 ${-chassis_depth_y/2} 0" rpy="0 0 0"/>
+        <origin xyz="0 ${-chassis_depth_y/2 - chassis_origin_z_offset} 0" rpy="0 0 0"/>
     </xacro:macro>
 
     <xacro:macro name="chassis_joint_origin">
         <origin xyz="-0.068 0 0.056475" rpy="${pi/2} 0 ${-pi/2}"/>
     </xacro:macro>
+    <!-- * * * * * * * * * -->
+
+    <!-- Expansion Plate Properties -->
+    <xacro:property name="ep_mass" value="0.01"/>
+    <xacro:property name="ep_width_x" value="0.192"/>
+    <xacro:property name="ep_depth_y" value="0.059"/>
+    <xacro:property name="ep_height_z" value="0.276"/>
+    <xacro:property name="ep_ixx" value="${(ep_mass / 12.0) * (ep_depth_y**2 + ep_height_z**2)}"/>
+    <xacro:property name="ep_iyy" value="${(ep_mass / 12.0) * (ep_width_x**2 + ep_height_z**2)}"/>
+    <xacro:property name="ep_izz" value="${(ep_mass / 12.0) * (ep_width_x**2 + ep_depth_y**2)}"/>
+
     <!-- * * * * * * * * * -->
 
     <!-- Wheel Properties -->
@@ -73,16 +86,51 @@
     <xacro:property name="wheel_iyy" value="${wheel_ixx}"/>
     <xacro:property name="wheel_izz" value="${(chassis_mass * wheel_radius**2) / 2}"/>
 
-    <xacro:macro name="right_wheel_joint_origin">
-        <origin xyz="0 -0.0805 0" rpy="${-pi/2} 0 0"/>
-    </xacro:macro>
-
     <xacro:macro name="left_wheel_joint_origin">
         <origin xyz="0 0.0805 0" rpy="${-pi/2} 0 0"/>
     </xacro:macro>
+
+    <xacro:macro name="right_wheel_joint_origin">
+        <origin xyz="0 -0.0805 0" rpy="${-pi/2} 0 0"/>
+    </xacro:macro>
     <!-- * * * * * * * * * -->
 
-    <!-- Macros -->
+    <!-- Castor Properties -->
+    <xacro:property name="castor_mesh_path" value="package://robotics_configurations/alex_description/models/alex/meshes/castor_wheel_sw0001.stl"/>
+    <xacro:property name="castor_mass" value="0.001"/>
+    <xacro:property name="castor_height" value="0.025"/>
+    <xacro:property name="castor_radius" value="0.0162"/>
+    <xacro:property name="castor_ixx" value="${(castor_mass / 12.0) * (3 * castor_radius**2 + castor_height**2)}"/>
+    <xacro:property name="castor_iyy" value="${castor_ixx}"/>
+    <xacro:property name="castor_izz" value="${(castor_mass * castor_radius**2) / 2}"/>
+
+    <xacro:macro name="castor_mesh_origin">
+        <origin xyz="0.08 0 0.058515" rpy="${pi/2} 0 ${-pi/2}"/>
+    </xacro:macro>
+
+    <xacro:macro name="castor_collision_origin">
+        <origin xyz="0 0 ${-castor_height/2}" rpy="0 0 0"/>
+    </xacro:macro>
+
+    <xacro:macro name="castor_joint_origin">
+        <origin xyz="-0.148 0 -0.00204" rpy="0 0 0"/>
+    </xacro:macro>
+    <!-- * * * * * * * * * -->
+
+    <!-- Castor Wheel Properties -->
+    <xacro:property name="castor_wheel_mass" value="0.001"/>
+    <xacro:property name="castor_wheel_width" value="0.0145"/>
+    <xacro:property name="castor_wheel_radius" value="0.0125"/>
+    <xacro:property name="castor_wheel_ixx" value="${(castor_wheel_mass / 12.0) * (3 * castor_wheel_radius**2 + castor_wheel_width**2)}"/>
+    <xacro:property name="castor_wheel_iyy" value="${castor_wheel_ixx}"/>
+    <xacro:property name="castor_wheel_izz" value="${(castor_wheel_mass * castor_wheel_radius**2) / 2}"/>
+
+    <xacro:macro name="castor_wheel_joint_origin">
+        <origin xyz="-0.016 0 -0.0205" rpy="${-pi/2} 0 0"/>
+    </xacro:macro>
+    <!-- * * * * * * * * * -->
+
+    <!-- Generic Macros -->
     <xacro:macro name="x_axis">
         <axis xyz="1 0 0" rpy="0 0 0"/>
     </xacro:macro>
@@ -110,7 +158,6 @@
         </visual>
     </link>
 
-
     <link name="chassis">
         <inertial>
             <xacro:chassis_origin/>
@@ -118,11 +165,12 @@
             <inertia ixx="${chassis_ixx}" ixy="0.0" ixz="0.0" iyy="${chassis_iyy}" iyz="0.0" izz="${chassis_izz}"/>
         </inertial>
         <visual>
-            <xacro:chassis_origin/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <box size="${chassis_width_x} ${chassis_depth_y} ${chassis_height_z}"/>
+<!--                <box size="${chassis_width_x} ${chassis_depth_y} ${chassis_height_z}"/>-->
+                <mesh filename="${chassis_mesh_path}" scale="0.001 0.001 0.001"/>
             </geometry>
-            <material name="grey"/>
+            <material name="black"/>
         </visual>
         <collision>
             <xacro:chassis_origin/>
@@ -198,8 +246,62 @@
         <joint_properties damping="1.0" friction="1.0"/>
 	</joint>
 
-    <xacro:gazebo_params link_ref="left_wheel"/>
-    <xacro:gazebo_params link_ref="right_wheel"/>
+    <link name="castor">
+        <inertial>
+            <xacro:castor_collision_origin/>
+            <mass value="${castor_mass}"/>
+            <inertia ixx="${castor_ixx}" ixy="0.0" ixz="0.0" iyy="${castor_iyy}" iyz="0.0" izz="${castor_izz}"/>
+        </inertial>
+        <visual>
+            <xacro:castor_mesh_origin/>
+            <geometry>
+                <mesh filename="${castor_mesh_path}" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <xacro:castor_collision_origin/>
+            <geometry>
+                <cylinder radius="${castor_radius}" length="${castor_height}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="baselink_castor_joint" type="continuous">
+    	<parent link="base_link"/>
+    	<child link="castor"/>
+    	<xacro:castor_joint_origin/>
+        <limit effort="1.0" velocity="0.45"/>
+        <xacro:z_axis/>
+        <joint_properties damping="1.0" friction="1.0"/>
+	</joint>
+
+    <link name="castor_wheel">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="${castor_wheel_mass}"/>
+            <inertia ixx="${castor_wheel_ixx}" ixy="0.0" ixz="0.0" iyy="${castor_wheel_iyy}" iyz="0.0" izz="${castor_wheel_izz}"/>
+        </inertial>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder radius="${castor_wheel_radius}" length="${castor_wheel_width}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="castor_castorwheel_joint" type="continuous">
+    	<parent link="castor"/>
+    	<child link="castor_wheel"/>
+    	<xacro:castor_wheel_joint_origin/>
+        <limit effort="1.0" velocity="0.45"/>
+        <xacro:z_axis/>
+        <joint_properties damping="1.0" friction="1.0"/>
+	</joint>
+
+    <xacro:gazebo_wheel_params link_ref="left_wheel"/>
+    <xacro:gazebo_wheel_params link_ref="right_wheel"/>
+    <xacro:gazebo_wheel_params link_ref="castor_wheel"/>
 
     <!--<link name="castor_swivel">
 
