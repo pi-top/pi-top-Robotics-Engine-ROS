@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="alex">
 
     <material name="grey">
-        <color rgba="0.75 0.75 0.75 1"/>
+        <color rgba="0.75 0.75 0.75 0.5"/>
     </material>
 
     <material name="red">
@@ -27,14 +27,28 @@
         </visual>
     </link>
 
-    <xacro:property name="chassis_mass" value="0.05"/>
-    <xacro:property name="chassis_length" value="0.276"/>
-    <xacro:property name="chassis_width" value="0.192"/>
-    <xacro:property name="chassis_height" value="0.059"/>
-    <xacro:property name="chassis_ixx" value="${(chassis_mass / 12.0) * (chassis_length**2 + chassis_height**2)}"/>
-    <xacro:property name="chassis_iyy" value="${(chassis_mass / 12.0) * (chassis_width**2 + chassis_height**2)}"/>
-    <xacro:property name="chassis_izz" value="${(chassis_mass / 12.0) * (chassis_width**2 + chassis_length**2)}"/>
+    <!-- Chassis Properties -->
+    <xacro:property name="chassis_mass" value="0.1"/>
+    <xacro:property name="chassis_width_x" value="0.192"/>
+    <xacro:property name="chassis_depth_y" value="0.059"/>
+    <xacro:property name="chassis_height_z" value="0.276"/>
+    <xacro:property name="chassis_ixx" value="${(chassis_mass / 12.0) * (chassis_depth_y**2 + chassis_height_z**2)}"/>
+    <xacro:property name="chassis_iyy" value="${(chassis_mass / 12.0) * (chassis_width_x**2 + chassis_height_z**2)}"/>
+    <xacro:property name="chassis_izz" value="${(chassis_mass / 12.0) * (chassis_width_x**2 + chassis_depth_y**2)}"/>
 
+    <xacro:macro name="chassis_joint_origin">
+        <origin xyz="-0.068 0 0.056475" rpy="${pi/2} 0 ${-pi/2}"/>
+    </xacro:macro>
+    <!-- * * * * * * * * * -->
+
+    <!-- Wheel Properties -->
+    <xacro:property name="wheel_mass" value="0.01"/>
+    <xacro:property name="wheel_width" value="0.029"/>
+    <xacro:property name="wheel_radius" value="0.0375"/>
+    <xacro:property name="wheel_ixx" value="${(wheel_mass / 12.0) * (3 * wheel_radius**2 + wheel_width**2)}"/>
+    <xacro:property name="wheel_iyy" value="${wheel_ixx}"/>
+    <xacro:property name="wheel_izz" value="${(chassis_mass * wheel_radius**2) / 2}"/>
+    <!-- * * * * * * * * * -->
 
 
     <link name="chassis">
@@ -46,14 +60,14 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+                <box size="${chassis_width_x} ${chassis_depth_y} ${chassis_height_z}"/>
             </geometry>
             <material name="grey"/>
         </visual>
         <collision>
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+                <box size="${chassis_width_x} ${chassis_depth_y} ${chassis_height_z}"/>
             </geometry>
         </collision>
     </link>
@@ -61,7 +75,7 @@
     <joint name="fixed" type="fixed">
     	<parent link="base_link"/>
     	<child link="chassis"/>
-    	<origin xyz="0 0 0" rpy="0 0 0"/>
+    	<xacro:chassis_joint_origin/>
 	</joint>
 
     <!--<link name="castor_swivel">
