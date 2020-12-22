@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="alex">
+
+    <material name="grey">
+        <color rgba="0.75 0.75 0.75 1"/>
+    </material>
+
+    <material name="red">
+        <color rgba="0.8 0 0 1"/>
+    </material>
+
+    <material name="black">
+        <color rgba="0.8 0.8 0.8 1"/>
+    </material>
+
+    <material name="pi-top_green">
+        <color rgba="0 0.7 0.64 1"/>
+    </material>
+
+    <link name="base_link">
+        <visual>
+            <origin rpy="0.0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.01 0.01 0.01"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+    </link>
+
+    <xacro:property name="chassis_mass" value="0.05"/>
+    <xacro:property name="chassis_length" value="0.276"/>
+    <xacro:property name="chassis_width" value="0.192"/>
+    <xacro:property name="chassis_height" value="0.059"/>
+    <xacro:property name="chassis_ixx" value="${(chassis_mass / 12.0) * (chassis_length**2 + chassis_height**2)}"/>
+    <xacro:property name="chassis_iyy" value="${(chassis_mass / 12.0) * (chassis_width**2 + chassis_height**2)}"/>
+    <xacro:property name="chassis_izz" value="${(chassis_mass / 12.0) * (chassis_width**2 + chassis_length**2)}"/>
+
+
+
+    <link name="chassis">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="${chassis_mass}"/>
+            <inertia ixx="${chassis_ixx}" ixy="0.0" ixz="0.0" iyy="${chassis_iyy}" iyz="0.0" izz="${chassis_izz}"/>
+        </inertial>
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="fixed" type="fixed">
+    	<parent link="base_link"/>
+    	<child link="chassis"/>
+    	<origin xyz="0 0 0" rpy="0 0 0"/>
+	</joint>
+
+    <!--<link name="castor_swivel">
+
+    </link>
+
+    <link name="castor_wheel">
+
+    </link>
+
+    <link name="chassis">
+
+    </link>-->
+
+
+</robot>
