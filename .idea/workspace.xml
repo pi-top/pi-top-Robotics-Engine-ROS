@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/spawn.launch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/start_alex.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/rviz.launch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +37,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="XML" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -62,7 +62,7 @@
       <workItem from="1607573457612" duration="1198000" />
       <workItem from="1608204158151" duration="3110000" />
       <workItem from="1608610159288" duration="6563000" />
-      <workItem from="1608621594208" duration="10238000" />
+      <workItem from="1608621594208" duration="11838000" />
     </task>
     <task id="LOCAL-00001" summary="Working rviz spawn">
       <created>1608623171166</created>
@@ -92,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608632225693</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add second wheel">
+      <created>1608634819192</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1608634819192</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,6 +123,7 @@
     <MESSAGE value="Chassis joint coordinates correct" />
     <MESSAGE value="Add wheel cylinder link/joint and fix chassis origin" />
     <MESSAGE value="Add joint controller GUI and fix missing TF transform for wheel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add joint controller GUI and fix missing TF transform for wheel" />
+    <MESSAGE value="Add second wheel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add second wheel" />
   </component>
 </project>
