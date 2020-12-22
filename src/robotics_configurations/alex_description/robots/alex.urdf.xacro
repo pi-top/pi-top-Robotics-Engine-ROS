@@ -130,7 +130,7 @@
     	<parent link="base_link"/>
     	<child link="right_wheel"/>
     	<xacro:right_wheel_joint_origin/>
-        <limit effort="1.0" velocity="0.005"/>
+        <limit effort="1.0" velocity="0.45"/>
         <xacro:z_axis/>
 	</joint>
 

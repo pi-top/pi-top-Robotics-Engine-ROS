@@ -9,11 +9,9 @@
     <param name="use_gui" value="TRUE"/>
   </node>
 
-
   <!-- Combine joint values -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+<!--  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>-->
 
-  <!-- Show in Rviz   -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robotics_configurations)/alex_description/rviz_config/alex.rviz"/>
+
 
 </launch>
