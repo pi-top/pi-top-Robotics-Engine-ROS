@@ -70,6 +70,8 @@
     <!-- * * * * * * * * * -->
 
     <!-- Wheel Properties -->
+    <xacro:property name="wheel_mesh_path"
+                    value="package://robotics_configurations/alex_description/models/alex/meshes/ros_wheel_sw0002.stl"/>
     <xacro:property name="wheel_mass" value="0.01"/>
     <xacro:property name="wheel_width" value="0.029"/>
     <xacro:property name="wheel_radius" value="0.0375"/>
@@ -77,8 +79,16 @@
     <xacro:property name="wheel_iyy" value="${wheel_ixx}"/>
     <xacro:property name="wheel_izz" value="${(chassis_mass * wheel_radius**2) / 2}"/>
 
+    <xacro:macro name="left_wheel_mesh_origin">
+        <origin xyz="0 0 0" rpy="${pi/2} ${pi} 0"/>
+    </xacro:macro>
+
     <xacro:macro name="left_wheel_joint_origin">
         <origin xyz="0 0.0805 0" rpy="${-pi/2} 0 0"/>
+    </xacro:macro>
+
+    <xacro:macro name="right_wheel_mesh_origin">
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
     </xacro:macro>
 
     <xacro:macro name="right_wheel_joint_origin">
@@ -256,9 +266,10 @@
             <inertia ixx="${wheel_ixx}" ixy="0.0" ixz="0.0" iyy="${wheel_iyy}" iyz="0.0" izz="${wheel_izz}"/>
         </inertial>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <xacro:right_wheel_mesh_origin/>
             <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                <mesh filename="${wheel_mesh_path}" scale="0.001 0.001 0.001"/>
+<!--                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>-->
             </geometry>
             <material name="black"/>
         </visual>
@@ -286,9 +297,10 @@
             <inertia ixx="${wheel_ixx}" ixy="0.0" ixz="0.0" iyy="${wheel_iyy}" iyz="0.0" izz="${wheel_izz}"/>
         </inertial>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <xacro:left_wheel_mesh_origin/>
             <geometry>
-                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+                <mesh filename="${wheel_mesh_path}" scale="0.001 0.001 0.001"/>
+<!--                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>-->
             </geometry>
             <material name="black"/>
         </visual>
