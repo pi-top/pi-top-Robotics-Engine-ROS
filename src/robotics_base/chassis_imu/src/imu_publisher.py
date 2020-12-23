@@ -9,7 +9,7 @@ from tf.transformations import quaternion_from_euler
 import numpy as np
 from dataclasses import fields
 
-from pitop.pma import Imu as RobotImu
+from pitop.pma import IMU as RobotImu
 
 # import time
 # import math
