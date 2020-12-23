@@ -35,16 +35,6 @@
         </plugin>
     </gazebo>
 
-    <xacro:macro name="gazebo_wheel_params" params="link_ref">
-        <gazebo reference="${link_ref}">
-            <kp>100.0</kp>
-            <kd>100.0</kd>
-            <mu1>10.0</mu1>
-            <mu2>10.0</mu2>
-            <material>Gazebo/Black</material>
-        </gazebo>
-    </xacro:macro>
-
 
     <!-- Chassis Properties -->
     <xacro:property name="chassis_mesh_path" value="package://robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0001.stl"/>
@@ -93,10 +83,21 @@
     <xacro:macro name="right_wheel_joint_origin">
         <origin xyz="0 -0.0805 0" rpy="${-pi/2} 0 0"/>
     </xacro:macro>
+
+    <xacro:macro name="gazebo_wheel_params" params="link_ref">
+        <gazebo reference="${link_ref}">
+            <kp>500.0</kp>
+            <kd>500.0</kd>
+            <mu1>10.0</mu1>
+            <mu2>10.0</mu2>
+            <material>Gazebo/Black</material>
+        </gazebo>
+    </xacro:macro>
     <!-- * * * * * * * * * -->
 
     <!-- Castor Properties -->
-    <xacro:property name="castor_mesh_path" value="package://robotics_configurations/alex_description/models/alex/meshes/castor_wheel_sw0001.stl"/>
+    <xacro:property name="castor_mesh_path"
+                    value="package://robotics_configurations/alex_description/models/alex/meshes/castor_wheel_sw0001.stl"/>
     <xacro:property name="castor_mass" value="0.001"/>
     <xacro:property name="castor_height" value="0.025"/>
     <xacro:property name="castor_radius" value="0.0162"/>
@@ -127,6 +128,57 @@
 
     <xacro:macro name="castor_wheel_joint_origin">
         <origin xyz="-0.016 0 -0.0205" rpy="${-pi/2} 0 0"/>
+    </xacro:macro>
+
+    <xacro:macro name="gazebo_castor_wheel_params" params="link_ref">
+        <gazebo reference="${link_ref}">
+            <kp>1000.0</kp>
+            <kd>1000.0</kd>
+            <mu1>10.0</mu1>
+            <mu2>10.0</mu2>
+            <material>Gazebo/Black</material>
+        </gazebo>
+    </xacro:macro>
+    <!-- * * * * * * * * * -->
+
+
+    <!-- Pan Mechanism Properties -->
+    <xacro:property name="pan_mechanism_mesh_path"
+                    value="package://robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0004.stl"/>
+    <xacro:property name="pan_mechanism_mass" value="0.005"/>
+    <xacro:property name="pan_mechanism_width_x" value="0.016"/>
+    <xacro:property name="pan_mechanism_depth_y" value="0.0385"/>
+    <xacro:property name="pan_mechanism_height_z" value="0.048"/>
+    <xacro:property name="pan_mechanism_ixx" value="${(pan_mechanism_mass / 12.0) * (pan_mechanism_depth_y**2 + pan_mechanism_height_z**2)}"/>
+    <xacro:property name="pan_mechanism_iyy" value="${(pan_mechanism_mass / 12.0) * (pan_mechanism_width_x**2 + pan_mechanism_height_z**2)}"/>
+    <xacro:property name="pan_mechanism_izz" value="${(pan_mechanism_mass / 12.0) * (pan_mechanism_width_x**2 + pan_mechanism_depth_y**2)}"/>
+
+    <xacro:macro name="pan_mechanism_origin">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:macro>
+
+    <xacro:macro name="pan_mechanism_joint_origin">
+        <origin xyz="0 -0.0372805 -0.142268" rpy="${pi} ${-pi/2} 0"/>
+    </xacro:macro>
+    <!-- * * * * * * * * * -->
+
+    <!-- Tilt Mechanism Properties -->
+<!--    <xacro:property name="tilt_mechanism_mesh_path"-->
+<!--                    value="package://robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0004.stl"/>-->
+    <xacro:property name="tilt_mechanism_mass" value="0.005"/>
+    <xacro:property name="tilt_mechanism_width_x" value="0.016"/>
+    <xacro:property name="tilt_mechanism_depth_y" value="0.0385"/>
+    <xacro:property name="tilt_mechanism_height_z" value="0.048"/>
+    <xacro:property name="tilt_mechanism_ixx" value="${(tilt_mechanism_mass / 12.0) * (tilt_mechanism_depth_y**2 + tilt_mechanism_height_z**2)}"/>
+    <xacro:property name="tilt_mechanism_iyy" value="${(tilt_mechanism_mass / 12.0) * (tilt_mechanism_width_x**2 + tilt_mechanism_height_z**2)}"/>
+    <xacro:property name="tilt_mechanism_izz" value="${(tilt_mechanism_mass / 12.0) * (tilt_mechanism_width_x**2 + tilt_mechanism_depth_y**2)}"/>
+
+    <xacro:macro name="tilt_mechanism_origin">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:macro>
+
+    <xacro:macro name="tilt_mechanism_joint_origin">
+        <origin xyz="0 -0.04825 -0.000526152" rpy="${-pi/2} 0 ${pi}"/>
     </xacro:macro>
     <!-- * * * * * * * * * -->
 
@@ -299,9 +351,73 @@
         <joint_properties damping="1.0" friction="1.0"/>
 	</joint>
 
+    <link name="pan_mechanism">
+        <inertial>
+            <xacro:pan_mechanism_origin/>
+            <mass value="${pan_mechanism_mass}"/>
+            <inertia ixx="${pan_mechanism_ixx}" ixy="0.0" ixz="0.0" iyy="${pan_mechanism_iyy}" iyz="0.0" izz="${pan_mechanism_izz}"/>
+        </inertial>
+        <visual>
+            <xacro:pan_mechanism_origin/>
+<!--            <origin rpy="0 0 0" xyz="0 0 0"/>-->
+            <geometry>
+                <box size="${pan_mechanism_width_x} ${pan_mechanism_depth_y} ${pan_mechanism_height_z}"/>
+<!--                <mesh filename="${pan_mechanism_mesh_path}" scale="0.001 0.001 0.001"/>-->
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <xacro:pan_mechanism_origin/>
+            <geometry>
+                <box size="${pan_mechanism_width_x} ${pan_mechanism_depth_y} ${pan_mechanism_height_z}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="pan_mechanism_joint" type="revolute">
+    	<parent link="chassis"/>
+    	<child link="pan_mechanism"/>
+    	<xacro:pan_mechanism_joint_origin/>
+        <limit lower="${-pi/2}" upper="${pi/2}" effort="1.0" velocity="${100*pi/180}"/>
+        <xacro:y_axis/>
+        <joint_properties damping="1.0" friction="1.0"/>
+	</joint>
+
+    <link name="tilt_mechanism">
+        <inertial>
+            <xacro:tilt_mechanism_origin/>
+            <mass value="${tilt_mechanism_mass}"/>
+            <inertia ixx="${tilt_mechanism_ixx}" ixy="0.0" ixz="0.0" iyy="${tilt_mechanism_iyy}" iyz="0.0" izz="${tilt_mechanism_izz}"/>
+        </inertial>
+        <visual>
+            <xacro:tilt_mechanism_origin/>
+<!--            <origin rpy="0 0 0" xyz="0 0 0"/>-->
+            <geometry>
+                <box size="${tilt_mechanism_width_x} ${tilt_mechanism_depth_y} ${tilt_mechanism_height_z}"/>
+<!--                <mesh filename="${tilt_mechanism_mesh_path}" scale="0.001 0.001 0.001"/>-->
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <xacro:tilt_mechanism_origin/>
+            <geometry>
+                <box size="${tilt_mechanism_width_x} ${tilt_mechanism_depth_y} ${tilt_mechanism_height_z}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="tilt_mechanism_joint" type="revolute">
+    	<parent link="pan_mechanism"/>
+    	<child link="tilt_mechanism"/>
+    	<xacro:tilt_mechanism_joint_origin/>
+        <limit lower="${-pi/2}" upper="${pi/2}" effort="1.0" velocity="${100*pi/180}"/>
+        <xacro:y_axis/>
+        <joint_properties damping="1.0" friction="1.0"/>
+	</joint>
+
     <xacro:gazebo_wheel_params link_ref="left_wheel"/>
     <xacro:gazebo_wheel_params link_ref="right_wheel"/>
-    <xacro:gazebo_wheel_params link_ref="castor_wheel"/>
+    <xacro:gazebo_castor_wheel_params link_ref="castor_wheel"/>
 
     <!--<link name="castor_swivel">
 

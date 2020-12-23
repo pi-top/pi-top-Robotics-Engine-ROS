@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/castor_wheel_sw0001.stl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0001.stl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0003.stl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0004.stl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/rviz.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/rviz.launch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,6 +64,8 @@
       <workItem from="1608204158151" duration="3110000" />
       <workItem from="1608610159288" duration="6563000" />
       <workItem from="1608621594208" duration="17866000" />
+      <workItem from="1608644022140" duration="945000" />
+      <workItem from="1608690480790" duration="5044000" />
     </task>
     <task id="LOCAL-00001" summary="Working rviz spawn">
       <created>1608623171166</created>
@@ -108,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608636411563</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add castor and castor wheel, add STLs for chassis and castor wheel">
+      <created>1608644077082</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1608644077082</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,6 +142,7 @@
     <MESSAGE value="Add joint controller GUI and fix missing TF transform for wheel" />
     <MESSAGE value="Add second wheel" />
     <MESSAGE value="Working gazebo simulation of two-wheeled robot" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working gazebo simulation of two-wheeled robot" />
+    <MESSAGE value="Add castor and castor wheel, add STLs for chassis and castor wheel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add castor and castor wheel, add STLs for chassis and castor wheel" />
   </component>
 </project>
