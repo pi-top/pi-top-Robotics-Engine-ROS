@@ -37,7 +37,8 @@
 
 
     <!-- Chassis Properties -->
-    <xacro:property name="chassis_mesh_path" value="package://robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0001.stl"/>
+    <xacro:property name="chassis_mesh_path"
+                    value="package://robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0002.stl"/>
     <xacro:property name="chassis_mass" value="0.1"/>
     <xacro:property name="chassis_width_x" value="0.192"/>
     <xacro:property name="chassis_depth_y" value="0.059"/>
@@ -160,11 +161,21 @@
     <xacro:macro name="pan_mechanism_joint_origin">
         <origin xyz="0 -0.0372805 -0.142268" rpy="${pi} ${-pi/2} 0"/>
     </xacro:macro>
+
+    <xacro:macro name="servo_params" params="link_ref">
+        <gazebo reference="${link_ref}">
+            <kp>10000.0</kp>
+            <kd>10000.0</kd>
+            <mu1>1.0</mu1>
+            <mu2>1.0</mu2>
+            <material>Gazebo/Black</material>
+        </gazebo>
+    </xacro:macro>
     <!-- * * * * * * * * * -->
 
     <!-- Tilt Mechanism Properties -->
-<!--    <xacro:property name="tilt_mechanism_mesh_path"-->
-<!--                    value="package://robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0004.stl"/>-->
+    <xacro:property name="tilt_mechanism_mesh_path"
+                    value="package://robotics_configurations/alex_description/models/alex/meshes/tilt_servo_ros_sw0002.stl"/>
     <xacro:property name="tilt_mechanism_mass" value="0.005"/>
     <xacro:property name="tilt_mechanism_width_x" value="0.016"/>
     <xacro:property name="tilt_mechanism_depth_y" value="0.0385"/>
@@ -178,7 +189,7 @@
     </xacro:macro>
 
     <xacro:macro name="tilt_mechanism_joint_origin">
-        <origin xyz="0 -0.04825 -0.000526152" rpy="${-pi/2} 0 ${pi}"/>
+        <origin xyz="0 -0.04825 -0.000526152" rpy="${pi/2} 0 ${pi}"/>
     </xacro:macro>
     <!-- * * * * * * * * * -->
 
@@ -358,11 +369,11 @@
             <inertia ixx="${pan_mechanism_ixx}" ixy="0.0" ixz="0.0" iyy="${pan_mechanism_iyy}" iyz="0.0" izz="${pan_mechanism_izz}"/>
         </inertial>
         <visual>
-            <xacro:pan_mechanism_origin/>
-<!--            <origin rpy="0 0 0" xyz="0 0 0"/>-->
+<!--            <xacro:pan_mechanism_origin/>-->
+            <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <box size="${pan_mechanism_width_x} ${pan_mechanism_depth_y} ${pan_mechanism_height_z}"/>
-<!--                <mesh filename="${pan_mechanism_mesh_path}" scale="0.001 0.001 0.001"/>-->
+<!--                <box size="${pan_mechanism_width_x} ${pan_mechanism_depth_y} ${pan_mechanism_height_z}"/>-->
+                <mesh filename="${pan_mechanism_mesh_path}" scale="0.001 0.001 0.001"/>
             </geometry>
             <material name="black"/>
         </visual>
@@ -390,11 +401,11 @@
             <inertia ixx="${tilt_mechanism_ixx}" ixy="0.0" ixz="0.0" iyy="${tilt_mechanism_iyy}" iyz="0.0" izz="${tilt_mechanism_izz}"/>
         </inertial>
         <visual>
-            <xacro:tilt_mechanism_origin/>
-<!--            <origin rpy="0 0 0" xyz="0 0 0"/>-->
+<!--            <xacro:tilt_mechanism_origin/>-->
+            <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <box size="${tilt_mechanism_width_x} ${tilt_mechanism_depth_y} ${tilt_mechanism_height_z}"/>
-<!--                <mesh filename="${tilt_mechanism_mesh_path}" scale="0.001 0.001 0.001"/>-->
+<!--                <box size="${tilt_mechanism_width_x} ${tilt_mechanism_depth_y} ${tilt_mechanism_height_z}"/>-->
+                <mesh filename="${tilt_mechanism_mesh_path}" scale="0.001 0.001 0.001"/>
             </geometry>
             <material name="black"/>
         </visual>
@@ -418,6 +429,8 @@
     <xacro:gazebo_wheel_params link_ref="left_wheel"/>
     <xacro:gazebo_wheel_params link_ref="right_wheel"/>
     <xacro:gazebo_castor_wheel_params link_ref="castor_wheel"/>
+    <xacro:servo_params link_ref="pan_mechanism"/>
+    <xacro:servo_params link_ref="tilt_mechanism"/>
 
     <!--<link name="castor_swivel">
 
