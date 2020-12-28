@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/camera_module_sw0001.stl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/line_following_tape.stl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/config/alex.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/config/alex.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/control_alex.launch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/spawn.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/spawn.launch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/urdf_visualize.launch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +71,10 @@
       <workItem from="1608644022140" duration="945000" />
       <workItem from="1608690480790" duration="5588000" />
       <workItem from="1608697832395" duration="2086000" />
-      <workItem from="1608700398787" duration="1143000" />
+      <workItem from="1608700398787" duration="1839000" />
+      <workItem from="1609126844382" duration="7616000" />
+      <workItem from="1609146653922" duration="134000" />
+      <workItem from="1609146969076" duration="4076000" />
     </task>
     <task id="LOCAL-00001" summary="Working rviz spawn">
       <created>1608623171166</created>
@@ -137,7 +146,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608700431121</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Change colours">
+      <created>1608715827245</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1608715827245</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,6 +183,7 @@
     <MESSAGE value="Add pan and tilt mechanisms" />
     <MESSAGE value="Add new chassis mesh and add servo meshes" />
     <MESSAGE value="Add wheel meshes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add wheel meshes" />
+    <MESSAGE value="Change colours" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change colours" />
   </component>
 </project>

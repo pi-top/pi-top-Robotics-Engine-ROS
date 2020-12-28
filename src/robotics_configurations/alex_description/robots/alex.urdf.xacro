@@ -33,6 +33,10 @@
             <odometryFrame>odom</odometryFrame>
             <robotBaseFrame>base_link</robotBaseFrame>
         </plugin>
+
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/alex</robotNamespace>
+        </plugin>
     </gazebo>
 
 
@@ -203,6 +207,42 @@
     </xacro:macro>
     <!-- * * * * * * * * * -->
 
+    <!-- Camera Module Properties -->
+    <xacro:property name="camera_module_mesh_path"
+                    value="package://robotics_configurations/alex_description/models/alex/meshes/camera_module_sw0001.stl"/>
+    <xacro:property name="camera_module_mass" value="0.005"/>
+    <xacro:property name="camera_module_width_x" value="0.02375"/>
+    <xacro:property name="camera_module_depth_y" value="0.0124"/>
+    <xacro:property name="camera_module_height_z" value="0.02375"/>
+    <xacro:property name="camera_module_ixx" value="${(camera_module_mass / 12.0) * (camera_module_depth_y**2 + camera_module_height_z**2)}"/>
+    <xacro:property name="camera_module_iyy" value="${(camera_module_mass / 12.0) * (camera_module_width_x**2 + camera_module_height_z**2)}"/>
+    <xacro:property name="camera_module_izz" value="${(camera_module_mass / 12.0) * (camera_module_width_x**2 + camera_module_depth_y**2)}"/>
+
+    <xacro:property name="camera_module_collision_y_offset" value="-0.0031"/>
+
+    <xacro:macro name="camera_module_box_origin">
+        <origin xyz="0 ${camera_module_collision_y_offset} 0" rpy="0 0 0"/>
+    </xacro:macro>
+
+    <xacro:macro name="camera_module_joint_origin">
+        <origin xyz="0.0176 0.00035 0" rpy="0 0 ${-pi/2}"/>
+    </xacro:macro>
+
+    <!-- Camera Sensor Properties -->
+
+<!--    <xacro:macro name="camera_sensor_joint_origin">-->
+<!--        <origin xyz="0 0.0014 0" rpy="${-pi/2} ${pi} 0"/>-->
+<!--    </xacro:macro>-->
+
+
+    <xacro:macro name="camera_sensor_joint_origin">
+        <origin xyz="0 0.0014 0" rpy="${pi} 0 ${pi/2}"/>
+    </xacro:macro>
+
+    <xacro:property name="camera_hfov_rad" value="${108*pi/180}"/>
+
+    <!-- * * * * * * * * * -->
+
     <!-- Generic Macros -->
     <xacro:macro name="x_axis">
         <axis xyz="1 0 0" rpy="0 0 0"/>
@@ -223,7 +263,7 @@
     <link name="base_link">
         <pose>0 0 ${wheel_radius} 0 0 0</pose>
         <visual>
-            <origin rpy="0.0 0 0" xyz="0 0 0"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
                 <box size="0.01 0.01 0.01"/>
             </geometry>
@@ -460,17 +500,107 @@
     <xacro:servo_params link_ref="pan_mechanism"/>
     <xacro:servo_params link_ref="tilt_mechanism"/>
 
-    <!--<link name="castor_swivel">
+    <xacro:macro name="servo_transmission_macro" params="joint servo_type">
+        <transmission name="${servo_type}_transmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${joint}">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${servo_type}_servo_actuator">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    </xacro:macro>
 
+    <xacro:servo_transmission_macro joint="pan_mechanism_joint" servo_type="pan" />
+    <xacro:servo_transmission_macro joint="tilt_mechanism_joint" servo_type="tilt" />
+
+
+    <link name="camera_module">
+        <inertial>
+            <xacro:camera_module_box_origin/>
+            <mass value="${camera_module_mass}"/>
+            <inertia ixx="${camera_module_ixx}" ixy="0.0" ixz="0.0" iyy="${camera_module_iyy}" iyz="0.0" izz="${camera_module_izz}"/>
+        </inertial>
+        <visual>
+<!--            <xacro:camera_module_box_origin/>-->
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+<!--                <box size="${camera_module_width_x} ${camera_module_depth_y} ${camera_module_height_z}"/>-->
+                <mesh filename="${camera_module_mesh_path}" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <xacro:camera_module_box_origin/>
+            <geometry>
+                <box size="${camera_module_width_x} ${camera_module_depth_y} ${camera_module_height_z}"/>
+            </geometry>
+        </collision>
     </link>
 
-    <link name="castor_wheel">
+    <joint name="camera_module_joint" type="fixed">
+    	<parent link="tilt_mechanism"/>
+    	<child link="camera_module"/>
+    	<xacro:camera_module_joint_origin/>
+	</joint>
 
+    <link name="camera_sensor">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
     </link>
 
-    <link name="chassis">
+    <joint name="camera_sensor_joint" type="fixed">
+    	<parent link="camera_module"/>
+    	<child link="camera_sensor"/>
+    	<xacro:camera_sensor_joint_origin/>
+	</joint>
 
-    </link>-->
-
+    <!-- camera -->
+    <gazebo reference="camera_sensor">
+        <sensor type="camera" name="camera1">
+            <update_rate>30.0</update_rate>
+            <camera name="pan_tilt_camera">
+                <horizontal_fov>${camera_hfov_rad}</horizontal_fov>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>R8G8B8</format>
+                </image>
+                <clip>
+                    <near>0.02</near>
+                    <far>300</far>
+                </clip>
+                <noise>
+                    <type>gaussian</type>
+                    <!-- Noise is sampled independently per pixel on each frame.
+                    That pixel's noise value is added to each of its color
+                    channels, which at that point lie in the range [0,1]. -->
+                    <mean>0.0</mean>
+                    <stddev>0.007</stddev>
+                </noise>
+            </camera>
+            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>0.0</updateRate>
+                <cameraName>alex/camera1</cameraName>
+                <imageTopicName>image_raw</imageTopicName>
+                <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                <frameName>camera_sensor</frameName>
+                <hackBaseline>0.07</hackBaseline>
+                <distortionK1>0.0</distortionK1>
+                <distortionK2>0.0</distortionK2>
+                <distortionK3>0.0</distortionK3>
+                <distortionT1>0.0</distortionT1>
+                <distortionT2>0.0</distortionT2>
+            </plugin>
+        </sensor>
+    </gazebo>
 
 </robot>
