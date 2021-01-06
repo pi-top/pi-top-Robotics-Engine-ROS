@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="catkin_ws" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="catkin_ws">
     <serverData>
       <paths name="catkin_ws">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
-            <mapping deploy="src" local="$PROJECT_DIR$/src" />
+            <mapping deploy="src/robotics_configurations" local="$PROJECT_DIR$/src/robotics_configurations" />
+            <mapping deploy="src/robotics_apps" local="$PROJECT_DIR$/src/robotics_apps" />
           </mappings>
         </serverdata>
       </paths>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
     <param name="robot_description"
-           command="$(find xacro)/xacro '$(find robotics_configurations)/alex_description/robots/alex.urdf.xacro'" />
+           command="$(find xacro)/xacro '$(find alex_description)/robots/alex.urdf.xacro'" />
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find alex_gazebo)/worlds/line_follower.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
         <arg name="paused" value="false"/>
         <arg name="use_sim_time" value="true"/>
         <arg name="gui" value="true"/>
@@ -18,7 +19,7 @@
     <node name="alex_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
           args="-urdf -param robot_description -model alex -x $(arg x) -y $(arg y) -z $(arg z)" />
 
-    <rosparam file="$(find robotics_configurations)/alex_description/config/alex.yaml" command="load"/>
+    <rosparam file="$(find alex_description)/config/alex.yaml" command="load"/>
 
     <!-- load the controllers -->
 

@@ -28,7 +28,7 @@ from vision_functions import colour_mask, find_centroid, find_contours
 class LineFollower:
 
     def __init__(self):
-        self._image_subscriber = rospy.Subscriber('/cv_camera/image_raw', Image,
+        self._image_subscriber = rospy.Subscriber('/alex/camera1/image_raw', Image,
                                                   callback=self.image_callback,
                                                   queue_size=1)
         self._robot_view_publisher = rospy.Publisher('/line_follower/robot_view', Image, queue_size=5)

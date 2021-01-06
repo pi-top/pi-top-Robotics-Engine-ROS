@@ -42,7 +42,7 @@
 
     <!-- Chassis Properties -->
     <xacro:property name="chassis_mesh_path"
-                    value="package://robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0002.stl"/>
+                    value="package://alex_description/models/alex/meshes/ros_chassis_sw0002.stl"/>
     <xacro:property name="chassis_mass" value="0.1"/>
     <xacro:property name="chassis_width_x" value="0.192"/>
     <xacro:property name="chassis_depth_y" value="0.059"/>
@@ -76,7 +76,7 @@
 
     <!-- Wheel Properties -->
     <xacro:property name="wheel_mesh_path"
-                    value="package://robotics_configurations/alex_description/models/alex/meshes/ros_wheel_sw0002.stl"/>
+                    value="package://alex_description/models/alex/meshes/ros_wheel_sw0002.stl"/>
     <xacro:property name="wheel_mass" value="0.01"/>
     <xacro:property name="wheel_width" value="0.029"/>
     <xacro:property name="wheel_radius" value="0.0375"/>
@@ -113,7 +113,7 @@
 
     <!-- Castor Properties -->
     <xacro:property name="castor_mesh_path"
-                    value="package://robotics_configurations/alex_description/models/alex/meshes/castor_wheel_sw0001.stl"/>
+                    value="package://alex_description/models/alex/meshes/castor_wheel_sw0001.stl"/>
     <xacro:property name="castor_mass" value="0.001"/>
     <xacro:property name="castor_height" value="0.025"/>
     <xacro:property name="castor_radius" value="0.0162"/>
@@ -159,7 +159,7 @@
 
     <!-- Pan Mechanism Properties -->
     <xacro:property name="pan_mechanism_mesh_path"
-                    value="package://robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0004.stl"/>
+                    value="package://alex_description/models/alex/meshes/pan_servo_ros_sw0004.stl"/>
     <xacro:property name="pan_mechanism_mass" value="0.005"/>
     <xacro:property name="pan_mechanism_width_x" value="0.016"/>
     <xacro:property name="pan_mechanism_depth_y" value="0.0385"/>
@@ -189,7 +189,7 @@
 
     <!-- Tilt Mechanism Properties -->
     <xacro:property name="tilt_mechanism_mesh_path"
-                    value="package://robotics_configurations/alex_description/models/alex/meshes/tilt_servo_ros_sw0002.stl"/>
+                    value="package://alex_description/models/alex/meshes/tilt_servo_ros_sw0002.stl"/>
     <xacro:property name="tilt_mechanism_mass" value="0.005"/>
     <xacro:property name="tilt_mechanism_width_x" value="0.016"/>
     <xacro:property name="tilt_mechanism_depth_y" value="0.0385"/>
@@ -209,7 +209,7 @@
 
     <!-- Camera Module Properties -->
     <xacro:property name="camera_module_mesh_path"
-                    value="package://robotics_configurations/alex_description/models/alex/meshes/camera_module_sw0001.stl"/>
+                    value="package://alex_description/models/alex/meshes/camera_module_sw0001.stl"/>
     <xacro:property name="camera_module_mass" value="0.005"/>
     <xacro:property name="camera_module_width_x" value="0.02375"/>
     <xacro:property name="camera_module_depth_y" value="0.0124"/>

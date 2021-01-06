@@ -2,14 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/camera_module_sw0001.stl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/line_following_tape.stl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/config/hardware_parameters.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/launch/alex.launch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/models/line_following_tape.stl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/package.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/worlds/line_follower.world" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/config/alex.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/config/alex.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/control_alex.launch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/launch/main.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/launch/main.launch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/line_follower_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/line_follower_node.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/rviz.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/rviz.launch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/spawn.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/spawn.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/urdf_visualize.launch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/camera_module_sw0001.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/camera_module_sw0001.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/castor_wheel_sw0001.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/castor_wheel_sw0001.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0003.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0003.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0004.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0004.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0001.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0001.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0002.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0002.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_wheel_sw0002.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_wheel_sw0002.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/tilt_servo_ros_sw0002.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/tilt_servo_ros_sw0002.stl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/package.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_engine/launch/main.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_engine/launch/main.launch" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +57,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="XML" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/robotics_apps" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
@@ -75,6 +91,8 @@
       <workItem from="1609126844382" duration="7616000" />
       <workItem from="1609146653922" duration="134000" />
       <workItem from="1609146969076" duration="4076000" />
+      <workItem from="1609927038759" duration="216000" />
+      <workItem from="1609929828598" duration="539000" />
     </task>
     <task id="LOCAL-00001" summary="Working rviz spawn">
       <created>1608623171166</created>
