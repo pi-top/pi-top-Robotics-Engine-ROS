@@ -2,30 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/config/hardware_parameters.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/launch/alex.launch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/models/line_following_tape.stl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/package.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/worlds/line_follower.world" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/chassis_asm.dae" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/wheel_asm.dae" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/launch/main.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/launch/main.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/line_follower_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/line_follower_node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/rviz.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/rviz.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/spawn.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/spawn.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/camera_module_sw0001.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/camera_module_sw0001.stl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/castor_wheel_sw0001.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/castor_wheel_sw0001.stl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0003.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0003.stl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0004.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0004.stl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0001.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0001.stl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0002.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0002.stl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_wheel_sw0002.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_wheel_sw0002.stl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/tilt_servo_ros_sw0002.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/tilt_servo_ros_sw0002.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/camera_module_sw0001.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/camera_module_sw0001.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/castor_wheel_sw0001.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/castor_wheel_sw0001.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/line_following_tape.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/line_following_tape.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0003.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/pan_servo_ros_sw0003.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_servo_ros_sw0004.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/pan_servo_ros_sw0004.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0001.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/ros_chassis_sw0001.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_chassis_sw0002.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/ros_chassis_sw0002.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/ros_wheel_sw0002.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/ros_wheel_sw0002.stl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/tilt_servo_ros_sw0002.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/tilt_servo_ros_sw0002.stl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/package.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_engine/launch/main.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_engine/launch/main.launch" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,18 +47,19 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="XML" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/robotics_apps" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/robotics_configurations/alex_description/models" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -93,6 +84,11 @@
       <workItem from="1609146969076" duration="4076000" />
       <workItem from="1609927038759" duration="216000" />
       <workItem from="1609929828598" duration="539000" />
+      <workItem from="1610001755982" duration="615000" />
+      <workItem from="1610006086558" duration="601000" />
+      <workItem from="1610011194113" duration="19000" />
+      <workItem from="1610021956855" duration="256000" />
+      <workItem from="1610022227070" duration="941000" />
     </task>
     <task id="LOCAL-00001" summary="Working rviz spawn">
       <created>1608623171166</created>
@@ -175,22 +171,28 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/../pi-top-Python-SDK" />
+      <path value="$PROJECT_DIR$/build/build-from-noetic/libs/pi-top-Python-Common-Library" />
+      <path value="$PROJECT_DIR$/build/build-from-noetic/libs/pitop.pma" />
+    </ignored-roots>
     <MESSAGE value="Working rviz spawn" />
     <MESSAGE value="Chassis joint coordinates correct" />
     <MESSAGE value="Add wheel cylinder link/joint and fix chassis origin" />
@@ -203,5 +205,19 @@
     <MESSAGE value="Add wheel meshes" />
     <MESSAGE value="Change colours" />
     <option name="LAST_COMMIT_MESSAGE" value="Change colours" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2054" y="638" width="800" height="684" key="#Deployment" timestamp="1610022182320">
+      <screen x="72" y="27" width="3183" height="1900" />
+    </state>
+    <state x="2054" y="638" width="800" height="684" key="#Deployment/72.27.3183.1900@72.27.3183.1900" timestamp="1610022182320" />
+    <state x="1152" y="612" width="1022" height="737" key="SettingsEditor" timestamp="1610021988290">
+      <screen x="72" y="27" width="3183" height="1900" />
+    </state>
+    <state x="1152" y="612" width="1022" height="737" key="SettingsEditor/72.27.3183.1900@72.27.3183.1900" timestamp="1610021988290" />
+    <state x="1319" y="804" key="com.intellij.ide.util.TipDialog" timestamp="1610021958880">
+      <screen x="72" y="27" width="3183" height="1900" />
+    </state>
+    <state x="1319" y="804" key="com.intellij.ide.util.TipDialog/72.27.3183.1900@72.27.3183.1900" timestamp="1610021958880" />
   </component>
 </project>
