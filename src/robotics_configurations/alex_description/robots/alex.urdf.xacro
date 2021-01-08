@@ -84,7 +84,7 @@
 
     <!-- pi-top [4] Properties -->
     <xacro:property name="pt4_mesh_path"
-                    value="package://alex_description/models/4_asm.dae"/>
+                    value="package://alex_description/models/4_asm_2.dae"/>
     <xacro:property name="pt4_mass" value="0.3"/>
     <xacro:property name="pt4_width_x" value="0.0995"/>
     <xacro:property name="pt4_depth_y" value="0.034"/>
@@ -131,7 +131,6 @@
             <kd>500.0</kd>
             <mu1>10.0</mu1>
             <mu2>10.0</mu2>
-<!--            <material>Gazebo/FlatBlack</material>-->
         </gazebo>
     </xacro:macro>
     <!-- * * * * * * * * * -->
@@ -177,7 +176,6 @@
             <kd>1000.0</kd>
             <mu1>10.0</mu1>
             <mu2>10.0</mu2>
-            <material>Gazebo/FlatBlack</material>
         </gazebo>
     </xacro:macro>
     <!-- * * * * * * * * * -->
@@ -213,7 +211,7 @@
 
     <!-- Tilt Mechanism Properties -->
     <xacro:property name="tilt_mechanism_mesh_path"
-                    value="package://alex_description/models/tilt_servo_ros_sw0002.stl"/>
+                    value="package://alex_description/models/tilt_asm.dae"/>
     <xacro:property name="tilt_mechanism_mass" value="0.005"/>
     <xacro:property name="tilt_mechanism_width_x" value="0.016"/>
     <xacro:property name="tilt_mechanism_depth_y" value="0.0385"/>
@@ -233,7 +231,7 @@
 
     <!-- Camera Module Properties -->
     <xacro:property name="camera_module_mesh_path"
-                    value="package://alex_description/models/camera_module_sw0001.stl"/>
+                    value="package://alex_description/models/camera_asm.dae"/>
     <xacro:property name="camera_module_mass" value="0.005"/>
     <xacro:property name="camera_module_width_x" value="0.02375"/>
     <xacro:property name="camera_module_depth_y" value="0.0124"/>
@@ -328,7 +326,6 @@
         <kd>10000.0</kd>
         <mu1>1.0</mu1>
         <mu2>1.0</mu2>
-<!--        <material>Gazebo/FlatBlack</material>-->
     </gazebo>
 
     <link name="ep">
@@ -364,7 +361,6 @@
         <kd>10000.0</kd>
         <mu1>1.0</mu1>
         <mu2>1.0</mu2>
-<!--        <material>Gazebo/FlatBlack</material>-->
     </gazebo>
 
     <link name="pt4">
@@ -400,7 +396,6 @@
         <kd>10000.0</kd>
         <mu1>1.0</mu1>
         <mu2>1.0</mu2>
-<!--        <material>Gazebo/FlatBlack</material>-->
     </gazebo>
 
     <link name="right_wheel">
@@ -474,7 +469,7 @@
         <visual>
             <xacro:castor_mesh_origin/>
             <geometry>
-                <mesh filename="${castor_mesh_path}" scale="0.001 0.001 0.001"/>
+                <mesh filename="${castor_mesh_path}"/>
             </geometry>
             <material name="grey"/>
         </visual>
@@ -569,7 +564,7 @@
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
 <!--                <box size="${tilt_mechanism_width_x} ${tilt_mechanism_depth_y} ${tilt_mechanism_height_z}"/>-->
-                <mesh filename="${tilt_mechanism_mesh_path}" scale="0.001 0.001 0.001"/>
+                <mesh filename="${tilt_mechanism_mesh_path}"/>
             </geometry>
             <material name="black"/>
         </visual>
@@ -624,7 +619,7 @@
             <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
 <!--                <box size="${camera_module_width_x} ${camera_module_depth_y} ${camera_module_height_z}"/>-->
-                <mesh filename="${camera_module_mesh_path}" scale="0.001 0.001 0.001"/>
+                <mesh filename="${camera_module_mesh_path}"/>
             </geometry>
             <material name="black"/>
         </visual>

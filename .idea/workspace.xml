@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/4_asm.dae" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/EP_asm.dae" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/pan_asm_2.dae" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/camera_asm.dae" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/chassis_asm.dae" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/chassis_asm.dae" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +78,8 @@
       <workItem from="1610011194113" duration="19000" />
       <workItem from="1610021956855" duration="256000" />
       <workItem from="1610022227070" duration="1738000" />
-      <workItem from="1610076189927" duration="2486000" />
+      <workItem from="1610076189927" duration="3751000" />
+      <workItem from="1610092789360" duration="1095000" />
     </task>
     <task id="LOCAL-00001" summary="Working rviz spawn">
       <created>1608623171166</created>
@@ -167,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610023616161</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Add ep, pt4 and servo daes">
+      <created>1610079291017</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1610079291017</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,26 +210,29 @@
     <MESSAGE value="Add wheel meshes" />
     <MESSAGE value="Change colours" />
     <MESSAGE value="Add new meshes with proper colours and change directory of meshes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add new meshes with proper colours and change directory of meshes" />
+    <MESSAGE value="Add ep, pt4 and servo daes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add ep, pt4 and servo daes" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2054" y="638" width="800" height="684" key="#Deployment" timestamp="1610022182320">
       <screen x="72" y="27" width="3183" height="1900" />
     </state>
     <state x="2054" y="638" width="800" height="684" key="#Deployment/72.27.3183.1900@72.27.3183.1900" timestamp="1610022182320" />
-    <state x="1728" y="553" width="888" height="854" key="CommitChangelistDialog2" timestamp="1610023615116">
-      <screen x="72" y="27" width="3183" height="1900" />
+    <state x="1730" y="554" width="888" height="854" key="CommitChangelistDialog2" timestamp="1610079287725">
+      <screen x="72" y="27" width="3187" height="1904" />
     </state>
     <state x="1728" y="553" width="888" height="854" key="CommitChangelistDialog2/72.27.3183.1900@72.27.3183.1900" timestamp="1610023615116" />
+    <state x="1730" y="554" key="CommitChangelistDialog2/72.27.3187.1904@72.27.3187.1904" timestamp="1610079287725" />
     <state x="1153" y="613" width="1022" height="737" key="SettingsEditor" timestamp="1610077355604">
       <screen x="72" y="27" width="3187" height="1904" />
     </state>
     <state x="1152" y="612" width="1022" height="737" key="SettingsEditor/72.27.3183.1900@72.27.3183.1900" timestamp="1610021988290" />
     <state x="1153" y="613" key="SettingsEditor/72.27.3187.1904@72.27.3187.1904" timestamp="1610077355604" />
-    <state x="1772" y="701" width="800" height="558" key="Vcs.Push.Dialog.v2" timestamp="1610023661592">
-      <screen x="72" y="27" width="3183" height="1900" />
+    <state x="1774" y="702" width="800" height="558" key="Vcs.Push.Dialog.v2" timestamp="1610079303115">
+      <screen x="72" y="27" width="3187" height="1904" />
     </state>
     <state x="1772" y="701" width="800" height="558" key="Vcs.Push.Dialog.v2/72.27.3183.1900@72.27.3183.1900" timestamp="1610023661592" />
+    <state x="1774" y="702" key="Vcs.Push.Dialog.v2/72.27.3187.1904@72.27.3187.1904" timestamp="1610079303115" />
     <state x="1319" y="804" key="com.intellij.ide.util.TipDialog" timestamp="1610021958880">
       <screen x="72" y="27" width="3183" height="1900" />
     </state>
