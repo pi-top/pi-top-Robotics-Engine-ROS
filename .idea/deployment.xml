@@ -11,6 +11,15 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="gzweb-docker">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="robotics_apps" local="$PROJECT_DIR$/src/robotics_apps" />
+            <mapping deploy="robotics_configurations" local="$PROJECT_DIR$/src/robotics_configurations" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
     <option name="myAutoUpload" value="ALWAYS" />
   </component>

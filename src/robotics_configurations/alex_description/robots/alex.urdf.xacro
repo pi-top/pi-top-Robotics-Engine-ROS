@@ -42,8 +42,8 @@
 
     <!-- Chassis Properties -->
     <xacro:property name="chassis_mesh_path"
-                    value="package://alex_description/models/chassis_asm.dae"/>
-    <xacro:property name="chassis_mass" value="0.1"/>
+                    value="model://alex/meshes/chassis_asm.dae"/>
+    <xacro:property name="chassis_mass" value="0.650"/>
     <xacro:property name="chassis_width_x" value="0.192"/>
     <xacro:property name="chassis_depth_y" value="0.059"/>
     <xacro:property name="chassis_height_z" value="0.276"/>
@@ -65,7 +65,7 @@
 
     <!-- Expansion Plate Properties -->
     <xacro:property name="ep_mesh_path"
-                    value="package://alex_description/models/EP_asm.dae"/>
+                    value="model://alex/meshes/EP_asm.dae"/>
     <xacro:property name="ep_mass" value="0.05"/>
     <xacro:property name="ep_width_x" value="0.1015"/>
     <xacro:property name="ep_depth_y" value="0.018"/>
@@ -84,8 +84,8 @@
 
     <!-- pi-top [4] Properties -->
     <xacro:property name="pt4_mesh_path"
-                    value="package://alex_description/models/4_asm_2.dae"/>
-    <xacro:property name="pt4_mass" value="0.3"/>
+                    value="model://alex/meshes/4_asm_2.dae"/>
+    <xacro:property name="pt4_mass" value="0.390"/>
     <xacro:property name="pt4_width_x" value="0.0995"/>
     <xacro:property name="pt4_depth_y" value="0.034"/>
     <xacro:property name="pt4_height_z" value="0.132"/>
@@ -101,7 +101,7 @@
 
     <!-- Wheel Properties -->
     <xacro:property name="wheel_mesh_path"
-                    value="package://alex_description/models/wheel_asm.dae"/>
+                    value="model://alex/meshes/wheel_asm.dae"/>
     <xacro:property name="wheel_mass" value="0.01"/>
     <xacro:property name="wheel_width" value="0.029"/>
     <xacro:property name="wheel_radius" value="0.0375"/>
@@ -125,6 +125,12 @@
         <origin xyz="0 -0.0805 0" rpy="${-pi/2} 0 0"/>
     </xacro:macro>
 
+    <xacro:property name="wheel_effort" value="" />
+    <xacro:property name="wheel_damping" value="" />
+    <xacro:property name="wheel_friction" value="" />
+    <xacro:property name="wheel_velocity" value="" />
+
+
     <xacro:macro name="gazebo_wheel_params" params="link_ref">
         <gazebo reference="${link_ref}">
             <kp>500.0</kp>
@@ -137,7 +143,7 @@
 
     <!-- Castor Properties -->
     <xacro:property name="castor_mesh_path"
-                    value="package://alex_description/models/castor_asm_3.dae"/>
+                    value="model://alex/meshes/castor_asm_3.dae"/>
     <xacro:property name="castor_mass" value="0.001"/>
     <xacro:property name="castor_height" value="0.025"/>
     <xacro:property name="castor_radius" value="0.0162"/>
@@ -182,7 +188,7 @@
 
     <!-- Pan Mechanism Properties -->
     <xacro:property name="pan_mechanism_mesh_path"
-                    value="package://alex_description/models/pan_asm_2.dae"/>
+                    value="model://alex/meshes/pan_asm_2.dae"/>
     <xacro:property name="pan_mechanism_mass" value="0.005"/>
     <xacro:property name="pan_mechanism_width_x" value="0.016"/>
     <xacro:property name="pan_mechanism_depth_y" value="0.0385"/>
@@ -211,7 +217,7 @@
 
     <!-- Tilt Mechanism Properties -->
     <xacro:property name="tilt_mechanism_mesh_path"
-                    value="package://alex_description/models/tilt_asm.dae"/>
+                    value="model://alex/meshes/tilt_asm.dae"/>
     <xacro:property name="tilt_mechanism_mass" value="0.005"/>
     <xacro:property name="tilt_mechanism_width_x" value="0.016"/>
     <xacro:property name="tilt_mechanism_depth_y" value="0.0385"/>
@@ -231,7 +237,7 @@
 
     <!-- Camera Module Properties -->
     <xacro:property name="camera_module_mesh_path"
-                    value="package://alex_description/models/camera_asm.dae"/>
+                    value="model://alex/meshes/camera_asm.dae"/>
     <xacro:property name="camera_module_mass" value="0.005"/>
     <xacro:property name="camera_module_width_x" value="0.02375"/>
     <xacro:property name="camera_module_depth_y" value="0.0124"/>
@@ -284,13 +290,6 @@
 
     <link name="base_link">
         <pose>0 0 ${wheel_radius} 0 0 0</pose>
-        <visual>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
-            <geometry>
-                <box size="0.01 0.01 0.01"/>
-            </geometry>
-            <material name="red"/>
-        </visual>
     </link>
 
     <link name="chassis">
@@ -424,7 +423,7 @@
     	<parent link="base_link"/>
     	<child link="right_wheel"/>
     	<xacro:right_wheel_joint_origin/>
-        <limit effort="1.0" velocity="0.45"/>
+        <limit effort="0.1" velocity="0.45"/>
         <xacro:z_axis/>
         <joint_properties damping="1.0" friction="1.0"/>
 	</joint>
@@ -455,7 +454,7 @@
     	<parent link="base_link"/>
     	<child link="left_wheel"/>
     	<xacro:left_wheel_joint_origin/>
-        <limit effort="1.0" velocity="0.45"/>
+        <limit effort="0.1" velocity="0.45"/>
         <xacro:z_axis/>
         <joint_properties damping="1.0" friction="1.0"/>
 	</joint>
