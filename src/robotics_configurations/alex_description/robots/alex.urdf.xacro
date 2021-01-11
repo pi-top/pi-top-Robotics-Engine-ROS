@@ -257,17 +257,58 @@
     </xacro:macro>
 
     <!-- Camera Sensor Properties -->
+    <xacro:macro name="camera_sensor_joint_origin">
+        <origin xyz="0 0.0014 0" rpy="${pi} 0 ${pi/2}"/>
+    </xacro:macro>
+
+    <xacro:property name="camera_hfov_rad" value="${108*pi/180}"/>
+
+    <gazebo reference="camera_sensor">
+        <sensor type="camera" name="camera1">
+            <update_rate>30.0</update_rate>
+            <camera name="pan_tilt_camera">
+                <horizontal_fov>${camera_hfov_rad}</horizontal_fov>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>R8G8B8</format>
+                </image>
+                <clip>
+                    <near>0.02</near>
+                    <far>300</far>
+                </clip>
+                <noise>
+                    <type>gaussian</type>
+                    <!-- Noise is sampled independently per pixel on each frame.
+                    That pixel's noise value is added to each of its color
+                    channels, which at that point lie in the range [0,1]. -->
+                    <mean>0.0</mean>
+                    <stddev>0.007</stddev>
+                </noise>
+            </camera>
+            <plugin filename="libgazebo_ros_camera.so" name="camera_controller">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>0.0</updateRate>
+                <cameraName>alex/camera1</cameraName>
+                <imageTopicName>image_raw</imageTopicName>
+                <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+                <frameName>camera_sensor</frameName>
+                <hackBaseline>0.07</hackBaseline>
+                <distortionK1>0.0</distortionK1>
+                <distortionK2>0.0</distortionK2>
+                <distortionK3>0.0</distortionK3>
+                <distortionT1>0.0</distortionT1>
+                <distortionT2>0.0</distortionT2>
+            </plugin>
+        </sensor>
+    </gazebo>
 
 <!--    <xacro:macro name="camera_sensor_joint_origin">-->
 <!--        <origin xyz="0 0.0014 0" rpy="${-pi/2} ${pi} 0"/>-->
 <!--    </xacro:macro>-->
 
 
-    <xacro:macro name="camera_sensor_joint_origin">
-        <origin xyz="0 0.0014 0" rpy="${pi} 0 ${pi/2}"/>
-    </xacro:macro>
 
-    <xacro:property name="camera_hfov_rad" value="${108*pi/180}"/>
 
     <!-- * * * * * * * * * -->
 
@@ -336,8 +377,8 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-<!--                <box size="${ep_width_x} ${ep_depth_y} ${ep_height_z}"/>-->
-                <mesh filename="${ep_mesh_path}"/>
+                <box size="${ep_width_x} ${ep_depth_y} ${ep_height_z}"/>
+<!--                <mesh filename="${ep_mesh_path}"/>-->
             </geometry>
             <material name="black"/>
         </visual>
@@ -371,8 +412,8 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-<!--                <box size="${pt4_width_x} ${pt4_depth_y} ${pt4_height_z}"/>-->
-                <mesh filename="${pt4_mesh_path}"/>
+                <box size="${pt4_width_x} ${pt4_depth_y} ${pt4_height_z}"/>
+<!--                <mesh filename="${pt4_mesh_path}"/>-->
             </geometry>
             <material name="black"/>
         </visual>
@@ -650,45 +691,42 @@
     	<xacro:camera_sensor_joint_origin/>
 	</joint>
 
-    <!-- camera -->
-    <gazebo reference="camera_sensor">
-        <sensor type="camera" name="camera1">
-            <update_rate>30.0</update_rate>
-            <camera name="pan_tilt_camera">
-                <horizontal_fov>${camera_hfov_rad}</horizontal_fov>
-                <image>
-                    <width>640</width>
-                    <height>480</height>
-                    <format>R8G8B8</format>
-                </image>
-                <clip>
-                    <near>0.02</near>
-                    <far>300</far>
-                </clip>
-                <noise>
-                    <type>gaussian</type>
-                    <!-- Noise is sampled independently per pixel on each frame.
-                    That pixel's noise value is added to each of its color
-                    channels, which at that point lie in the range [0,1]. -->
-                    <mean>0.0</mean>
-                    <stddev>0.007</stddev>
-                </noise>
-            </camera>
-            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-                <alwaysOn>true</alwaysOn>
-                <updateRate>0.0</updateRate>
-                <cameraName>alex/camera1</cameraName>
-                <imageTopicName>image_raw</imageTopicName>
-                <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-                <frameName>camera_sensor</frameName>
-                <hackBaseline>0.07</hackBaseline>
-                <distortionK1>0.0</distortionK1>
-                <distortionK2>0.0</distortionK2>
-                <distortionK3>0.0</distortionK3>
-                <distortionT1>0.0</distortionT1>
-                <distortionT2>0.0</distortionT2>
+    <link name="imu_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <box size="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+    </link>
+
+    <joint name="ep_imu_joint" type="fixed">
+    	<parent link="ep"/>
+    	<child link="imu_link"/>
+    	<xacro:ep_box_origin/>
+	</joint>
+
+    <gazebo reference="imu_link">
+        <gravity>true</gravity>
+        <sensor name="imu_sensor" type="imu">
+            <always_on>true</always_on>
+            <update_rate>100</update_rate>
+            <visualize>true</visualize>
+            <topic>__default_topic__</topic>
+            <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+                <topicName>imu</topicName>
+                <bodyName>imu_link</bodyName>
+                <updateRateHZ>10.0</updateRateHZ>
+                <gaussianNoise>0.0</gaussianNoise>
+                <xyzOffset>0 0 0</xyzOffset>
+                <rpyOffset>0 0 0</rpyOffset>
+                <frameName>imu_link</frameName>
+                <initialOrientationAsReference>false</initialOrientationAsReference>
             </plugin>
+            <pose>0 0 0 0 0 0</pose>
         </sensor>
     </gazebo>
+
 
 </robot>
