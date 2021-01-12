@@ -14,6 +14,7 @@ apt-get clean && apt-get update
 # update apt registry
 apt-get --fix-broken install  # get this recommendation if trying to install packages
 apt-get update
+apt-get upgrade -y
 
 # install build tools like gcc (ROS needs it)
 apt-get install -y build-essential

@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/scripts/container-setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/scripts/container-setup.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +93,7 @@
       <workItem from="1610022227070" duration="1738000" />
       <workItem from="1610076189927" duration="3751000" />
       <workItem from="1610092789360" duration="16747000" />
-      <workItem from="1610423646354" duration="7330000" />
+      <workItem from="1610423646354" duration="11283000" />
     </task>
     <task id="LOCAL-00001" summary="Working rviz spawn">
       <created>1608623171166</created>
