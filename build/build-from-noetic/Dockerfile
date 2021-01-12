@@ -5,10 +5,6 @@ USER root
 # Would usually install packages in Dockerfile at this point
 # but can't get around GPG key issue with ros-noetic so using install script instead
 
-# add pi-top component libs
-ADD build/build-from-noetic/libs/pitop.pma/ptpma /usr/lib/python3/dist-packages/ptpma
-ADD build/build-from-noetic/libs/pi-top-Python-Common-Library/ptcommon /usr/lib/python3/dist-packages/ptcommon
-
 # create catkin workspace
 ENV CATKIN_WS /home/catkin_ws
 RUN mkdir -p $CATKIN_WS/src
