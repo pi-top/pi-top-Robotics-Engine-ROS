@@ -33,12 +33,12 @@ git clone https://github.com/pi-top/pi-top-Python-SDK
 # install common library
 cd pi-top-Python-Common-Library
 pip3 install .
-python3 setup.py
+python3 setup.py install
 
 # install SDK
 cd /home/pi-top-Python-SDK/
 pip3 install .
-python3 setup.py
+python3 setup.py install
 
 # install ros packages
 apt-get install -y ros-noetic-tf ros-noetic-tf2-tools
@@ -79,7 +79,6 @@ chmod +x /home/catkin_ws/src/robotics_base/chassis_imu/src/imu_publisher.py
 chmod +x /home/catkin_ws/src/robotics_base/chassis_move/src/chassis_move.py
 chmod +x /home/catkin_ws/src/robotics_base/chassis_odom/src/odom_publisher.py
 chmod +x /home/catkin_ws/src/robotics_base/chassis_servos/src/chassis_servos.py
-#bash /home/catkin_ws/src/ros-rover/chmod_python_files.sh
 
 # need ros-noetic-web-video-server and async_web_server_cpp but cant find it on noetic
 cd /home/catkin_ws/src || exit

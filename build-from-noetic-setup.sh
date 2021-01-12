@@ -7,7 +7,7 @@ set -e
 set -o xtrace
 
 # image name:tag
-IMAGE_NAME=pi-top-robotics-engine-dev:0.0.0
+IMAGE_NAME=pt-ros:0.0.0
 
 sudo apt update
 if [ -x "$(command -v docker)" ]; then

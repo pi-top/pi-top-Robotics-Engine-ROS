@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="gzweb-docker" createEmptyFolders="true">
+  <component name="PublishConfigData" autoUpload="Always" serverName="du-top" createEmptyFolders="true">
     <serverData>
       <paths name="catkin_ws">
         <serverdata>
@@ -8,6 +8,14 @@
             <mapping local="$PROJECT_DIR$" web="/" />
             <mapping deploy="src/robotics_configurations" local="$PROJECT_DIR$/src/robotics_configurations" />
             <mapping deploy="src/robotics_apps" local="$PROJECT_DIR$/src/robotics_apps" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="du-top">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../pi-top-Python-SDK" web="/" />
+            <mapping deploy="/home/pi/pi-top-Robotics-Engine" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

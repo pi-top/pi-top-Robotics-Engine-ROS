@@ -3,10 +3,18 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="5bbbbbe9-5a15-45cc-aec4-3d3baf293a8f" name="catkin_ws" url="http://localhost">
-        <fileTransfer port="0" mountedRoot="$USER_HOME$/catkin_ws" accessType="MOUNT" />
+        <fileTransfer port="0" mountedRoot="C:\Users\ryan\catkin_ws" accessType="MOUNT" />
       </webServer>
       <webServer id="3e411239-2c14-4c84-83be-9ddd314ac6d7" name="gzweb-docker" url="http://172.18.0.2">
         <fileTransfer host="172.18.0.2" port="22" rootFolder="/root/catkin_ws/src/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="864689a8-cc7b-4e88-b954-72e47dc82012" name="du-top" url="http://du-top3">
+        <fileTransfer host="du-top3" port="22" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
