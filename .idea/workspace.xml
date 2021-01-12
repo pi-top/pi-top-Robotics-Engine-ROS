@@ -2,94 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pi-top-robotics-engine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pi-top-robotics-engine.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build-from-noetic-setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build-from-noetic-setup.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/build-from-noetic/scripts/container-setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-noetic/scripts/container-setup.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/build-from-pi-top-dev/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-pi-top-dev/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/build-from-pi-top-dev/setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build/build-from-pi-top-dev/setup.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_apps/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/launch/main.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/launch/main.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/package.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/line_follower_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/line_follower_node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/math_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/math_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/vision_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_apps/line_follower/src/vision_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_imu/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_imu/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_imu/launch/imu_publisher.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_imu/launch/imu_publisher.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_imu/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_imu/package.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_imu/src/imu_publisher.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_imu/src/imu_publisher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_move/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_move/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_move/launch/chassis_move.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_move/launch/chassis_move.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_move/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_move/package.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_move/src/chassis_move.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_move/src/chassis_move.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_odom/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_odom/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_odom/launch/odom_publisher.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_odom/launch/odom_publisher.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_odom/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_odom/package.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_odom/src/odom_publisher.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_odom/src/odom_publisher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_servos/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_servos/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_servos/launch/chassis_servos.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_servos/launch/chassis_servos.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_servos/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_servos/package.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_base/chassis_servos/src/chassis_servos.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_base/chassis_servos/src/chassis_servos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/CHANGELOG.rst" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/CHANGELOG.rst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/cv_camera_nodelets.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/cv_camera_nodelets.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/include/cv_camera/capture.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/include/cv_camera/capture.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/include/cv_camera/driver.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/include/cv_camera/driver.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/include/cv_camera/exception.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/include/cv_camera/exception.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/launch/pi-top-camera.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/launch/pi-top-camera.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/package.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/pi-top-camera.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/pi-top-camera.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/src/capture.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/src/capture.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/src/cv_camera_node.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/src/cv_camera_node.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/src/cv_camera_nodelet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/src/cv_camera_nodelet.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/src/driver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/src/driver.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/src/opencvTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/src/opencvTest.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/test/cv_camera.test" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/test/cv_camera.test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/test/no_yaml.test" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/test/no_yaml.test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/test/sample.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/test/sample.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/test/test_cv_camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/test/test_cv_camera.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_camera/cv_camera/test/test_cv_camera_no_yaml.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_camera/cv_camera/test/test_cv_camera_no_yaml.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/Alex/parameters.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/config/alex.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/config/alex.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/config/hardware_parameters.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/config/hardware_parameters.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/rviz.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/rviz.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/spawn.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch/spawn.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/alex.config" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/alex.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/alex.sdf" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/alex.sdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/EP_asm.dae" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/EP_asm.dae" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/camera_asm.dae" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/camera_asm.dae" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/castor_asm_3.dae" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/castor_asm_3.dae" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_asm_2.dae" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_asm_2.dae" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/tilt_asm.dae" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/tilt_asm.dae" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/wheel_asm.dae" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/wheel_asm.dae" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/package.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/rviz_config/alex.rviz" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/rviz_config/alex.rviz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/scripts/inertia_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/scripts/inertia_calculation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/launch/alex.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/launch/alex.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/package.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/worlds/line_follower.world" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/worlds/line_follower.world" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_engine/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_engine/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_engine/launch/main.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_engine/launch/main.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_engine/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_engine/package.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_msgs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_msgs/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_web_controller/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_web_controller/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_web_controller/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_web_controller/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_web_controller/webui.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_web_controller/webui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -179,7 +92,7 @@
       <workItem from="1610022227070" duration="1738000" />
       <workItem from="1610076189927" duration="3751000" />
       <workItem from="1610092789360" duration="16747000" />
-      <workItem from="1610423646354" duration="7165000" />
+      <workItem from="1610423646354" duration="7330000" />
     </task>
     <task id="LOCAL-00001" summary="Working rviz spawn">
       <created>1608623171166</created>
