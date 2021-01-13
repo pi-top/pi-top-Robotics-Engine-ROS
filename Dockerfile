@@ -122,6 +122,7 @@ RUN apt-get install -y openssh-server \
     && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
     && echo "export VISIBLE=now" >> /etc/profile \
     && service ssh restart
+    && echo 'service ssh restart' >> ~/.bashrc
 
 # comment out for development purposed to avoid having to run apt update again
 # RUN rm -rf /var/lib/apt/lists/

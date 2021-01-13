@@ -59,9 +59,9 @@ In a terminal run:
 
 `cd pi-top-Robotics-Engine-ROS`
 
-`chmod +x build-from-noetic-setup.sh`
+`chmod +x setup.sh`
 
-`sudo bash build-from-noetic-setup.sh`
+`sudo bash setup.sh`
 
 This will build from the base ROS noetic core image provided on Docker Hub and configure it to work with the pi-top 
 Robotics Kit.
