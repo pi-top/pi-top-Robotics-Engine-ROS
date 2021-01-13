@@ -32,7 +32,10 @@ Then get the latest Docker image:
 Run it:
 
 ```
-sudo docker run -it --privileged \
+sudo docker run -it \
+      -v /dev:/dev \
+      --device-cgroup-rule='c 89:* rmw' \
+      --device-cgroup-rule='c 81:* rmw' \
       -p 8022:22 -p 80:80 -p 8080:8080 -p 9090:9090 \
       --name pt-ros-dev \
       pitop/robotics-engine:latest

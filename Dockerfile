@@ -72,7 +72,7 @@ RUN apt-get install -y python3-tornado nginx
 # Configure nginx server root to ros-web-ui directory
 RUN sed -i 's/root \/var\/www\/html/root \/home\/catkin_ws\/src\/robotics_web_controller/' /etc/nginx/sites-enabled/default
 RUN service nginx restart
-echo 'service nginx restart' >> ~/.bashrc
+RUN echo 'service nginx restart' >> ~/.bashrc
 
 # install python packages
 RUN pip3 install cython \
@@ -121,7 +121,7 @@ RUN apt-get install -y openssh-server \
     && echo 'root:pi-top' | chpasswd \
     && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
     && echo "export VISIBLE=now" >> /etc/profile \
-    && service ssh restart
+    && service ssh restart \
     && echo 'service ssh restart' >> ~/.bashrc
 
 # comment out for development purposed to avoid having to run apt update again
