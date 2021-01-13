@@ -6,7 +6,7 @@ from geometry_msgs.msg import Point, Quaternion, Pose, Twist, PoseWithCovariance
 # Because of transformations
 from tf.transformations import quaternion_from_euler
 import tf
-from ptpma import PMAEncoderMotor, ForwardDirection
+from pitop.pma import EncoderMotor, ForwardDirection
 import time
 import math
 
@@ -219,17 +219,17 @@ if __name__ == "__main__":
     left_motor = None
 
     if right_motor_forward_direction == "CCW":
-        right_motor = PMAEncoderMotor(port_name=right_motor_port, forward_direction=ForwardDirection.COUNTER_CLOCKWISE)
+        right_motor = EncoderMotor(port_name=right_motor_port, forward_direction=ForwardDirection.COUNTER_CLOCKWISE)
     elif right_motor_forward_direction == "CW":
-        right_motor = PMAEncoderMotor(port_name=right_motor_port, forward_direction=ForwardDirection.CLOCKWISE)
+        right_motor = EncoderMotor(port_name=right_motor_port, forward_direction=ForwardDirection.CLOCKWISE)
     else:
         rospy.logdebug("Right motor set up has failed, check parameter config file")
     rospy.logdebug("Right motor set up")
 
     if left_motor_forward_direction == "CCW":
-        left_motor = PMAEncoderMotor(port_name=left_motor_port, forward_direction=ForwardDirection.COUNTER_CLOCKWISE)
+        left_motor = EncoderMotor(port_name=left_motor_port, forward_direction=ForwardDirection.COUNTER_CLOCKWISE)
     elif left_motor_forward_direction == "CW":
-        left_motor = PMAEncoderMotor(port_name=left_motor_port, forward_direction=ForwardDirection.CLOCKWISE)
+        left_motor = EncoderMotor(port_name=left_motor_port, forward_direction=ForwardDirection.CLOCKWISE)
     else:
         rospy.logdebug("Left motor set up has failed, check parameter config file")
     rospy.logdebug("Left motor set up")

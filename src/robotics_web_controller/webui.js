@@ -210,16 +210,19 @@ window.onload = function () {
     });
 
     initVelocityPublisher();
-
 	initVelocityPublisher_PanTi();
+	initTeleopKeyboard();
+	createJoystick();
+    createJoystick_PanTi();
+
     // get handle for video placeholder
     video = document.getElementById('video');
     // Populate video source 
     video.src = "http://" + robot_IP + ":8080/stream?topic=/cv_camera/image_raw&type=ros_compressed"; //&quality=20
+
     video.onload = function () {
-        // joystick and keyboard controls will be available only when video is correctly loaded
+        // use if joystick and keyboard controls should only be available when video is correctly loaded
         createJoystick();
         createJoystick_PanTi();
-        initTeleopKeyboard();
     };
 }

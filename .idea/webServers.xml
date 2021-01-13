@@ -13,12 +13,20 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
-      <webServer id="864689a8-cc7b-4e88-b954-72e47dc82012" name="du-top" url="http://du-top3">
-        <fileTransfer host="du-top3" port="22" accessType="SFTP">
+      <webServer id="864689a8-cc7b-4e88-b954-72e47dc82012" name="du-top" url="http://192.168.1.152">
+        <fileTransfer host="192.168.1.152" port="22" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
           <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="792c18cc-8385-425f-a973-3084ccbcb037" name="hardware_catkin_ws" url="http://192.168.1.152">
+        <fileTransfer host="192.168.1.152" port="8022" rootFolder="/home/catkin_ws" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="8022" />
         </fileTransfer>
       </webServer>
     </option>
