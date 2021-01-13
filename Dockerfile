@@ -85,15 +85,6 @@ RUN pip3 install cython \
 
 # chmod python files so they can execute
 RUN find /home/catkin_ws/src -type f -name "*.py" -exec chmod +x {} \;
-#RUN chmod +x /home/catkin_ws/src/robotics_apps/line_follower/src/controller.py \
-#    && chmod +x /home/catkin_ws/src/robotics_apps/line_follower/src/line_follower_node.py \
-#    && chmod +x /home/catkin_ws/src/robotics_apps/line_follower/src/math_functions.py \
-#    && chmod +x /home/catkin_ws/src/robotics_apps/line_follower/src/vision_functions.py \
-#    && chmod +x /home/catkin_ws/src/robotics_apps/line_follower/src/vision_functions.py \
-#    && chmod +x /home/catkin_ws/src/robotics_base/chassis_imu/src/imu_publisher.py \
-#    && chmod +x /home/catkin_ws/src/robotics_base/chassis_move/src/chassis_move.py \
-#    && chmod +x /home/catkin_ws/src/robotics_base/chassis_odom/src/odom_publisher.py \
-#    && chmod +x /home/catkin_ws/src/robotics_base/chassis_servos/src/chassis_servos.py
 
 # need ros-noetic-web-video-server and async_web_server_cpp but not available as debian packages yet
 RUN cd /home/catkin_ws/src \
