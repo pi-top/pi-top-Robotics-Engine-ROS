@@ -23,10 +23,10 @@ function moveAction(linear, angular) {
 
 function moveAction_PanTi(angular, angular2) {
     if (angular !== undefined && angular2 !== undefined) {
-        twist2.angular.x = angular;
+        twist2.angular.y = angular;
         twist2.angular.z = angular2;
     } else {
-        twist2.angular.x = 0;
+        twist2.angular.y = 0;
         twist2.angular.z = 0;
     }
     // console.log(linear)
@@ -173,8 +173,8 @@ function createJoystick_PanTi() {
             }
             // convert angles to radians and scale linear and angular speed
             // adjust if you want robot to drive faster or slower
-            var ang = Math.cos(direction / 57.29) * nipple.distance * 0.03;
-            var ang2 = Math.sin(direction / 57.29) * nipple.distance * 0.03;
+            var ang = -Math.cos(direction / 57.29) * nipple.distance * 0.01;
+            var ang2 = Math.sin(direction / 57.29) * nipple.distance * 0.01;
             // nipplejs is triggering events when joystick moves each pixel
             // we need delay between consecutive message publications to
             // prevent system from being flooded by messages
@@ -212,8 +212,6 @@ window.onload = function () {
     initVelocityPublisher();
 	initVelocityPublisher_PanTi();
 	initTeleopKeyboard();
-	createJoystick();
-    createJoystick_PanTi();
 
     // get handle for video placeholder
     video = document.getElementById('video');

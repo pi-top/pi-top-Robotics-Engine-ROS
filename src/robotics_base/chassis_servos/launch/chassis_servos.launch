@@ -1,4 +1,4 @@
 <launch>
-    <node pkg='pan_tilt_move' type='pan_tilt_move_subscriber.py' name='Pan_Tilt_Subscriber_Node' output='screen'>
+    <node pkg='chassis_servos' type='chassis_servos.py' name='Pan_Tilt_Subscriber_Node' output='screen'>
     </node>
 </launch>
