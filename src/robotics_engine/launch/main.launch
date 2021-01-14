@@ -1,5 +1,5 @@
 <launch>
-    <rosparam command="load" file="$(find alex_description)/config/hardware_parameters.yaml" />
+    <rosparam command="load" file="$(find robotics_engine)/hardware_configs/alex.yaml" />
     <!--<include file="$(find pan_tilt_move)/launch/cmd_vel_sub.launch" />-->
     <include file="$(find chassis_move)/launch/chassis_move.launch" />
     <!--<include file="$(find web_video_server)/launch/web_video_server.launch"-->

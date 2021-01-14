@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/config/hardware_parameters.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_engine/hardware_configs/alex.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_engine/launch/main.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_engine/launch/main.launch" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,14 +42,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ryan\Documents\software\pi-top-Robotics-Engine\src\robotics_engine" />
+      <recent name="C:\Users\ryan\Documents\software\pi-top-Robotics-Engine\src\robotics_base\hardware_configs" />
       <recent name="C:\Users\ryan\Documents\software\pi-top-Robotics-Engine" />
       <recent name="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes" />
       <recent name="$PROJECT_DIR$/src/robotics_configurations/alex_description/models" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/robotics_configurations/alex_description/launch" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -96,7 +98,8 @@
       <workItem from="1610076189927" duration="3751000" />
       <workItem from="1610092789360" duration="16747000" />
       <workItem from="1610423646354" duration="20538000" />
-      <workItem from="1610522362729" duration="17518000" />
+      <workItem from="1610522362729" duration="18142000" />
+      <workItem from="1610595997281" duration="654000" />
     </task>
     <task id="LOCAL-00001" summary="Working rviz spawn">
       <created>1608623171166</created>
