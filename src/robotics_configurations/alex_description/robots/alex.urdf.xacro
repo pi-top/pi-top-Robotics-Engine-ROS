@@ -42,7 +42,7 @@
 
     <!-- Chassis Properties -->
     <xacro:property name="chassis_mesh_path"
-                    value="model://alex/meshes/chassis_asm.dae"/>
+                    value="model://alex/meshes/chassis_asm_dessimate.dae"/>
     <xacro:property name="chassis_mass" value="0.650"/>
     <xacro:property name="chassis_width_x" value="0.192"/>
     <xacro:property name="chassis_depth_y" value="0.059"/>
@@ -58,14 +58,14 @@
     </xacro:macro>
 
     <xacro:macro name="chassis_joint_origin">
-        <origin xyz="-0.068 0 0.056475" rpy="${pi/2} 0 ${-pi/2}"/>
+        <origin xyz="-0.068 0 0.056475" rpy="${pi/2} 0 ${-pi/2}"/>\
     </xacro:macro>
 
     <!-- * * * * * * * * * -->
 
     <!-- Expansion Plate Properties -->
     <xacro:property name="ep_mesh_path"
-                    value="model://alex/meshes/EP_asm.dae"/>
+                    value="model://alex/meshes/EP_asm_decimate_4.dae"/>
     <xacro:property name="ep_mass" value="0.05"/>
     <xacro:property name="ep_width_x" value="0.1015"/>
     <xacro:property name="ep_depth_y" value="0.018"/>
@@ -84,7 +84,7 @@
 
     <!-- pi-top [4] Properties -->
     <xacro:property name="pt4_mesh_path"
-                    value="model://alex/meshes/4_asm_2.dae"/>
+                    value="model://alex/meshes/4_asm_2_dessimate.dae"/>
     <xacro:property name="pt4_mass" value="0.390"/>
     <xacro:property name="pt4_width_x" value="0.0995"/>
     <xacro:property name="pt4_depth_y" value="0.034"/>
@@ -101,7 +101,7 @@
 
     <!-- Wheel Properties -->
     <xacro:property name="wheel_mesh_path"
-                    value="model://alex/meshes/wheel_asm.dae"/>
+                    value="model://alex/meshes/wheel_asm_decimate_3.dae"/>
     <xacro:property name="wheel_mass" value="0.01"/>
     <xacro:property name="wheel_width" value="0.029"/>
     <xacro:property name="wheel_radius" value="0.0375"/>
@@ -143,7 +143,7 @@
 
     <!-- Castor Properties -->
     <xacro:property name="castor_mesh_path"
-                    value="model://alex/meshes/castor_asm_3.dae"/>
+                    value="model://alex/meshes/castor_asm_3_dessimate.dae"/>
     <xacro:property name="castor_mass" value="0.001"/>
     <xacro:property name="castor_height" value="0.025"/>
     <xacro:property name="castor_radius" value="0.0162"/>
@@ -188,7 +188,7 @@
 
     <!-- Pan Mechanism Properties -->
     <xacro:property name="pan_mechanism_mesh_path"
-                    value="model://alex/meshes/pan_asm_2.dae"/>
+                    value="model://alex/meshes/pan_asm_2_dessimate_2.dae"/>
     <xacro:property name="pan_mechanism_mass" value="0.005"/>
     <xacro:property name="pan_mechanism_width_x" value="0.016"/>
     <xacro:property name="pan_mechanism_depth_y" value="0.0385"/>
@@ -217,7 +217,7 @@
 
     <!-- Tilt Mechanism Properties -->
     <xacro:property name="tilt_mechanism_mesh_path"
-                    value="model://alex/meshes/tilt_asm.dae"/>
+                    value="model://alex/meshes/tilt_asm_dessimate.dae"/>
     <xacro:property name="tilt_mechanism_mass" value="0.005"/>
     <xacro:property name="tilt_mechanism_width_x" value="0.016"/>
     <xacro:property name="tilt_mechanism_depth_y" value="0.0385"/>
@@ -237,7 +237,7 @@
 
     <!-- Camera Module Properties -->
     <xacro:property name="camera_module_mesh_path"
-                    value="model://alex/meshes/camera_asm.dae"/>
+                    value="model://alex/meshes/camera_asm_2_dessimate.dae"/>
     <xacro:property name="camera_module_mass" value="0.005"/>
     <xacro:property name="camera_module_width_x" value="0.02375"/>
     <xacro:property name="camera_module_depth_y" value="0.0124"/>
@@ -377,8 +377,8 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <box size="${ep_width_x} ${ep_depth_y} ${ep_height_z}"/>
-<!--                <mesh filename="${ep_mesh_path}"/>-->
+<!--                <box size="${ep_width_x} ${ep_depth_y} ${ep_height_z}"/>-->
+                <mesh filename="${ep_mesh_path}"/>
             </geometry>
             <material name="black"/>
         </visual>
@@ -412,8 +412,8 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <box size="${pt4_width_x} ${pt4_depth_y} ${pt4_height_z}"/>
-<!--                <mesh filename="${pt4_mesh_path}"/>-->
+<!--                <box size="${pt4_width_x} ${pt4_depth_y} ${pt4_height_z}"/>-->
+                <mesh filename="${pt4_mesh_path}"/>
             </geometry>
             <material name="black"/>
         </visual>

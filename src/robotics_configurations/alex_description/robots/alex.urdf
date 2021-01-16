@@ -44,7 +44,45 @@
   <!-- * * * * * * * * * -->
   <!-- * * * * * * * * * -->
   <!-- * * * * * * * * * -->
-  <!-- Camera Sensor Properties -->
+  <gazebo reference="camera_sensor">
+    <sensor name="camera1" type="camera">
+      <update_rate>30.0</update_rate>
+      <camera name="pan_tilt_camera">
+        <horizontal_fov>1.8849555921538759</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise is sampled independently per pixel on each frame.
+                    That pixel's noise value is added to each of its color
+                    channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin filename="libgazebo_ros_camera.so" name="camera_controller">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>alex/camera1</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_sensor</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
   <!--    <xacro:macro name="camera_sensor_joint_origin">-->
   <!--        <origin xyz="0 0.0014 0" rpy="${-pi/2} ${pi} 0"/>-->
   <!--    </xacro:macro>-->
@@ -64,7 +102,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--                <box size="${chassis_width_x} ${chassis_depth_y} ${chassis_height_z}"/>-->
-        <mesh filename="model://alex/meshes/chassis_asm.dae"/>
+        <mesh filename="model://alex/meshes/chassis_asm_dessimate.dae"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -95,8 +133,8 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <!--                <box size="${ep_width_x} ${ep_depth_y} ${ep_height_z}"/>-->
-        <mesh filename="model://alex/meshes/EP_asm.dae"/>
+        <box size="0.1015 0.018 0.134"/>
+        <!--                <mesh filename="${ep_mesh_path}"/>-->
       </geometry>
       <material name="black"/>
     </visual>
@@ -127,8 +165,8 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <!--                <box size="${pt4_width_x} ${pt4_depth_y} ${pt4_height_z}"/>-->
-        <mesh filename="model://alex/meshes/4_asm_2.dae"/>
+        <box size="0.0995 0.034 0.132"/>
+        <!--                <mesh filename="${pt4_mesh_path}"/>-->
       </geometry>
       <material name="black"/>
     </visual>
@@ -159,7 +197,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="model://alex/meshes/wheel_asm.dae"/>
+        <mesh filename="model://alex/meshes/wheel_asm_decimate_3.dae"/>
         <!--                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>-->
       </geometry>
       <material name="black"/>
@@ -188,7 +226,7 @@
     <visual>
       <origin rpy="0 3.141592653589793 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="model://alex/meshes/wheel_asm.dae"/>
+        <mesh filename="model://alex/meshes/wheel_asm_decimate_3.dae"/>
         <!--                <cylinder radius="${wheel_radius}" length="${wheel_width}"/>-->
       </geometry>
       <material name="black"/>
@@ -217,7 +255,7 @@
     <visual>
       <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0.08 0 0.058515"/>
       <geometry>
-        <mesh filename="model://alex/meshes/castor_asm_3.dae"/>
+        <mesh filename="model://alex/meshes/castor_asm_3_dessimate.dae"/>
       </geometry>
     </visual>
     <collision>
@@ -273,7 +311,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--                <box size="${pan_mechanism_width_x} ${pan_mechanism_depth_y} ${pan_mechanism_height_z}"/>-->
-        <mesh filename="model://alex/meshes/pan_asm_2.dae"/>
+        <mesh filename="model://alex/meshes/pan_asm_2_dessimate_2.dae"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -303,7 +341,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--                <box size="${tilt_mechanism_width_x} ${tilt_mechanism_depth_y} ${tilt_mechanism_height_z}"/>-->
-        <mesh filename="model://alex/meshes/tilt_asm.dae"/>
+        <mesh filename="model://alex/meshes/tilt_asm_dessimate.dae"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -383,7 +421,7 @@
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <!--                <box size="${camera_module_width_x} ${camera_module_depth_y} ${camera_module_height_z}"/>-->
-        <mesh filename="model://alex/meshes/camera_asm.dae"/>
+        <mesh filename="model://alex/meshes/camera_asm_2_dessimate.dae"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -413,44 +451,38 @@
     <child link="camera_sensor"/>
     <origin rpy="3.141592653589793 0 1.5707963267948966" xyz="0 0.0014 0"/>
   </joint>
-  <!-- camera -->
-  <gazebo reference="camera_sensor">
-    <sensor name="camera1" type="camera">
-      <update_rate>30.0</update_rate>
-      <camera name="pan_tilt_camera">
-        <horizontal_fov>1.8849555921538759</horizontal_fov>
-        <image>
-          <width>640</width>
-          <height>480</height>
-          <format>R8G8B8</format>
-        </image>
-        <clip>
-          <near>0.02</near>
-          <far>300</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <!-- Noise is sampled independently per pixel on each frame.
-                    That pixel's noise value is added to each of its color
-                    channels, which at that point lie in the range [0,1]. -->
-          <mean>0.0</mean>
-          <stddev>0.007</stddev>
-        </noise>
-      </camera>
-      <plugin filename="libgazebo_ros_camera.so" name="camera_controller">
-        <alwaysOn>true</alwaysOn>
-        <updateRate>0.0</updateRate>
-        <cameraName>alex/camera1</cameraName>
-        <imageTopicName>image_raw</imageTopicName>
-        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>camera_sensor</frameName>
-        <hackBaseline>0.07</hackBaseline>
-        <distortionK1>0.0</distortionK1>
-        <distortionK2>0.0</distortionK2>
-        <distortionK3>0.0</distortionK3>
-        <distortionT1>0.0</distortionT1>
-        <distortionT2>0.0</distortionT2>
+  <link name="imu_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+  <joint name="ep_imu_joint" type="fixed">
+    <parent link="ep"/>
+    <child link="imu_link"/>
+    <origin rpy="0 0 0" xyz="0 -0.0085 0"/>
+  </joint>
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
       </plugin>
+      <pose>0 0 0 0 0 0</pose>
     </sensor>
   </gazebo>
 </robot>
