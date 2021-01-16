@@ -82,7 +82,7 @@ void Capture::open(int32_t device_id)
   if (!cap_.isOpened())
   {
     std::stringstream stream;
-    stream << "device_id" << device_id << " cannot be opened";
+    stream << "device_" << device_id << " cannot be opened";
     throw DeviceError(stream.str());
   }
   pub_ = it_.advertiseCamera(topic_name_, buffer_size_);

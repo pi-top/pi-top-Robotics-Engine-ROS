@@ -1,0 +1,17 @@
+wheel_base: 0.1725
+wheel_diameter: 0.074
+right_motor_port: "M0"
+right_motor_forward_direction: "CCW"
+left_motor_port: "M3"
+left_motor_forward_direction: "CW"
+pan_servo_port: "S0"
+pan_servo_zero_point: 12
+tilt_servo_port: "S3"
+tilt_servo_zero_point: 13
+# below is to support other configs in future
+#servo_config: {
+#  n: 2,
+#  list:
+#    [{name: "pan_servo", port: "S0", function: "pan", direction: 1, max_speed: 30, topic: "pan_servo/cmd_vel"},
+#    {name: "tilt_servo", port: "S3", function: "tilt", direction: 1, max_speed: 30, topic: "tilt_servo/cmd_vel"}]
+#}

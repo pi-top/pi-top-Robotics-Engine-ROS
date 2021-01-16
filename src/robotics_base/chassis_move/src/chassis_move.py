@@ -2,7 +2,7 @@
 
 import rospy
 from geometry_msgs.msg import Twist, Vector3
-from ptpma import PMAEncoderMotor, ForwardDirection, BrakingType
+from pitop.pma import EncoderMotor, ForwardDirection, BrakingType
 from math import pi, floor
 
 
@@ -92,15 +92,15 @@ if __name__ == "__main__":
     wheel_circumference = wheel_diameter * pi
 
     if right_motor_forward_direction == "CCW":
-        right_motor = PMAEncoderMotor(port_name=right_motor_port, forward_direction=ForwardDirection.COUNTER_CLOCKWISE)
+        right_motor = EncoderMotor(port_name=right_motor_port, forward_direction=ForwardDirection.COUNTER_CLOCKWISE)
     elif right_motor_forward_direction == "CW":
-        right_motor = PMAEncoderMotor(port_name=right_motor_port, forward_direction=ForwardDirection.CLOCKWISE)
+        right_motor = EncoderMotor(port_name=right_motor_port, forward_direction=ForwardDirection.CLOCKWISE)
     rospy.logdebug("Right motor set up")
 
     if left_motor_forward_direction == "CCW":
-        left_motor = PMAEncoderMotor(port_name=left_motor_port, forward_direction=ForwardDirection.COUNTER_CLOCKWISE)
+        left_motor = EncoderMotor(port_name=left_motor_port, forward_direction=ForwardDirection.COUNTER_CLOCKWISE)
     elif left_motor_forward_direction == "CW":
-        left_motor = PMAEncoderMotor(port_name=left_motor_port, forward_direction=ForwardDirection.CLOCKWISE)
+        left_motor = EncoderMotor(port_name=left_motor_port, forward_direction=ForwardDirection.CLOCKWISE)
     rospy.logdebug("Left motor set up")
 
     right_motor.braking_type = BrakingType.BRAKE

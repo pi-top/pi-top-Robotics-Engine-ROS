@@ -16,6 +16,13 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <style>
+      .ShaShiDi img{
+	    width:100%;
+	    height:auto;
+      }
+    </style>
+
   </head>
 
   <script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
@@ -45,37 +52,37 @@
 
     <!-- VIDEO -->
     <div class="row my-4">
-      <div class="col d-flex justify-content-center">
-        <img src="" class="p-1 bg-dark" alt="" id="video" />
-      </div>
-    </div>
-
-    <!-- JOYSTICK -->
-    <div class="row my-4"  style="position:relative;top: 20px">
-     <div class="col d-flex justify-content-center">
-      <div class="row"  >
-
-        <div
-          style="width: 110px; height: 110px; position:absolute; left: 20% ; top: 20px">
-         <div id="joystick"></div>
+      <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div class="primary">
+            <div class="ShaShiDi">
+              <img src="" class="p-1 bg-dark" alt="" id="video" />
+            </div>
+          </div>
         </div>
-
- 		<div
-          style="width: 110px; height: 110px; position: absolute;right: -50px ;top: 20px">
-          <div id="joystick1"></div>
-        </div>
-
-      </div>
-     </div>
+      <div class="col-md-4"></div>
     </div>
-
-    
-
 
     <!-- INFO -->
     <div class="row my-4">
       <div class="col-md-2"></div>
       <div class="col-md-8">
+        <div class="primary">
+          <div class="col">
+            <div class="primary" style="width: 200px; height: 200px">
+                <div id="joystick"></div>
+                <div id="joystick1" ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
+    <!-- INFO -->
+    <div class="row my-4">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
         <div class="alert alert-success">
           <h4 class="alert-heading">ROS + Bootstrap interface demo</h4>
           <ul>
@@ -84,7 +91,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-2"></div>
+      <div class="col-md-4"></div>
     </div>
 
     <!-- Optional JavaScript -->
