@@ -108,7 +108,7 @@ function createJoystick() {
         // https://yoannmoinet.github.io/nipplejs/
         var options = {
             zone: joystickContainer,
-            position: { left: 29 + '%', top: 80 + 'px' },
+            position: { left: 80 + 'px', top: 80 + 'px' },
             mode: 'static',
             size: 150,
             color: '#0066ff',
@@ -156,7 +156,7 @@ function createJoystick_PanTi() {
         // https://yoannmoinet.github.io/nipplejs/
         var options = {
             zone: joystickContainer,
-            position: { left: 71 + '%', top: 80 + 'px' },
+            position: { right: 80 + 'px', top: 80 + 'px' },
             mode: 'static',
             size: 150,
             color: '#0066ff',
