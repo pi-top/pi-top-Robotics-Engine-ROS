@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <sdf version="1.7">
     <model name="line_follower_track">
-        <pose>0 0 0.01 0 0 0</pose>
+        <pose>0 0 0 0 0 0</pose>
         <static>true</static>
         <link name="body">
             <visual name="visual">
