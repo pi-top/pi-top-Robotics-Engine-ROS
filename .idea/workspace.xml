@@ -1,27 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/4_asm_2_dessimate.dae" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/EP_asm_decimate_4.dae" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/camera_asm_2_dessimate.dae" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/castor_asm_3_dessimate.dae" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/castor_asm_3_dessimate_2.dae" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/chassis_asm_dessimate.dae" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/pan_asm_2_dessimate_2.dae" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/tilt_asm_dessimate.dae" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/meshes/wheel_asm_decimate_3.dae" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/models/line_follower_track/model.config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/models/line_follower_track/model.sdf" afterDir="false" />
+    <list default="true" id="bae40ef5-0abc-4e91-8ade-ed5e5ba11d32" name="Default Changelist" comment="Add new daes, fix model directories">
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/alex.config" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/model.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/alex.sdf" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/models/alex/model.sdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_description/robots/alex.urdf.xacro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/models/line_following_tape.stl" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/models/line_follower_track/meshes/line_following_tape.stl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/package.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/worlds/line_follower.world" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/worlds/line_follower.world" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/models/line_follower_track/model.sdf" beforeDir="false" afterPath="$PROJECT_DIR$/src/robotics_configurations/alex_gazebo/models/line_follower_track/model.sdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +89,7 @@
       <workItem from="1610076189927" duration="3751000" />
       <workItem from="1610092789360" duration="37193000" />
       <workItem from="1610356223841" duration="4261000" />
-      <workItem from="1610767544069" duration="12883000" />
+      <workItem from="1610767544069" duration="26691000" />
     </task>
     <task id="LOCAL-00001" summary="Working rviz spawn">
       <created>1608623171166</created>
@@ -247,7 +231,21 @@
       <option name="project" value="LOCAL" />
       <updated>1610372814281</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Add new daes, fix model directories">
+      <created>1610796101799</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1610796101799</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Dessimate DAEs and fix object ID issue with gzweb">
+      <created>1610872398935</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1610872398935</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,14 +288,20 @@
     <MESSAGE value="delete unused stls" />
     <MESSAGE value="Update for gzweb compatability with SDFs and model dirs" />
     <MESSAGE value="Add IMU and change web controller to work with sim" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add IMU and change web controller to work with sim" />
+    <MESSAGE value="Add new daes, fix model directories" />
+    <MESSAGE value="Dessimate DAEs and fix object ID issue with gzweb" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dessimate DAEs and fix object ID issue with gzweb" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1001" y="778" width="1919" height="686" key="#Deployment" timestamp="1610785034503">
+    <state x="1001" y="778" width="1460" height="686" key="#Deployment" timestamp="1610867740697">
       <screen x="72" y="27" width="3187" height="1904" />
     </state>
     <state x="2054" y="638" width="800" height="684" key="#Deployment/72.27.3183.1900@72.27.3183.1900" timestamp="1610022182320" />
-    <state x="1001" y="778" width="1919" height="686" key="#Deployment/72.27.3187.1904@72.27.3187.1904" timestamp="1610785034503" />
+    <state x="1001" y="778" width="1460" height="686" key="#Deployment/72.27.3187.1904@72.27.3187.1904" timestamp="1610867740697" />
+    <state x="1877" y="609" width="800" height="684" key="#Notifications" timestamp="1610853626499">
+      <screen x="72" y="27" width="3187" height="1904" />
+    </state>
+    <state x="1877" y="609" width="800" height="684" key="#Notifications/72.27.3187.1904@72.27.3187.1904" timestamp="1610853626499" />
     <state x="1767" y="640" width="800" height="684" key="#Options" timestamp="1610182489609">
       <screen x="72" y="27" width="3187" height="1904" />
     </state>
@@ -306,15 +310,23 @@
       <screen x="72" y="27" width="3187" height="1904" />
     </state>
     <state x="1925" y="784" width="664" height="397" key="#com.intellij.fileTypes.FileTypeChooser/72.27.3187.1904@72.27.3187.1904" timestamp="1610780990613" />
-    <state x="1730" y="554" width="860" height="858" key="CommitChangelistDialog2" timestamp="1610796061173">
+    <state x="1730" y="554" width="860" height="858" key="CommitChangelistDialog2" timestamp="1610872392937">
       <screen x="72" y="27" width="3187" height="1904" />
     </state>
     <state x="1728" y="553" width="888" height="854" key="CommitChangelistDialog2/72.27.3183.1900@72.27.3183.1900" timestamp="1610023615116" />
-    <state x="1730" y="554" width="860" height="858" key="CommitChangelistDialog2/72.27.3187.1904@72.27.3187.1904" timestamp="1610796061173" />
-    <state x="1854" y="884" width="424" height="491" key="FileChooserDialogImpl" timestamp="1610254420962">
+    <state x="1730" y="554" width="860" height="858" key="CommitChangelistDialog2/72.27.3187.1904@72.27.3187.1904" timestamp="1610872392937" />
+    <state x="583" y="334" width="1829" height="1383" key="DiffContextDialog" timestamp="1610853721306">
       <screen x="72" y="27" width="3187" height="1904" />
     </state>
-    <state x="1854" y="884" width="424" height="491" key="FileChooserDialogImpl/72.27.3187.1904@72.27.3187.1904" timestamp="1610254420962" />
+    <state x="583" y="334" width="1829" height="1383" key="DiffContextDialog/72.27.3187.1904@72.27.3187.1904" timestamp="1610853721306" />
+    <state x="1854" y="884" width="424" height="491" key="FileChooserDialogImpl" timestamp="1610852886489">
+      <screen x="72" y="27" width="3187" height="1904" />
+    </state>
+    <state x="1854" y="884" width="424" height="491" key="FileChooserDialogImpl/72.27.3187.1904@72.27.3187.1904" timestamp="1610852886489" />
+    <state x="1832" y="785" width="580" height="571" key="MultipleFileMergeDialog" timestamp="1610796128540">
+      <screen x="72" y="27" width="3187" height="1904" />
+    </state>
+    <state x="1832" y="785" width="580" height="571" key="MultipleFileMergeDialog/72.27.3187.1904@72.27.3187.1904" timestamp="1610796128540" />
     <state x="1886" y="760" width="472" height="621" key="RollbackChangesDialog" timestamp="1610796034091">
       <screen x="72" y="27" width="3187" height="1904" />
     </state>
@@ -324,11 +336,11 @@
     </state>
     <state x="1152" y="612" width="1022" height="737" key="SettingsEditor/72.27.3183.1900@72.27.3183.1900" timestamp="1610021988290" />
     <state x="1153" y="613" key="SettingsEditor/72.27.3187.1904@72.27.3187.1904" timestamp="1610077355604" />
-    <state x="1774" y="702" width="800" height="558" key="Vcs.Push.Dialog.v2" timestamp="1610372817003">
+    <state x="1774" y="702" width="800" height="558" key="Vcs.Push.Dialog.v2" timestamp="1610796103981">
       <screen x="72" y="27" width="3187" height="1904" />
     </state>
     <state x="1772" y="701" width="800" height="558" key="Vcs.Push.Dialog.v2/72.27.3183.1900@72.27.3183.1900" timestamp="1610023661592" />
-    <state x="1774" y="702" width="800" height="558" key="Vcs.Push.Dialog.v2/72.27.3187.1904@72.27.3187.1904" timestamp="1610372817003" />
+    <state x="1774" y="702" width="800" height="558" key="Vcs.Push.Dialog.v2/72.27.3187.1904@72.27.3187.1904" timestamp="1610796103981" />
     <state x="1319" y="804" key="com.intellij.ide.util.TipDialog" timestamp="1610021958880">
       <screen x="72" y="27" width="3183" height="1900" />
     </state>
@@ -341,9 +353,9 @@
       <screen x="72" y="27" width="3187" height="1904" />
     </state>
     <state x="2129" y="834" width="197" height="580" key="ftp.server.browser/72.27.3187.1904@72.27.3187.1904" timestamp="1610357102074" />
-    <state x="1644" y="1022" width="270" height="228" key="publish.login" timestamp="1610107884572">
+    <state x="1644" y="1022" width="270" height="228" key="publish.login" timestamp="1610852663168">
       <screen x="72" y="27" width="3187" height="1904" />
     </state>
-    <state x="1644" y="1022" width="270" height="228" key="publish.login/72.27.3187.1904@72.27.3187.1904" timestamp="1610107884572" />
+    <state x="1644" y="1022" width="270" height="228" key="publish.login/72.27.3187.1904@72.27.3187.1904" timestamp="1610852663168" />
   </component>
 </project>
