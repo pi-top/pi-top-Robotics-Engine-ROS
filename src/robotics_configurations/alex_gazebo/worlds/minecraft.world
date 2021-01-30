@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<sdf version="1.7">
+  <world name="default">
+<!--    <gui>-->
+<!--        <camera name="user_camera">-->
+<!--            <pose>0 0 0 0 0 0</pose>-->
+<!--        </camera>-->
+<!--    </gui>-->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://minecraft_city</uri>
+    </include>
+  </world>
+</sdf>
