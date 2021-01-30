@@ -7,16 +7,17 @@
             <visual name="visual">
                 <geometry>
                     <mesh>
-                        <uri>model://line_follower_track/meshes/line_following_tape.stl</uri>
-                        <scale>0.001 0.001 0.001</scale>
+                        <uri>model://line_follower_track/meshes/blue_track.dae</uri>
+<!--                        <uri>model://line_follower_track/meshes/line_follower_tape.stl</uri>-->
+<!--                        <scale>0.001 0.001 0.001</scale>-->
                     </mesh>
                 </geometry>
-                <material>
-                    <ambient>0.1 0.6 1.0 1</ambient>
-                    <diffuse>0.1 0.6 1.0 1</diffuse>
-                    <specular>0 0 0 0</specular>
-                    <emissive>0 0 0 0</emissive>
-                </material>
+<!--                <material>-->
+<!--                    <ambient>0.1 0.6 1.0 1</ambient>-->
+<!--                    <diffuse>0.1 0.6 1.0 1</diffuse>-->
+<!--                    <specular>0 0 0 0</specular>-->
+<!--                    <emissive>0 0 0 0</emissive>-->
+<!--                </material>-->
             </visual>
         </link>
     </model>
