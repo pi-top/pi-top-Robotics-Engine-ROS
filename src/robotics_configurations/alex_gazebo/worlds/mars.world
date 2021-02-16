@@ -1,0 +1,18 @@
+<sdf version="1.5">
+  <world name="default">
+
+    <!-- Martian Gravity-->
+    <gravity>0 0 -3.711</gravity>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <include>
+      <uri>model://mars_landscape</uri>
+      <name>mars_landscape</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+  </world>
+</sdf>
